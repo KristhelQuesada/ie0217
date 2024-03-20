@@ -3,7 +3,19 @@ using namespace std;
 
 /*
 Description:
+Este programa continua el estudio de punteros pero ahora aplicado
+dentro del ambito de las funciones con base en las diapositivas 18,
+19 y 20 de la presentacion. Cuando nosotros construimos las funciones
+tenemos distintas maneras de mandar los parametros de estas:
+1. por valor: le pasamos un 5 por ejemplo
+2. por referencia: le pasamos un &<variable>
+3. por puntero: le pasamos un <data type>* <variable>
 
+Que nos llegue una referencia es muy diferente a que me llegue una va-
+riable con la direccion de memoria de otra variable (puntero). Con el
+uso de una referencia las modificaciones se reflejaran en la funcion
+original pero cuando nos mandan un puntero, es la direccion de memoria
+sin caerle encima a los valores originales.
 */
 
 //FUNCTIONS
@@ -18,7 +30,7 @@ void func2(int &numRef) {
     cout << "Funcion 2 parametro: " << &numRef << endl;
 }
 
-// function to swap values
+// function to swap values with parameters passed by reference
 void swap(int &n1, int &n2) {
     int temp;
 
@@ -27,7 +39,7 @@ void swap(int &n1, int &n2) {
     n2 = temp;
 }
 
-// function swap but sligthly different
+// function swap with parameters passed by pointers
 void swap2(int* n1, int* n2) {
     int temp;
 
