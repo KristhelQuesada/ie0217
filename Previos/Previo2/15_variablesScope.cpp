@@ -36,7 +36,7 @@ Program2
 >>
 >> extern int count;
 >>
->> void extern_write(void) {
+>> void write_extern(void) {
 >>    cout << "Count is " << count << endl;
 >> }
 
@@ -56,9 +56,17 @@ void test() {
     cout << var << endl;
 }
 
+// Program1
+int count ;
+extern void write_extern();
+
 
 // Function Main
 int main() {
+    // Trying the external variables
+    count = 5;
+    write_extern();
+
     // Calling functions
     test(); // Output: 1
     // Como la variable ya se inicializo entonces la segunda vez que
