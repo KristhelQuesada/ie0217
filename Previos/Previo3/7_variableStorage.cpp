@@ -1,14 +1,15 @@
 #include <iostream>
 using namespace std;
 
-#define BOOK_ID_MAX 10
-
-enum {
-    CASA_BADILLA,
-    CASA_ALVARADO,
-    CASA_SOLANO,
-    CASA_MAX
-} casas_t;
+/*
+Descripcion
+Este programa busca comprender que pasa a nivel de memoria cuando
+estamos utilizando algunas variables y con base en la diapositiva
+10 de la presentacion. En este caso se introduce el &, que cuando
+esta pegado a una variable entonces representa la direccion de me-
+moria donde esta almacenada esa variable. La memoria internamente
+es un archivero.
+*/
 
 int main() {
     // Initializing variables
