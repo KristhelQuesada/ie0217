@@ -5,34 +5,49 @@ using namespace std;
 DESCRIPCION
 A continuacion se introduce el tema de clases, principalmente sobre el esqueleto
 o boilerplate, todo con base a las diapositivas 4 y 5 de la presentacion.
-
-A partir de la linea 12 hasta la 38 estamos definiendo la clase Molde.
+Esta es una continuacion del archivo 1_boilerplate.cpp pero donde se detalla otro
+formato para la definicion del constructor. En este caso, el constructor lo que
+hace es asociar a sus distintos atributos lo que se nos pase por parametro, solo
+que con la diferencia de que vamos a especificar su relacion uno a uno.
+- Asimismo, se exploran algunos conceptos del destructor. Por ejemplo, que el
+destructor se ejecuto unicamente al final, cuando ya se hayan ejecutado las demas
+instrucciones.
 */
 
 class Molde {
     // especificador de acceso, en este caso se utilizo 'public'
     public:
-        // Atributos or data members
+        // data members
         double largo;
         double ancho;
         double altura;
 
-        // Esto es el constructor de la clase, y sucede cuando utilizamos el
-        // mismo nombre de la clase solo que sin el class al frente.
-        // Esta es una funcion que se va a ejecutar cuando instanciemos esta
-        // clase.
-        Molde() {
-            cout << "Esto se ejecuta en cada instanciacion" << endl;
-            cout << "Iniciando un objeto de la clase Room" << endl;
-            cout << "Instanciando molde" << endl;
-
-            largo = 15;
-            ancho = 12;
-            altura = 21;
+        // El constructor puede tener este otro formato
+        // Se definen los parametros
+        // Luego se asocia atributo con parametro de la forma
+        // atributo(parametro)
+        Molde(double largo_p, double ancho_p, double altura_p) : largo(largo_p), ancho(ancho_p), altura(altura_p) {
+            cout<< "Probando si se puede imprimir" << endl;
         }
 
+        ~Molde() {
+            cout<< "\nSaludos desde el destructor de la clase molde" << endl;
+        }
+
+        /*
+        Es lo mismo que utilizar:
+
+
+        Molde(double largo_p, double ancho_p, double altura_p) {
+            largo = largo_p;
+            ancho = ancho_p;
+            altura = altura_p;
+
+        }
+        */
+        
+
         // Las dos siguientes funciones son member functions
-        // o metodos
         double calcularArea() {
             return largo*ancho;
         }
@@ -45,9 +60,7 @@ class Molde {
 
 int main() {
     // Instanciar un objeto llamado pared basado en la clase Molde
-    // Con la linea siguiente lo primero que sucede es la ejecucion
-    // del constructor de la linea 24. Inicializa todo lo necesario
-    Molde pared;
+    Molde pared(10.0, 20.0, 35.0);
 
     // Impresion antes del cambio
     cout << "\nPared largo antes" << endl;
@@ -66,7 +79,6 @@ int main() {
     // Calcular y desplegar el area y volumen
     cout << "\nArea = " << pared.calcularArea() << endl;
     cout << "Volumen = " << pared.calcularVolumen() << endl;
-
 
 
     return 0;
