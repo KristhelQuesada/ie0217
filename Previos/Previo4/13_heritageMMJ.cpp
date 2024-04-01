@@ -1,6 +1,27 @@
 #include <iostream>
 using namespace std;
 
+/*
+DESCRIPCION
+Este programa sirve para demostrar el comportamiento de los distintos
+tipos de herencia: multinivel, multiple y jerarquica (de ahi el MMJ del
+nombre del archivo) con base en la diapositiva 18 de la presentacion.
+
+Herencia multinivel: Es como una tirar una ficha de domino que bota las
+demas, es decir, se puede tener una clase A que contiene un metodo des-
+plegar que imprime un texto. Entonces, podemos crear un clase B que here-
+da de la clase A y una clase C que hereda de la clase B, y asi sucesivamente.
+
+Herencia multiple: En este caso las clases no se gastan, es decir, podemos
+tener multiples clases bases. Por ejemplo, pueden definirse dos clases se-
+paradas (Mammal and WingedAnimal) y por ende un murcielago puede llegar y
+absorber los atributos de manera derivada de ambas bases.
+
+Herencia jerarquica: Por ejemplo, se puede tener una clase Animal, y unas
+clases derivadas de esta Perro y Gato, porque estas no se gastan, puedo
+asignarle la herencia base a una derivada cuantas veces sea necesario.
+*/
+
 // Multinivel
 class A {
     public:

@@ -1,6 +1,18 @@
 #include <iostream>
 using namespace std;
 
+/*
+DESCRIPCION
+Este programa da seguimiento al concepto de funciones amigas con base en
+la diapositiva 21 de la presentacion. Basicamente es igual al segundo
+ejemplo de la presentacion 20, solo que en vez de trabajar con funciones
+amigas se trabaja con clases amigas.
+
+Entonces, en ClassA se especifica que ClassB sera una clase amiga y en
+ClassB se declara el objeto ClassA donde podemos acceder libremente ya
+que le dijimos a A que B era amiga y por ende le podiamos otorgar los
+permisos.
+*/
 
 class ClassB;
 
