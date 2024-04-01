@@ -4,6 +4,10 @@ Repositorio del curso de Estructuras Abstractas de Datos y Algoritmos para Ingen
 > Consideraciones:
 > - Ignore los ">>" en las secciones donde se especifican los comandos utilizados para ejecutar los programas. Estos estan unicamente para dar a entender en donde comienza el comando.
 > - Los comandos estan escritos en base al uso de Linux Ubuntu 22.04.
+> - Algunos archivos aveces contienen el caracter & en el nombre del archivo, por tanto, agregue un \ antes del caracter tipo:
+> ```
+> >> g++ -o archivo.exe primero\&segundo.cpp
+> ```
 
 ## Previos
 
@@ -59,6 +63,32 @@ Lo anterior se aplica para todos los archivos a excepcion de:
 donde para su ejecucion se utiliza:
 ```
 >> g++ -o ejecutable.exe ./Previos/Previo3/1_main.cpp ./Previos/Previo3/1_sum.cpp
+
+>> .\ejecutable.exe
+```
+
+### Previo 4
+
+Consiste en el seguimiento del estudio de C++. En este caso se revisan los conceptos de clases como su definicion, tipos de acceso, ejemplos y caracteristicas de herencia, asi como funciones amigas y virtuales.
+
+Para la ejecucion de los programas, posicionese en el directorio _.../ie0217/Previos/Previo4_, y utilice los comandos:
+```
+>> g++ -o ejecutable.exe ./<nombre del archivo>.cpp
+
+>> .\ejecutable.exe
+```
+
+Lo anterior se aplica para todos los archivos a excepcion de:
+- 6_main.cpp
+- 6_persona.cpp
+- 6_persona.hpp
+- 7_main.cpp
+- 7_ejercicio.cpp
+- 7_ejercicio.hpp
+
+donde para su ejecucion se utiliza:
+```
+>> g++ -o ejecutable.exe ./<main>.cpp ./<segundo archivo>.cpp
 
 >> .\ejecutable.exe
 ```
