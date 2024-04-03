@@ -55,11 +55,25 @@ void addWords(string array[], string word) {
 
 
 // Definicion de las funciones Base
-void gameStart(string array[]) {
+void gameStart(string array[], Game* game) {
     cout << "\nThis is the gameStart function" << endl;
-
-    // Seleccionar la palabra aleatoria
+    int rand_index;
+    int words_qty = findSizeDictionary(array);
+    int max_index = words_qty - 1;
     
+    if (words_qty > 0) {
+        // Seleccionar la palabra aleatoria
+        rand_index = rand() % max_index; // genera un valor entre 0 y el indice maximo
+        game->goal_word = *(array+rand_index); // actualiza la palabra a adivinar
+        cout << "La palabra es: " << game->goal_word << endl;
+
+        // Inicializar en blanco la palabra
+
+
+        // Establecer max_tries and left_tries
+    } else {
+        cout << "Primero debe ingresar algunas palabras." << endl;
+    }
 
 }
 

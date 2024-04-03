@@ -4,7 +4,7 @@
 using namespace std;
 
 // Prototipo de las funciones base
-void gameStart(string array[]);
+void gameStart(string array[], Game* game);
 void guessWord(char letra);
 void checkWord();
 

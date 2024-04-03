@@ -5,6 +5,13 @@
 
 #define MAX_WORDS 30
 
+enum Difficulty {
+    FACIL = 1,
+    INTERMEDIO,
+    DIFICIL,
+    PERSONALIZADO
+};
+
 int main() {
     // Declaracion de variables y estructuras
     // y estructuras
@@ -12,9 +19,11 @@ int main() {
     string dictionary[MAX_WORDS];
     int total_words;
     string newword;
+    int dificultad;
     int opcion;
 
     // Inicializacion de variables
+    juego1.max_tries = 3;
     bool detener = false;
     string txt_menu = "\nQue desea realizar:\n"
                       "1. Elegir la dificultad\n"
@@ -23,6 +32,12 @@ int main() {
                       "4. Ver diccionario de palabras\n"
                       "5. Salir del programa\n"
                       "\nIngrese su respuesta: ";
+    string txt_dificultad = "Dificultades:\n"
+                            "1. Facil\n"
+                            "2. Intermedio\n"
+                            "3. Dificil\n"
+                            "4. Personalizado\n"
+                            "Seleccione la dificultad deseada: ";
 
     
     // Inicio del programa
@@ -41,29 +56,66 @@ int main() {
         cout << txt_menu;
         cin >> opcion;
 
+        // Determinacion de funcion a ejecutar
         switch (opcion) {
             case 1:
-                cout << "Opción 1 seleccionada\n" << endl;
+                // Interaccion con usuario
+                cout << txt_dificultad;
+                cin >> dificultad;
+                
+                // Determinacion de intentos maximos
+                switch (dificultad) {
+                    case FACIL:
+                        juego1.max_tries = 3;
+                        break;
+                    case INTERMEDIO:
+                        juego1.max_tries = 5;
+                        break;
+                    case DIFICIL:
+                        juego1.max_tries = 7;
+                        break;
+                    case PERSONALIZADO:
+                        cout << "Ingrese la cantidad maxima de intentos: ";
+                        cin >> juego1.max_tries;
+                        break;
+                    default:
+                        cout << "Opción no válida" << endl;
+                    }
                 break;
+
+
             case 2:
-                cout << "Opción 2 seleccionada\n" << endl;
+                cout << "Inicia el juego";
+                cout << "\nMAX TRIES: " << juego1.max_tries << endl;
+                gameStart(dictionary, &juego1);
+
+
+
                 break;
+
+
             case 3:
                 cout << "Escriba la palabra que desea agregar: ";
                 cin >> newword;
                 addWords(dictionary, newword);
 
                 break;
+
+
             case 4:
                 cout << "El diccionario contiene las palabras: ";
                 printDictionary(dictionary);
                 cout << "\n";
-                
+
                 break;
+
+
             case 5:
                 cout << "Opción 5 seleccionada\n" << endl;
                 detener = true;
                 break;
+
+
             default:
                 cout << "Opción no válida" << endl;
         }
