@@ -73,9 +73,14 @@ void gameStart(string array[], Game* game) {
         cout << "-------------------------------------------------\n";
 
         // Seleccionar la palabra aleatoria
-        rand_index = rand() % max_index; // genera un valor entre 0 y el indice maximo
-        game->goal_word = *(array+rand_index); // actualiza la palabra a adivinar por puntero
-        cout << "La palabra es: " << game->goal_word << endl;
+        // if para manejo de error
+        if (words_qty == 1) {
+            game->goal_word = *(array);
+        } else {
+            rand_index = rand() % max_index; // genera un valor entre 0 y el indice maximo
+            game->goal_word = *(array+rand_index); // actualiza la palabra a adivinar por puntero
+        }
+        // cout << "La palabra es: " << game->goal_word << endl; // for debug
 
         // Inicializar en blanco la palabra
         size_word = size(game->goal_word);
@@ -118,7 +123,7 @@ void guessWord(Game* game, string unfilled_word) {
     int size_word = size(game->goal_word);
     while (stop == false) {
         cout << "\n\nIntento: " << game->actual_tries << endl;
-        cout << "Max tries: " << game->max_tries << endl;
+        cout << "Maxima cantidad de intentos: " << game->max_tries << endl;
         cout << "Ingrese la letra: ";
         cin >> letra;
         for (int i = 0; i < size_word; ++i) {

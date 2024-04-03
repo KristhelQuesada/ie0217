@@ -108,7 +108,7 @@ int main() {
 
 
             case 5:
-                cout << "Opción 5 seleccionada\n" << endl;
+                cout << "Gracias por jugar" << endl;
                 detener = true;
                 break;
 
