@@ -17,6 +17,7 @@ int main() {
     // y estructuras
     Game juego1;
     string dictionary[MAX_WORDS];
+    string unfilled_word;
     int total_words;
     string newword;
     int dificultad;
@@ -87,7 +88,8 @@ int main() {
             case 2:
                 cout << "Inicia el juego";
                 cout << "\nMAX TRIES: " << juego1.max_tries << endl;
-                gameStart(dictionary, &juego1);
+                unfilled_word = gameStart(dictionary, &juego1);
+                guessWord(&juego1, unfilled_word);
 
 
 
