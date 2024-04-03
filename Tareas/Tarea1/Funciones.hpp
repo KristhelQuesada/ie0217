@@ -4,9 +4,9 @@
 using namespace std;
 
 // Prototipo de las funciones base
-string gameStart(string array[], Game* game);
+void gameStart(string array[], Game* game);
 void guessWord(Game* game, string unfilled_word);
-void checkWord(Game* game);
+bool checkWord(Game* game, string unfilled_word, bool match);
 
 // Prototipo de funciones propias
 int findSizeDictionary(string array[]);

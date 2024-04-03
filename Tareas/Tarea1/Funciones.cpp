@@ -55,15 +55,23 @@ void addWords(string array[], string word) {
 
 
 // Definicion de las funciones Base
-string gameStart(string array[], Game* game) {
-    cout << "\nThis is the gameStart function" << endl;
+void gameStart(string array[], Game* game) {
+    // Declaracion de variables
     string ans_word;
     int rand_index;
     int size_word;
+
+    // Inicializacion de variables
     int words_qty = findSizeDictionary(array);
     int max_index = words_qty - 1;
     
+    // Manejo y redireccion de error
+    // si hay palabras entonces:
     if (words_qty > 0) {
+        cout << "-------------------------------------------------\n";
+        cout << "INICIA EL JUEGO\n";
+        cout << "-------------------------------------------------\n";
+
         // Seleccionar la palabra aleatoria
         rand_index = rand() % max_index; // genera un valor entre 0 y el indice maximo
         game->goal_word = *(array+rand_index); // actualiza la palabra a adivinar por puntero
@@ -71,7 +79,7 @@ string gameStart(string array[], Game* game) {
 
         // Inicializar en blanco la palabra
         size_word = size(game->goal_word);
-        cout << "Su tamanio es de: " << size_word << " caracteres" << endl;
+        // cout << "Su tamanio es de: " << size_word << " caracteres" << endl; // for debug
 
         // crear los blancos con base en el tamanio de la palabra
         for (int i = 0; i < size_word; ++i) {
@@ -87,62 +95,84 @@ string gameStart(string array[], Game* game) {
         }
 
         // Establecer max_tries and left_tries
-        cout << "AnsWord is: " << ans_word << endl;
-        game->actual_tries = 0;
+        // cout << "AnsWord is: " << ans_word << endl; // for debug
+        game->actual_tries = 1;
 
-        return ans_word;
+        // Llama la funcion que buscara la palabra
+        guessWord(game, ans_word);
 
+    // si no hay palabras entonces
     } else {
         cout << "Primero debe ingresar algunas palabras." << endl;
-        return "";
     }
 }
 
 
 void guessWord(Game* game, string unfilled_word) {
-    cout << "This is the guessWord function" << endl;
     // Declarar variable letra
+    bool stop; // starts in false by default
+    bool match;
     char letra;
 
-    // Construir palabra
-
-    // Mantener el loop si aun no se gastan los intentos
-    if (game->actual_tries <= game->max_tries) {
-
-        // Verificar que la letra esta dentro de la palabra
-        int size_word = size(game->goal_word);
-
-        while (game->actual_tries <= game->max_tries) {
-
-            cout << "\n\nIngrese la letra: ";
-            cin >> letra;
-
-            for (int i = 0; i < size_word; ++i) {
-                // actualizar estado de la palabra
-                if (letra == game->goal_word[i]) {
-                    unfilled_word[i] = letra;
-                }
-
-                cout << unfilled_word[i] << " ";
+    // Verificar que la letra esta dentro de la palabra
+    int size_word = size(game->goal_word);
+    while (stop == false) {
+        cout << "\n\nIntento: " << game->actual_tries << endl;
+        cout << "Max tries: " << game->max_tries << endl;
+        cout << "Ingrese la letra: ";
+        cin >> letra;
+        for (int i = 0; i < size_word; ++i) {
+            // actualizar estado de la palabra
+            if (letra == game->goal_word[i]) {
+                unfilled_word[i] = letra;
+                match = true;
             }
+            cout << unfilled_word[i] << " ";
         }
 
-    // si agota los intentos entonces
-    } else if (game->actual_tries <= game->max_tries) {
-        cout << "Ultimo intento! Ingrese la palabra que considera correcta: ";
+        // Falta determinar por que no se ejecuta
+        if (game->actual_tries == game->max_tries) {
+            cout << "\n\nUltimo intento! Ingrese la palabra que considera correcta: ";
+            cin >> unfilled_word;
+        }
 
+        stop = checkWord(game, unfilled_word, match);
+        match = false; // reset the variable
     }
 
 }
 
 
-void checkWord(Game* game) {
-    cout << "This is the checkWord function" << endl;
+bool checkWord(Game* game, string unfilled_word, bool match) {
+    // Declaracion de variable booleans
+    bool fin_programa;
 
     // Cuenta los intentos
-
+    if (match == false) {
+        game->actual_tries++;
+    }
 
     // Verificar que la palabra es igual
+    if (unfilled_word == game->goal_word) {
+            cout << "\n\n-------------------------------------------------\n";
+            cout << "Felicidades, has ganado!" << endl;
+            cout << "-------------------------------------------------\n";
 
+            fin_programa = true;
+    }
 
+    // si nos pasamos de intentos
+    if (game->actual_tries > game->max_tries) {
+
+        // y la palabra es incorrecta
+        if (unfilled_word != game->goal_word) {
+            cout << "\n\n-------------------------------------------------\n";
+            cout << "Has perdido, game over :(" << endl;
+            cout << "-------------------------------------------------\n";
+
+            fin_programa = true;
+        }
+    }
+
+    return fin_programa;
 }

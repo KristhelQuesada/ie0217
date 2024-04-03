@@ -86,12 +86,7 @@ int main() {
 
 
             case 2:
-                cout << "Inicia el juego";
-                cout << "\nMAX TRIES: " << juego1.max_tries << endl;
-                unfilled_word = gameStart(dictionary, &juego1);
-                guessWord(&juego1, unfilled_word);
-
-
+                gameStart(dictionary, &juego1);
 
                 break;
 
