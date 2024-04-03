@@ -12,9 +12,4 @@ struct Game {
     int actual_tries; // intentos realizados
 };
 
-// Prototipo de las funciones
-void gameStart();
-void guessWord(char letra);
-void checkWord();
-
 #endif // AHORCADO_H
