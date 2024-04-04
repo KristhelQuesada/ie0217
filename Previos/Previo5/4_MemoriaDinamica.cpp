@@ -12,7 +12,7 @@ int main() {
     // Declare float pointers
     float *ptr, *new_ptr;
 
-    // Allocate memory from int size to int pointe
+    // Allocate memory from float size to float pointer
     ptr = (float*) malloc(5 * sizeof(float));
 
     // Sanity check
