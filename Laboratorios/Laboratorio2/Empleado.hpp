@@ -15,10 +15,14 @@ class Empleado {
     public:
         // Metodos
         Empleado(std::string _string, int _edad, double _salario);
+
+        // REaliza la implementacion por las {}
         virtual ~Empleado(){}
 
-        // Metodo virtual puro
+        // Metodo virtual puro porque usa const = 0
         // Necesita sobreescribirse si o si
+        // Asi me garantizo que cada tipo empleado tiene su
+        // manera personalizadas de calcular su pago
         virtual double calcularPago() const = 0;
 
         // Este no es puro
