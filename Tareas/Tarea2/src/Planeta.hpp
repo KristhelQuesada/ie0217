@@ -22,7 +22,7 @@ class Planeta {
     // Acceden cualquiera
     public:
         // Metodos
-        Planeta(string _nombre, int _total_contis); // Prototipo del constructor
+        Planeta(string _nombre); // Prototipo del constructor
         virtual ~Planeta(){} // Implementacion del destructor
         void agregarContinente(Continente* continente); // agrega objetos continente al array
         virtual void mostrarDetalles() const; // metodo virtual que se heredara a otras clases

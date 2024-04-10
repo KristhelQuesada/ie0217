@@ -2,9 +2,9 @@
 #include <iostream>
 
 // Constructor de la clase Continente
-Continente::Continente(string _nombre) : nombre(_nombre), Planeta("", 10) {}
+Continente::Continente(string _nombre) : nombre(_nombre), Planeta("") {}
 
 // Display de la informacion de la clase
 void Continente::mostrarDetalles() const {
-    cout << "Continente: " << nombre << std::endl;
+    cout << nombre;
 }

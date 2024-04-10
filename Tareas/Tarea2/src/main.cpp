@@ -19,7 +19,7 @@ int main() {
     
     // Inicio del programa
     cout << "Inicia el programa\n";
-    Planeta tierra("Tierra", 3);
+    Planeta tierra("Tierra");
 
     // Loop para mantener la ejecucion del juego
     while (detener == false) {
@@ -66,5 +66,6 @@ int main() {
                 cout << "Opción no válida" << endl;
         }
     }
+
     return 0;
 }

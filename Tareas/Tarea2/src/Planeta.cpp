@@ -3,7 +3,7 @@
 #include <iostream>
 
 // Constructor de la clase Planeta
-Planeta::Planeta(string _nombre, int _total_contis) : nombre(_nombre), total_contis(_total_contis) {}
+Planeta::Planeta(string _nombre) : nombre(_nombre), total_contis(0) {}
 
 
 void Planeta::agregarContinente(Continente* continente) {
@@ -13,7 +13,9 @@ void Planeta::agregarContinente(Continente* continente) {
         // al array que contiene la direccion en memoria de cada
         // objeto continente, actualice la variable total_contis
         // y guarde la direccion que pasamos por parametro ahi.
-        continentes[total_contis++] = continente;
+        cout << "Continente: " << continente << endl;
+        cout << "Total Continentes: " << total_contis << endl;
+        this->continentes[total_contis++] = continente;
 
     } else {
         cout << "Ya no se pueden agregar mas continentes, maximo alcanzado.\n";
@@ -30,6 +32,15 @@ void Planeta::mostrarDetalles() const {
     for (int i = 0; i < total_contis; ++i) {
         if (continentes[i] != nullptr) {
             continentes[i]->mostrarDetalles();
+
+            // Imprimir comas bien
+            if (i == total_contis - 1) {
+                cout << endl;
+            } else {
+                cout << ", ";
+            }
+
+
         } else {
             cout << "Aca hay error" << endl;
         }
