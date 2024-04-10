@@ -1,7 +1,7 @@
 # Tarea 2: Manejo de clases en C++.
 #### Estudiante: Kristhel Quesada, C06153
 
-En el siguiente repositorio se encuentra...
+En el siguiente repositorio se encuentra un programa que permitia repasar los conceptos del manejo de clases, introduciendo por consecuencia el paradigma de programacion orientado a objetos.
 
 
 ## Ejecucion de los Programas
@@ -10,6 +10,11 @@ Para la ejecucion de los programas, posicionese en el directorio _.../ie0217/Tar
 >> g++ -o tryout.exe Planeta.cpp Continentes.cpp Funciones.cpp main.cpp Paises.cpp PaisesEnDesarrollo.cpp PaisesPrimerMundo.cpp
 
 >> ./tryout.exe
+```
+
+Asimismo, para la documentacion de Doxygen, puede acceder al output de este mediante el uso de Netlify, para ello acceda al siguiente enlace:
+```
+https://ie0217kriss.netlify.app/
 ```
 
 ## Parte Teorica
