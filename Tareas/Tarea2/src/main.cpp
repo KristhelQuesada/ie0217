@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include "PaisesPrimerMundo.hpp"
+#include "PaisesEnDesarrollo.hpp"
 #include "Funciones.hpp"
 
 /*
@@ -25,10 +27,32 @@ int main() {
                       "5. Salir del programa\n"
                       "\nQue desea realizar: ";
 
+    // Inicializacion de los objetos necesarios
+    Planeta tierra("Tierra"); // Inicializa el planeta
+
+    Continente asia("Asia"); // Inicializan los continentes
+    Continente africa("Africa");
+    Continente europa("Europa");
+    Continente america("America");
+    Continente oceania("Oceania");
+
+    tierra.agregarContinente(&asia); // Agregar continentes al planeta
+    tierra.agregarContinente(&africa);
+    tierra.agregarContinente(&europa);
+    tierra.agregarContinente(&america);
+    tierra.agregarContinente(&oceania);
+
+    PaisEnDesarrollo panama("Panama"); // Inicializar paises
+    Pais colombia("Colombia");
+    Pais australia("Australia");
+
+    america.agregarPais(&panama); // Agregar paises a continentes
+    america.agregarPais(&colombia);
+    oceania.agregarPais(&australia);
+
     
     // Inicio del programa
     cout << "Inicia el programa\n";
-    Planeta tierra("Tierra");
 
     // Loop para mantener la ejecucion del juego
     while (detener == false) {
@@ -44,7 +68,7 @@ int main() {
                 cout << "\nImpresion de los paises" << endl;
 
                 // Crear un objeto Planeta y pasar un puntero a la función
-                funcionPrueba(&tierra);
+                printAllInfo(&tierra);
 
                 break;
 

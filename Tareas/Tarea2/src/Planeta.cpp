@@ -48,4 +48,18 @@ void Planeta::mostrarDetalles() const {
             cout << "Aca hay error" << endl;
         }
     }
+
+    // Imprimir info de los continentes
+    for (int i = 0; i < total_contis; ++i) {
+
+        // Verifica que se apunta a una direccion valida
+        if (continentes[i] != nullptr) {
+
+            // Imprime los detalles de; continente como la lista de paises
+            continentes[i]->mostrarDetalles();
+        } else {
+            cout << "Aca hay error" << endl;
+        }
+    }
+
 }
