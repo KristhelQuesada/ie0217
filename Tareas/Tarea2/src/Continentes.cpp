@@ -23,32 +23,45 @@ void Continente::agregarPais(Pais* pais) {
 
 // Display de la informacion de la clase
 void Continente::mostrarDetalles() const {
-    cout << "El continente " << nombre;
-    cout << " tiene " << total_paises << " paises: ";
+    cout << "\nEl continente " << nombre;
 
     if (total_paises == 0) {
-        cout << endl;
-    }
-
-    // Imprimir los continentes
-    for (int i = 0; i < total_paises; ++i) {
-
-        // Verifica que se apunta a una direccion valida
-        if (paises[i] != nullptr) {
-
-            // Imprime el nombre de los continentes
-            paises[i]->mostrarNombre();
-
-            // Imprimir comas bien
-            if (i == total_paises - 1) {
-                cout << endl;
+        cout << " no tiene paises.";
+    } else {
+        cout << " tiene " << total_paises << " paises: ";
+        // Imprimir los continentes
+        for (int i = 0; i < total_paises; ++i) {
+        
+            // Verifica que se apunta a una direccion valida
+            if (paises[i] != nullptr) {
+            
+                // Imprime el nombre de los continentes
+                paises[i]->mostrarNombre();
+    
+                // Imprimir comas bien
+                if (i == total_paises - 1) {
+                    cout << endl;
+                } else {
+                    cout << ", ";
+                }
+    
+    
             } else {
-                cout << ", ";
+                cout << "Aca hay error" << endl;
             }
-
-
-        } else {
-            cout << "Aca hay error" << endl;
+        }
+    
+        cout << ">> Descripcion de cada pais" << endl;
+        // Imprimir info de los continentes
+        for (int i = 0; i < total_paises; ++i) {
+            // Verifica que se apunta a una direccion valida
+            if (paises[i] != nullptr) {
+            
+                // Imprime los detalles de; continente como la lista de paises
+                paises[i]->mostrarDetalles();
+            } else {
+                cout << "Aca hay error" << endl;
+            }
         }
     }
 }

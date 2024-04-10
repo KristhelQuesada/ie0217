@@ -42,9 +42,9 @@ int main() {
     tierra.agregarContinente(&america);
     tierra.agregarContinente(&oceania);
 
-    PaisEnDesarrollo panama("Panama"); // Inicializar paises
-    Pais colombia("Colombia");
-    Pais australia("Australia");
+    PaisEnDesarrollo panama("Panama", 1, 100000, false, true, false); // Inicializar paises
+    Pais colombia("Colombia", 2, 200000, true, false, true);
+    Pais australia("Australia", 3, 5000000, true, true, true);
 
     america.agregarPais(&panama); // Agregar paises a continentes
     america.agregarPais(&colombia);
