@@ -5,7 +5,7 @@ En el siguiente repositorio se encuentra...
 
 
 ## Ejecucion de los Programas
-Para la ejecucion de los programas, posicionese en el directorio _.../ie0217/Previos/Previo5_, y utilice los comandos:
+Para la ejecucion de los programas, posicionese en el directorio _.../ie0217/Tareas/Tarea2/src/_, y utilice los comandos:
 ```
 >> g++ -o tryout.exe Planeta.cpp Continentes.cpp Funciones.cpp main.cpp Paises.cpp PaisesEnDesarrollo.cpp PaisesPrimerMundo.cpp
 
