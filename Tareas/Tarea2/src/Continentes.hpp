@@ -22,6 +22,9 @@ class Continente : public Planeta {
         void agregarPais(Pais* pais); // agrega objetos pais al array
         virtual void mostrarNombre() const; // Despliega solo el nombre
         void mostrarDetalles() const override; // Muestra todos los detalles
+
+        void mostrarPaises();
+        Pais* buscarPais(Pais* pais);
 };
 
 #endif // CONTINENTE_HPP

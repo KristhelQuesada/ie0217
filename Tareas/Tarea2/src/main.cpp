@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cstdlib> // Para utilizar rand()
+#include <ctime>   // Para utilizar time()
 #include "PaisesPrimerMundo.hpp"
 #include "PaisesEnDesarrollo.hpp"
 #include "Funciones.hpp"
@@ -19,7 +21,7 @@ int main() {
 
     // Inicializacion de variables
     bool detener = false;
-    string txt_menu = "\nMENU:\n"
+    string txt_menu = "\n\nMENU:\n"
                       "1. Imprimir info de todos los paises.\n"
                       "2. Comparar dos paises\n"
                       "3. Agregar nuevo pais\n"
@@ -42,9 +44,9 @@ int main() {
     tierra.agregarContinente(&america);
     tierra.agregarContinente(&oceania);
 
-    PaisEnDesarrollo panama("Panama", 1, 100000, false, true, false); // Inicializar paises
-    Pais colombia("Colombia", 2, 200000, true, false, true);
-    Pais australia("Australia", 3, 5000000, true, true, true);
+    PaisEnDesarrollo panama("Panama", 24, 100000, false, true, false); // Inicializar paises
+    Pais colombia("Colombia", 13, 200000, true, false, true);
+    Pais australia("Australia", 17, 5000000, true, true, true);
 
     america.agregarPais(&panama); // Agregar paises a continentes
     america.agregarPais(&colombia);
@@ -52,7 +54,7 @@ int main() {
 
     
     // Inicio del programa
-    cout << "Inicia el programa\n";
+    cout << "Inicia el programa";
 
     // Loop para mantener la ejecucion del juego
     while (detener == false) {
@@ -68,19 +70,18 @@ int main() {
                 cout << "\nImpresion de los paises" << endl;
 
                 // Crear un objeto Planeta y pasar un puntero a la función
-                printAllInfo(&tierra);
-
+                tierra.mostrarDetalles();
                 break;
 
 
             case 2:
                 cout << "\nComparacion de 2 paises";
-
                 break;
 
 
             case 3:
                 cout << "\nAgregar pais" << endl;
+                tierra.mostrarCyP();
                 break;
 
 

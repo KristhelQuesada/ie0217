@@ -26,6 +26,8 @@ class Planeta {
         virtual ~Planeta(){} // Implementacion del destructor
         void agregarContinente(Continente* continente); // agrega objetos continente al array
         virtual void mostrarDetalles() const; // metodo virtual que se heredara a otras clases
+
+        void mostrarCyP(); // muestra los continentes y sus paises
 };
 
 #endif // PLANETA_HPP

@@ -5,7 +5,7 @@ using namespace std;
 #include "Planeta.hpp"
 
 // Prototipo de funciones propias
-void printAllInfo(Planeta* planeta);
+bool checkPrimo(int numero);
 // void validIntData(string input);
 
 #endif // FUNCIONES_H

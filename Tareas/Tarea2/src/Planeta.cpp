@@ -63,3 +63,20 @@ void Planeta::mostrarDetalles() const {
     }
 
 }
+
+void Planeta::mostrarCyP() {
+    cout << "Considere la disponibilidad de continentes y paises por el momento." << endl;
+
+    // Imprimir info de los continentes
+    for (int i = 0; i < total_contis; ++i) {
+
+        // Verifica que se apunta a una direccion valida
+        if (continentes[i] != nullptr) {
+
+            // Imprime los detalles de; continente como la lista de paises
+            continentes[i]->mostrarPaises();
+        } else {
+            cout << "Aca hay error" << endl;
+        }
+    }
+}

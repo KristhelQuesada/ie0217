@@ -3,6 +3,15 @@
 
 En el siguiente repositorio se encuentra...
 
+
+## Ejecucion de los Programas
+Para la ejecucion de los programas, posicionese en el directorio _.../ie0217/Previos/Previo5_, y utilice los comandos:
+```
+>> g++ -o tryout.exe Planeta.cpp Continentes.cpp Funciones.cpp main.cpp Paises.cpp PaisesEnDesarrollo.cpp PaisesPrimerMundo.cpp
+
+>> ./tryout.exe
+```
+
 ## Parte Teorica
 ### 1. ¿Que es la programacion orientada a objetos y cuales son sus principales principios?
 En la programacion, existen varios modos de trabajar para obtener los resultados deseados, la programacion orientada a objetos es uno de ellos, y se define como un __paradigma de programacion__, donde un paradigma es como tal una forma o estilo de programar al resolver un problema. La programacion orientada a objetos o POO, funcion de tal manera que se construyen modelos o moldes para asi crear diferentes objetos que tendran mismas caracteristicas o funciones, de esta forma, se permite separar los diferentes componentes de un programa. Entre sus principales principios se tiene:

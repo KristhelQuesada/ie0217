@@ -10,7 +10,7 @@ using namespace std;
 class Pais : public Continente {    
     protected:
         string nombre; // nombre del pais
-        unsigned int pib; // almacena el Producto Interno Bruto del pais
+        float pib; // almacena el Producto Interno Bruto del pais
         unsigned int habitantes; // almacena la cantidad de habitantes
         int identifier; // identificador del pais
         bool internet5G; // por si hay internet 5G
@@ -23,11 +23,16 @@ class Pais : public Continente {
              bool _internet5G, bool _airport, bool _centerDI); // constructor
         
         void mostrarNombre() const override; // muestra el nombre del pais unicamente
-        void mostrarDetalles() const override; // 
+        void mostrarDetalles() const override; // muestra todos los detalles del pais
 
-        void calcularPIB() const;
-
+        void calcularPIB();
+        float getPIB();
         int getIdentifier();
+        bool getInternet5G();
+        bool getAirport();
+        bool getCenterDI();
+        unsigned int getHabitants();
+
 };
 
 #endif // PAIS_HPP

@@ -70,3 +70,35 @@ void Continente::mostrarDetalles() const {
 void Continente::mostrarNombre() const {
     cout << nombre;
 }
+
+void Continente::mostrarPaises() {
+    cout << "\nEl continente " << nombre;
+
+    if (total_paises == 0) {
+        cout << " no tiene paises.";
+    } else {
+        cout << " tiene " << total_paises << " paises: ";
+        // Imprimir los continentes
+        for (int i = 0; i < total_paises; ++i) {
+        
+            // Verifica que se apunta a una direccion valida
+            if (paises[i] != nullptr) {
+            
+                // Imprime el nombre de los continentes
+                paises[i]->mostrarNombre();
+    
+                // Imprimir comas bien
+                if (i == total_paises - 1) {
+                    cout << "";
+                } else {
+                    cout << ", ";
+                }
+    
+    
+            } else {
+                cout << "Aca hay error" << endl;
+            }
+        }
+    }
+        
+}
