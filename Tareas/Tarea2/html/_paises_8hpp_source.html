@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tarea2: Fichero Fuente Paises.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Tarea2
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Estudio de conceptos relacionados a clases, objetos y herencias</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Paises.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_paises_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// MIT License</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright (c) 2024 Kristhel Quesada</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// </span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// </span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// The above copyright notice and this permission notice shall be included in all</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// copies or substantial portions of the Software.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// SOFTWARE.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef PAIS_HPP</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define PAIS_HPP</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_continentes_8hpp.html">Continentes.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="_paises_8hpp.html#a6703e361d6219325ad611153e92c420e">   30</a></span>&#160;<span class="preprocessor">#define MAX_COUNTRIES 10</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_pais.html">   41</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_pais.html">Pais</a> : <span class="keyword">public</span> <a class="code" href="class_continente.html">Continente</a> {    </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_pais.html#ae7cc64ef86bb41238ea03f3bd0173f59">   43</a></span>&#160;        <span class="keywordtype">string</span> <a class="code" href="class_pais.html#ae7cc64ef86bb41238ea03f3bd0173f59">nombre</a>; <span class="comment">// nombre del pais</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_pais.html#ae2dfff73c455425a392b2dca9a1fb8ec">   44</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_pais.html#ae2dfff73c455425a392b2dca9a1fb8ec">pib</a>; <span class="comment">// almacena el Producto Interno Bruto del pais</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_pais.html#ad2024e6e31db104bb00b9af6a836bd94">   45</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_pais.html#ad2024e6e31db104bb00b9af6a836bd94">habitantes</a>; <span class="comment">// almacena la cantidad de habitantes</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_pais.html#a839212a894e9325b792e870929583e44">   46</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_pais.html#a839212a894e9325b792e870929583e44">identifier</a>; <span class="comment">// identificador del pais</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_pais.html#abf1d670b4aa8acf95be85dfbd1eed48a">   47</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_pais.html#abf1d670b4aa8acf95be85dfbd1eed48a">internet5G</a>; <span class="comment">// por si hay internet 5G</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_pais.html#ae3654d1cf1fc25586abb45b641ff48f6">   48</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_pais.html#ae3654d1cf1fc25586abb45b641ff48f6">airport</a>; <span class="comment">// por si hay aeropuerto</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_pais.html#aafb5b7916aa2004ee29931c35cf333ee">   49</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_pais.html#aafb5b7916aa2004ee29931c35cf333ee">centerDI</a>; <span class="comment">// por si hay centro de Investigacion y Desarrollo</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="class_pais.html">Pais</a>(<span class="keywordtype">string</span> _nombre, <span class="keywordtype">int</span> _id, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> _habitantes,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;             <span class="keywordtype">bool</span> _internet5G, <span class="keywordtype">bool</span> _airport, <span class="keywordtype">bool</span> _centerDI); <span class="comment">// constructor</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">void</span> mostrarNombre() <span class="keyword">const override</span>; <span class="comment">// muestra el nombre del pais unicamente</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">void</span> mostrarDetalles() <span class="keyword">const override</span>; <span class="comment">// muestra todos los detalles del pais</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">void</span> calcularPIB();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordtype">float</span> getPIB();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordtype">int</span> getIdentifier();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordtype">bool</span> getInternet5G();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordtype">bool</span> getAirport();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordtype">bool</span> getCenterDI();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getHabitants();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// PAIS_HPP</span></div>
+<div class="ttc" id="a_continentes_8hpp_html"><div class="ttname"><a href="_continentes_8hpp.html">Continentes.hpp</a></div></div>
+<div class="ttc" id="aclass_continente_html"><div class="ttname"><a href="class_continente.html">Continente</a></div><div class="ttdoc">Clase que representa un continente con objetos Pais.</div><div class="ttdef"><b>Definition:</b> Continentes.hpp:49</div></div>
+<div class="ttc" id="aclass_pais_html"><div class="ttname"><a href="class_pais.html">Pais</a></div><div class="ttdoc">Clase que representa un Pais y heredara ciertas caracteristicas.</div><div class="ttdef"><b>Definition:</b> Paises.hpp:41</div></div>
+<div class="ttc" id="aclass_pais_html_a839212a894e9325b792e870929583e44"><div class="ttname"><a href="class_pais.html#a839212a894e9325b792e870929583e44">Pais::identifier</a></div><div class="ttdeci">int identifier</div><div class="ttdef"><b>Definition:</b> Paises.hpp:46</div></div>
+<div class="ttc" id="aclass_pais_html_aafb5b7916aa2004ee29931c35cf333ee"><div class="ttname"><a href="class_pais.html#aafb5b7916aa2004ee29931c35cf333ee">Pais::centerDI</a></div><div class="ttdeci">bool centerDI</div><div class="ttdef"><b>Definition:</b> Paises.hpp:49</div></div>
+<div class="ttc" id="aclass_pais_html_abf1d670b4aa8acf95be85dfbd1eed48a"><div class="ttname"><a href="class_pais.html#abf1d670b4aa8acf95be85dfbd1eed48a">Pais::internet5G</a></div><div class="ttdeci">bool internet5G</div><div class="ttdef"><b>Definition:</b> Paises.hpp:47</div></div>
+<div class="ttc" id="aclass_pais_html_ad2024e6e31db104bb00b9af6a836bd94"><div class="ttname"><a href="class_pais.html#ad2024e6e31db104bb00b9af6a836bd94">Pais::habitantes</a></div><div class="ttdeci">unsigned int habitantes</div><div class="ttdef"><b>Definition:</b> Paises.hpp:45</div></div>
+<div class="ttc" id="aclass_pais_html_ae2dfff73c455425a392b2dca9a1fb8ec"><div class="ttname"><a href="class_pais.html#ae2dfff73c455425a392b2dca9a1fb8ec">Pais::pib</a></div><div class="ttdeci">float pib</div><div class="ttdef"><b>Definition:</b> Paises.hpp:44</div></div>
+<div class="ttc" id="aclass_pais_html_ae3654d1cf1fc25586abb45b641ff48f6"><div class="ttname"><a href="class_pais.html#ae3654d1cf1fc25586abb45b641ff48f6">Pais::airport</a></div><div class="ttdeci">bool airport</div><div class="ttdef"><b>Definition:</b> Paises.hpp:48</div></div>
+<div class="ttc" id="aclass_pais_html_ae7cc64ef86bb41238ea03f3bd0173f59"><div class="ttname"><a href="class_pais.html#ae7cc64ef86bb41238ea03f3bd0173f59">Pais::nombre</a></div><div class="ttdeci">string nombre</div><div class="ttdef"><b>Definition:</b> Paises.hpp:43</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
