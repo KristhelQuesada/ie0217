@@ -26,6 +26,10 @@ void Continente::mostrarDetalles() const {
     cout << "El continente " << nombre;
     cout << " tiene " << total_paises << " paises: ";
 
+    if (total_paises == 0) {
+        cout << endl;
+    }
+
     // Imprimir los continentes
     for (int i = 0; i < total_paises; ++i) {
 
@@ -33,7 +37,7 @@ void Continente::mostrarDetalles() const {
         if (paises[i] != nullptr) {
 
             // Imprime el nombre de los continentes
-            paises[i]->mostrarNombre();
+            paises[i]->mostrarDetalles();
 
             // Imprimir comas bien
             if (i == total_paises - 1) {
