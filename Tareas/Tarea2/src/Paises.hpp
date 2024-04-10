@@ -5,11 +5,15 @@
 #include "Continentes.hpp"
 using namespace std;
 
+#define MAX_COUNTRIES 10
+
 class Pais : public Continente {
     private:
         string nombre;
+
     public:
         Pais(string nombre);
+        void mostrarNombre() const override;
         void mostrarDetalles() const override;
 };
 

@@ -10,6 +10,6 @@ void Pais::mostrarDetalles() const {
 }
 
 // Funcion virtual de la clase Continente, solo imprimira el nombre
-//void Continente::mostrarNombre() const {
-//    cout << nombre
-//}
+void Pais::mostrarNombre() const {
+    cout << nombre;
+}

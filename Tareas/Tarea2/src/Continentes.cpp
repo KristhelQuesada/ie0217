@@ -37,7 +37,7 @@ void Continente::mostrarDetalles() const {
         if (paises[i] != nullptr) {
 
             // Imprime el nombre de los continentes
-            paises[i]->mostrarDetalles();
+            paises[i]->mostrarNombre();
 
             // Imprimir comas bien
             if (i == total_paises - 1) {
