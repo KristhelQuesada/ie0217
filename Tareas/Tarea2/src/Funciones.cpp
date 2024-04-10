@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Continentes.hpp"
+#include "Paises.hpp"
 #include "Funciones.hpp"
 
 void funcionPrueba(Planeta* planeta) {
@@ -8,17 +8,36 @@ void funcionPrueba(Planeta* planeta) {
     Continente* asia = new Continente("Asia");
     Continente* america = new Continente("America");
     Continente* oceania = new Continente("Oceania");
-    cout << "checkin1" << endl;
+    cout << "Checkpoint: Objetos Continente creados" << endl;
 
     planeta->agregarContinente(asia);
     planeta->agregarContinente(america);
     planeta->agregarContinente(oceania);
-    cout << "checkin2" << endl;
+    cout << "Checkpoint: Objetos Continente agregados a Planeta" << endl;
 
     // Imprimir la información del planeta
     planeta->mostrarDetalles();
 
+    // Crear 3 objetos Pais y agregarlos a los continentes
+    Pais* panama = new Pais("Panama");
+    Pais* colombia = new Pais("Colombia");
+    Pais* australia = new Pais("Australia");
+    cout << "Checkpoint: Objetos Pais creados" << endl;
+
+    america->agregarPais(panama);
+    america->agregarPais(colombia);
+    oceania->agregarPais(australia);
+    cout << "Checkpoint: Objetos Pais agregados a sus continentes" << endl;
+
+    asia->mostrarDetalles();
+    america->mostrarDetalles();
+    oceania->mostrarDetalles();
+
     delete asia;
     delete america;
     delete oceania;
+
+    delete panama;
+    delete colombia;
+    delete australia;
 }

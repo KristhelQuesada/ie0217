@@ -2,7 +2,7 @@
 #include "Continentes.hpp" // clase que alberga
 #include <iostream>
 
-// Constructor de la clase Planeta
+// Constructor de la clase Planeta. Inicializa el contador en cero
 Planeta::Planeta(string _nombre) : nombre(_nombre), total_contis(0) {}
 
 
@@ -10,11 +10,10 @@ void Planeta::agregarContinente(Continente* continente) {
     // Condicional que controla que no podamos agregar mas continentes
     // si se supera su limite maximo.
     if (total_contis < MAX_CONTINENTS) {
+
         // al array que contiene la direccion en memoria de cada
         // objeto continente, actualice la variable total_contis
         // y guarde la direccion que pasamos por parametro ahi.
-        cout << "Continente: " << continente << endl;
-        cout << "Total Continentes: " << total_contis << endl;
         this->continentes[total_contis++] = continente;
 
     } else {
@@ -30,8 +29,12 @@ void Planeta::mostrarDetalles() const {
 
     // Imprimir los continentes
     for (int i = 0; i < total_contis; ++i) {
+
+        // Verifica que se apunta a una direccion valida
         if (continentes[i] != nullptr) {
-            continentes[i]->mostrarDetalles();
+
+            // Imprime el nombre de los continentes
+            continentes[i]->mostrarNombre();
 
             // Imprimir comas bien
             if (i == total_contis - 1) {

@@ -2,7 +2,16 @@
 #include <string>
 #include "Funciones.hpp"
 
+/*
+Tarea 2
+Estudiante: Kristhel Quesada, C06153
+Algoritmo: Uso de clases y objetos para la definicion de un planeta con
+continentes, paises y tipos de paises cada uno representado por medio de
+clases.
+*/
+
 int main() {
+    // Declaracion de variables
     int opcion;
     //string input;
 
@@ -32,7 +41,7 @@ int main() {
         switch (opcion) {
             case 1:
                 // Interaccion con usuario
-                cout << "Impresion de los paises" << endl;
+                cout << "\nImpresion de los paises" << endl;
 
                 // Crear un objeto Planeta y pasar un puntero a la función
                 funcionPrueba(&tierra);
@@ -41,23 +50,23 @@ int main() {
 
 
             case 2:
-                cout << "Comparacion de 2 paises";
+                cout << "\nComparacion de 2 paises";
 
                 break;
 
 
             case 3:
-                cout << "Agregar pais" << endl;
+                cout << "\nAgregar pais" << endl;
                 break;
 
 
             case 4:
-                cout << "Eliminar pais" << endl;
+                cout << "\nEliminar pais" << endl;
                 break;
 
 
             case 5:
-                cout << "Gracias por jugar" << endl;
+                cout << "Fin del programa :)" << endl;
                 detener = true;
                 break;
 
