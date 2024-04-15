@@ -6,10 +6,6 @@ int verifyMenuOption(string input, int out_range) {
     int verified_input;
     int size_input;
 
-    // Testing inputs
-    cout << "Input: " << input << endl;
-    cout << "Max_range: " << out_range << endl;
-
     // Primero se pregunta por el tamanio del string
     size_input = size(input);
 

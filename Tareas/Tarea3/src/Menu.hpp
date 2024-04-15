@@ -1,5 +1,5 @@
-#ifndef MENU
-#define MENU
+#ifndef MENU_HPP
+#define MENU_HPP
 
 /**
  * @brief Funcion Menu que se encarga de implementar las funciones
@@ -8,4 +8,4 @@
 // Prototipo de las funciones a desarrollar en Funciones.cpp
 void menu();
 
-#endif // MENU
+#endif // MENU_HPP

@@ -1,5 +1,5 @@
-#ifndef FUNCIONES
-#define FUNCIONES
+#ifndef FUNCIONES_HPP
+#define FUNCIONES_HPP
 
 #include <iostream>
 #include <string>
@@ -15,4 +15,4 @@ using namespace std;
 // Prototipo de las funciones a desarrollar en Funciones.cpp
 int verifyMenuOption(string input, int out_range);
 
-#endif // FUNCIONES
+#endif // FUNCIONES_HPP

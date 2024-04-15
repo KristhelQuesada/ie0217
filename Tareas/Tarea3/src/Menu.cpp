@@ -2,6 +2,8 @@
 #include <string>
 #include "Menu.hpp"
 #include "Funciones.hpp"
+#include "Contacto.hpp"
+#include "LinkedListFuncs.hpp"
 using namespace std;
 
 // ENUM para organizar el switch-case implementado en el menu
@@ -16,16 +18,21 @@ enum opciones {
 
 void menu() {
     // Declaracion de variables
+    Contacto* listaContactos = nullptr;
+    Contacto nuevoContacto;
     int opcion;
+    int phone_input;
     string input;
+    string name_input;
 
 
 
     // Inicializacion de variables
     bool detener = false;
-    string txt_menu = "\nMENU:\n"
+    string txt_menu = "\n______________________________________\n"
+                      "MENU:\n"
                       "1. Agregar contacto\n"
-                      "2. ELiminar contacto\n"
+                      "2. Eliminar contacto\n"
                       "3. Imprimir informacion en el cloud\n"
                       "4. Mostrar todos los contactos\n"
                       "5. Salir del programa\n"
@@ -45,19 +52,37 @@ void menu() {
         // Determinacion de funcion a ejecutar
         switch (opcion) {
             case ADD_CONTACT:
-                cout << "AGREAGANDO CONTACTO..." << endl;
+                cout << "\nAGREAGANDO CONTACTO..." << endl;
+
+                // Crear un nuevo objeto Contacto
+                cout << "Ingrese el nombre: ";
+                cin.ignore();
+                getline(cin, nuevoContacto.name);
+
+                cout << "Ingrese el numero telefonico: ";
+                cin >> nuevoContacto.phone;
+                //nuevoContacto.name = "Juan";
+                //nuevoContacto.phone = 88004554;
+                nuevoContacto.siguiente = NULL; // Inicializamos siguiente a NULL
+
+                agregarContacto(nuevoContacto, listaContactos);
+
+                //delete nuevoContacto;
+
                 break;
 
             case DELETE_CONTACT:
-                cout << "ELIMINANDO CONTACTO... " << endl;
+                cout << "\nELIMINANDO CONTACTO... " << endl;
+                
                 break;
 
             case SHOW_CLOUD:
-                cout << "ALMACENAMIENTO Y CLOUD... " << endl;
+                cout << "\nALMACENAMIENTO Y CLOUD... " << endl;
                 break;
 
             case SHOW_CONTACTS:
-                cout << "LISTA DE CONTACTOS... " << endl;
+                cout << "\nLISTA DE CONTACTOS... " << endl;
+                mostrarContactos(listaContactos);
                 break;
 
             case SALIR:
@@ -71,4 +96,7 @@ void menu() {
         }
         
     }
+
+    // Liberar la memoria fuera del while cuando termina el programa
+    liberarMemoria(listaContactos);
 }
