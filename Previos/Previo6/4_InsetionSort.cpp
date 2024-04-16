@@ -5,7 +5,7 @@ using namespace std;
 DESCRIPCION: Insertion sort
 Este programa introduce el algoritmo de ordenamiento Selection Sort con
 base en la diapositiva 12 de la presentacion. Este algoritmo consiste en
-tomar cada elemento del arreglo de ta forma que lo inserta en su posicion
+tomar cada elemento del arreglo de tal forma que lo inserta en su posicion
 correcta.
 
 Para ello, se parte del primer elemento y lo compara con el elemento que
