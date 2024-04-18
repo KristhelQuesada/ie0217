@@ -61,13 +61,23 @@ void selectionSort(int arr[], int n) {
 }
 
 void insertionSort(int arr[], int n) {
+
+    // Recorre el arreglo
     for (int i = 1; i < n; ++i) {
+
+        // Se define el key value
         int key = arr[i];
+
+        // Numero de comparaciones a ejecutar
         int j = i - 1;
+
+        // Busca la posicion del key desplazando los mayores
         while (j >= 0 && arr[j] > key) {
             arr[j + 1] = arr[j];
             --j;
         }
+
+        // Inserta el key en su posicion correcta
         arr[j + 1] = key;
     }
 }
