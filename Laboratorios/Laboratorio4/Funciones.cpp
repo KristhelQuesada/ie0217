@@ -13,8 +13,15 @@ tipos de algortimos de ordenamiento.
 */
 
 void bubbleSort(int arr[], int n) {
+    // for que recorr todo el arreglo (step)
     for (int i = 0; i < n - 1; ++i) {
+
+        // for que realiza cada iteracion
         for (int j = 0; j < n - i - 1; ++j) {
+
+            // Intercambia el valor menor a la posicion
+            // del mayor y mediante una variable temporal
+            // reasigna el mayor en su posicion correcta
             if (arr[j] > arr[j + 1]) {
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
@@ -26,13 +33,27 @@ void bubbleSort(int arr[], int n) {
 
 
 void selectionSort(int arr[], int n) {
+    // for que recorre todo el arreglo (step)
     for (int i = 0; i < n - 1; ++i) {
+
+        // Indice que determina desde donde se comienza cada iteracion
         int min_index = i;
+
+        // Desde ese indice de partida i hasta el final del arreglo
+        // ya que busca el nuevo minimo
         for (int j = i + 1; j < n; ++j) {
+
+            // Si el valor en la posicion j es menor que el valor
+            // donde teniamos registrado el ultimo minimo entonces
+            // actualice la posicion del nuevo minimo a j
             if (arr[j] < arr[min_index]) {
                 min_index = j;
             }
         }
+
+        // luego de hallar el nuevo minimo, intercambie el valor
+        // que se encuentra en la posicion donde iniciamos la
+        // iteracion por el valor del nuevo minimo encontrado
         int temp = arr[i];
         arr[i] = arr[min_index];
         arr[min_index] = temp;
@@ -52,27 +73,48 @@ void insertionSort(int arr[], int n) {
 }
 
 int partition(int arr[], int low, int high) {
+    // Define el pivote como el elemento mas a la derecha
     int pivot = arr[high];
+
+    // Inicializa el puntero que lleva la cuenta de la
+    // indice anterior al cual se ubicara el pivote
     int i = low - 1;
+
+    // Recorre cada elemento del array
     for (int j = low; j < high; ++j) {
+
+        // pregunta si el numero actual es menor al pivote
         if (arr[j] < pivot) {
-            ++i;
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+
+            // Si lo es entonces
+            ++i;                    // actualice el indice
+            int temp = arr[i];      // hace un swap para pasar
+            arr[i] = arr[j];        // el elemento menor a la
+            arr[j] = temp;          // derecha del pivote
         }
     }
+
+    // Despues de hallar la posicion anterior al pivote
+    // sumamos uno a dicha posicion para intercambia el
+    // pivote a su indice determinado
     int temp = arr[i + 1];
     arr[i + 1] = arr[high];
     arr[high] = temp;
+
+    // Luego retornamos la posicion del pivote
     return i + 1;
 }
 
 void quickSort(int arr[], int low, int high) {
+    // Detiene la recursividad cuando se alcance un array unitario
     if (low < high) {
+        // Determina el punto de pivote
         int pi = partition(arr, low, high);
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+
+        // Llama recursivamente al algortimo para que ejecute
+        // la misma logica de particion para los demas subarreglos
+        quickSort(arr, low, pi - 1); // subarreglo derecha
+        quickSort(arr, pi + 1, high); // subarreglo izquierda
     }
 }
 
