@@ -54,10 +54,11 @@ int main() {
     // Declaracion e inicializacion de variables
     Contacto* cloudList = nullptr; // lista enlazada para el Cloud
     Contacto* memoryList = nullptr; ; // lista enlazada para la memoria
+    Contacto* ptrToDelete;
     Hashtable cloud;
 
-    int phone_input, opcion;
-    string input, name_input;
+    int phone_input, opcion, opcion2;
+    string input, input2, name_input;
 
     bool detener = false; // bandera de detenimiento
 
@@ -101,7 +102,43 @@ int main() {
 
             case DELETE_CONTACT:
                 cout << "\nELIMINANDO CONTACTO... " << endl;
-                
+
+                cout << "Ingrese el nombre del contacto que desea eliminar: ";
+                getline(cin, name_input);
+
+                cout << "\nDesea eliminar el contacto de: " << endl;
+                cout << "1. La memoria" << endl;
+                cout << "2. El cloud" << endl;
+                cout << "3. Ambas" << endl;
+                cout << "Escriba su respuesta: ";
+                cin >> input2;
+                opcion2 = verifyMenuOption(input2, 4); // Maneja errores
+
+                switch (opcion2) {
+                    case 1:
+                        // Borra en la memoria only
+                        deleteFromMemory(name_input, memoryList);
+                        break;
+
+                    case 2:
+                        // Borra en el cloud only
+                        ptrToDelete = cloud.deleteItem(name_input);
+                        deleteFromCloud(name_input, cloudList, ptrToDelete);
+                        break;
+
+                    case 3:
+                        // Borra en la memoria
+                        deleteFromMemory(name_input, memoryList);
+
+                        // Borra en el cloud
+                        ptrToDelete = cloud.deleteItem(name_input);
+                        deleteFromCloud(name_input, cloudList, ptrToDelete);
+                        break;
+
+                    default:
+                        cout << "Opcion ingresada no valida." << endl;
+                        break;
+                }
                 break;
 
             case SHOW_CLOUD:

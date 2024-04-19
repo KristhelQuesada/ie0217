@@ -17,13 +17,10 @@ class Hashtable {
 
     public: // Anyone can access
         Hashtable(); // constructor
-        void insertItem(std::string key, Contacto* value); // Metodos para la
-        void deleteItem(std::string key);                  // manipulacion de
-        void searchItem(std::string key);                  // tems del hashtable
-        
+        void insertItem(std::string key, Contacto* value); // permite insertar un elemento
+        Contacto* deleteItem(std::string key); // permite eliminar un nodo y retornar su valor
         void displayHash(); // Despliega la informacion del hashtable
         int hashFunction(std::string key); // Realizar la operacion de hashing
-
         void freeHashTable(); // Para liberar la memoria
         
 };

@@ -7,7 +7,7 @@ using namespace std;
 ------------------------------------------------------------------
 FUNCIONES PARA LA LISTA ENLAZADA DEL CLOUD
 */
-void addToCloud(string nombre, int numero, Contacto*& lista, Hashtable& hashTable){
+void addToCloud(string nombre, int numero, Contacto*& lista, Hashtable& hashTable) {
     Contacto* contactCopy = new Contacto;
     contactCopy->name.assign(nombre);
     contactCopy->phone = numero;
@@ -24,7 +24,7 @@ void addToCloud(string nombre, int numero, Contacto*& lista, Hashtable& hashTabl
 
 
 
-void showCloudList(Contacto* lista){
+void showCloudList(Contacto* lista) {
     int i; // lleva la cuenta de los contactos
 
     // Verifica que la lista esta vacia
@@ -43,14 +43,11 @@ void showCloudList(Contacto* lista){
 
         lista = lista->siguiente;
     }
-
-    // Implementacion de la impresion de la hashtable
-    // agregue codigo aca
 }
 
 
 
-void freeCloudData(Contacto*& lista){
+void freeCloudData(Contacto*& lista) {
     while (lista != nullptr) {
         Contacto* temp = lista;
         lista = lista->siguiente;
@@ -60,11 +57,45 @@ void freeCloudData(Contacto*& lista){
 
 
 
+void deleteFromCloud(string nombre, Contacto*& lista, Contacto* ptrContacto) {
+    if (ptrContacto == nullptr) {
+        cout << "Contacto '" << nombre << "' no existe en el Cloud." << endl;
+        return;
+    }
+
+    // Verificar si el primer elemento de la lista es el que queremos eliminar
+    if (lista == ptrContacto) {
+        lista = lista->siguiente;
+        delete ptrContacto;
+        cout << "Contacto '" << nombre << "' ha sido eliminado." << endl;
+        return;
+    }
+
+    Contacto* currentContact = lista;
+    Contacto* previousContact = nullptr;
+
+    // Buscar ptrContacto en la lista
+    while (currentContact != nullptr) {
+        if (currentContact == ptrContacto) {
+            previousContact->siguiente = currentContact->siguiente;
+            delete currentContact;
+            cout << "Contacto '" << nombre << "' ha sido eliminado." << endl;
+            return;
+        }
+        previousContact = currentContact;
+        currentContact = currentContact->siguiente;
+    }
+
+    cout << "Contacto '" << nombre << "' no existe en la lista." << endl;
+}
+
+
+
 /*
 ------------------------------------------------------------------
 FUNCIONES PARA LA LISTA ENLAZADA DE LA MEMORIA
 */
-void addToMemory(string nombre, int numero, Contacto*& lista){
+void addToMemory(string nombre, int numero, Contacto*& lista) {
     Contacto* contactCopy = new Contacto;
     contactCopy->name.assign(nombre);
     contactCopy->phone = numero;
@@ -77,7 +108,7 @@ void addToMemory(string nombre, int numero, Contacto*& lista){
 
 
 
-void showMemoryList(Contacto* lista){
+void showMemoryList(Contacto* lista) {
     int i; // lleva la cuenta de los contactos
 
     // Verifica que la lista esta vacia
@@ -100,10 +131,57 @@ void showMemoryList(Contacto* lista){
 
 
 
-void freeMemoryData(Contacto*& lista){
+void freeMemoryData(Contacto*& lista) {
     while (lista != nullptr) {
         Contacto* temp = lista;
         lista = lista->siguiente;
         free(temp);
     }
 }
+
+
+void deleteFromMemory(string nombre, Contacto*& lista) {
+    // Verifica si la lista está vacía inicialmente para evitar
+    // iteraciones innecesarias
+    if (lista == nullptr) {
+        cout << "La lista está vacía." << endl;
+        return;
+    }
+
+    // Inicializa los punteros para recorrer la lista
+    Contacto* currentContact = lista;
+    Contacto* previousContact = nullptr;
+
+    // Recorre la lista hasta que currentContact sea nulo, o sea, se llega al final
+    while (currentContact != nullptr) {
+
+        // Verifica si el contacto actual coincide con el nombre buscado
+        if (currentContact->name == nombre) {
+
+            // Si el contacto a eliminar es el primero de la lista
+            if (previousContact == nullptr) {
+                lista = currentContact->siguiente; // Lista ahora comienza en el siguiente contacto
+
+            } else {
+                /*
+                El contacto previo ahora sera el contacto enlazado a 'siguiente' del
+                currentContact, ya que este ultimo piensa eliminarse
+                */
+                previousContact->siguiente = currentContact->siguiente;
+            }
+
+            // Libera la memoria del contacto actual
+            free(currentContact);
+            cout << "Contacto '" << nombre << "' ha sido eliminado." << endl;
+            return;
+        }
+
+        // Si no hubo match entonces avanza al siguiente contacto
+        previousContact = currentContact;
+        currentContact = currentContact->siguiente;
+    }
+
+    // Si se recorre todo la lista y no hubo match entonces
+    cout << "No se encontró el contacto: " << nombre << endl;
+}
+

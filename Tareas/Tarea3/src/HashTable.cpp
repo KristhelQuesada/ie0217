@@ -17,6 +17,7 @@ Hashtable::Hashtable() {
 }
 
 
+
 // Hash Function
 int Hashtable::hashFunction(string key) {
     unsigned long hashValue = 0;
@@ -29,6 +30,7 @@ int Hashtable::hashFunction(string key) {
     // Retorna un valor entero entre el tamanio del hashtable
     return (hashValue % MAX_ELEMENTS);
 }
+
 
 
 // Funcion para agregar un item a la HashTable
@@ -70,6 +72,7 @@ void Hashtable::insertItem(string key, Contacto* value) {
 }
 
 
+
 // Funcion para visualizar el HashTable by far
 void Hashtable::displayHash() {
     // Recorre cada bucket
@@ -98,28 +101,6 @@ void Hashtable::displayHash() {
 
 
 // Funcion para liberar la memoria utilizada por la HashTable
-//void Hashtable::freeHashTable() {
-//    // Inicializa los Nodos para recorrer cada bucket
-//    Nodo* currentNode = tablaHash[0];
-//    Nodo* nextNode = currentNode->siguiente;
-//    Nodo* nodeToDelete;
-//
-//
-//    // Recorre cada bucket
-//    for (int i = 0; i < MAX_ELEMENTS; i++) {
-//
-//        // Cuenta la cantidad de nodos que hay por bucket
-//        while (nextNode != nullptr) {
-//            nodeToDelete = currentNode;
-//
-//            currentNode = nextNode;
-//            nextNode = nextNode->siguiente;
-//
-//            delete(nodeToDelete);
-//        }
-//    }
-//}
-
 void Hashtable::freeHashTable() {
     // Recorre cada bucket
     for (int i = 0; i < MAX_ELEMENTS; i++) {
@@ -142,4 +123,51 @@ void Hashtable::freeHashTable() {
         // Actualiza el bucket como vacio nuevamente
         tablaHash[i] = nullptr;
     }
+}
+
+
+
+Contacto* Hashtable::deleteItem(string key) {
+    // Recorre cada bucker
+    for (int i = 0; i < MAX_ELEMENTS; i++) {
+
+        // Inicializa nodos para recorrer el bucket
+        Nodo* currentNode = tablaHash[i];
+        Nodo* previousNode = nullptr;
+
+        // Siempre que el bucket no este vacio entonces para cada nodo con el mismo key
+        while (currentNode != nullptr) {
+
+            // Se inspecciona su contenido
+            Contacto* ptrContacto = currentNode->ptrContactValue;
+
+            // Si el nombre del contacto del actual nodo es igual al key
+            if (ptrContacto->name == key) {
+
+                // Seleccione ese nodo para eliminarlo
+                Nodo* nodeToDelete = currentNode;
+
+                // Si ese nodo era el primero del bucker
+                if (previousNode == nullptr) {
+                    tablaHash[i] = currentNode->siguiente; // actualice su nuevo primero
+                } else {
+                    previousNode->siguiente = currentNode->siguiente; // si no, reorganice
+                }
+
+                // Luego se extrae el valor que contenia el nodo a eliminar
+                Contacto* contactToReturn = nodeToDelete->ptrContactValue;
+                delete nodeToDelete; // se elimina el nodo
+                return contactToReturn; // se retorna el valor
+
+
+            } else {
+                // si el nombre del contacto no era igua a la llave
+                // entonces siga buscando mediante el analisis del
+                // siguiente nodo
+                previousNode = currentNode;
+                currentNode = currentNode->siguiente;
+            }
+        }
+    }
+    return nullptr; // El elemento no se encontró en el hash table
 }
