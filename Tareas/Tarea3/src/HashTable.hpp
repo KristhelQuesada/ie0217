@@ -1,33 +1,30 @@
 #ifndef HASHTABLE_HPP
 #define HASHTABLE_HPP
 
-#include <iostream>
-#include <string>
-using namespace std;
-
-#define MAX_ELEMENTS 50
-
-
-class Hashtable;
+#include "Nodo.hpp" // Para usar la estructura contacto
+#define MAX_ELEMENTS 10 // Cantidad de maxima buckets del hashtable
 
 /**
  * @class Hashtable
- * @brief Clase 
+ * @brief Clase que define la estructura de datos Hash Table.
+ * Esta permite recibir un nombre y hacer el hashing para asignar
+ * el valor a un index correspondiente.
  */
-class Planeta {
-    // Se acceden dentro de esta clase y las derivadas
-    private:
-        int capacity = MAX_ELEMENTS; // Cantidad de elementos que alberga la tabla
+class Hashtable {
+    private: // Only this class and derivates have access
+        Nodo* tablaHash[MAX_ELEMENTS]; // array de listas enlazadas
+                                       // donde cada lista es un bucket
 
+    public: // Anyone can access
+        Hashtable(); // constructor
+        void insertItem(std::string key, Contacto* value); // Metodos para la
+        void deleteItem(std::string key);                  // manipulacion de
+        void searchItem(std::string key);                  // tems del hashtable
+        
+        void displayHash(); // Despliega la informacion del hashtable
+        int hashFunction(std::string key); // Realizar la operacion de hashing
 
-
-        // Array que contiene los punteros a cada continente
-        Continente* continentes[MAX_CONTINENTS];
-
-
-    // Acceden cualquiera
-    public:
-        // Metodos
+        void freeHashTable(); // Para liberar la memoria
         
 };
 

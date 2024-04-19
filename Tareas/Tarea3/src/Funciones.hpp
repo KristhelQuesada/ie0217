@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string>
-using namespace std;
 
 /**
  * @brief Funcion que se encarga de revisar la entrada de un usuario
@@ -13,6 +12,6 @@ using namespace std;
  * del menu
  */
 // Prototipo de las funciones a desarrollar en Funciones.cpp
-int verifyMenuOption(string input, int out_range);
+int verifyMenuOption(std::string input, int out_range);
 
 #endif // FUNCIONES_HPP

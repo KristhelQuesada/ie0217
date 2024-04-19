@@ -1,3 +1,3 @@
 tarea: main.cpp
-	g++ -o tryout.exe main.cpp Menu.cpp Funciones.cpp HashTable.cpp LinkedListFuncs.cpp
+	g++ -o tryout.exe main.cpp Funciones.cpp LinkedListFuncs.cpp HashTable.cpp
 	./tryout.exe

@@ -20,10 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Includes de los archivos y librerias necesarias
-#include <iostream>
-#include "Menu.hpp"
-using namespace std;
 
 /*
 Tarea 3
@@ -33,13 +29,109 @@ tanto en un espacio de "memoria" como en un "cloud", implementando el uso de
 memoria dinamica.
 */
 
+// Includes de los archivos y librerias necesarias
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include "Funciones.hpp"
+#include "LinkedListFuncs.hpp"
+using namespace std;
+
+
+// ENUM para organizar el switch-case implementado en el menu
+enum opciones {
+    ADD_CONTACT = 1,
+    DELETE_CONTACT,
+    SHOW_CLOUD,
+    SHOW_CONTACTS,
+    SALIR,
+    OPCIONES_MAX // para saber cuantas opciones tenemos
+};
+
+
+// MAIN FUNCTION
 int main() {
-    // Aviso de que el programa inicia
-    cout << "INICIA EL PROGRAMA" << endl;
+    // Declaracion e inicializacion de variables
+    Contacto* cloudList = nullptr; // lista enlazada para el Cloud
+    Contacto* memoryList = nullptr; ; // lista enlazada para la memoria
+    Hashtable cloud;
 
-    // Activa el menu
-    menu();
+    int phone_input, opcion;
+    string input, name_input;
 
-    
+    bool detener = false; // bandera de detenimiento
+
+
+
+
+    cout << "INICIO DEL PROGRAMA" << endl;
+    // Loop para mantener la ejecucion del juego
+    while (detener == false) {
+        // Menu para el ususario
+        cout << "\n______________________________________\n";
+        cout << "MENU:\n";
+        cout << "1. Agregar contacto\n";
+        cout << "2. Eliminar contacto\n";
+        cout << "3. Imprimir informacion en el cloud\n";
+        cout << "4. Mostrar todos los contactos\n";
+        cout << "5. Salir del programa\n";
+        cout << "\nQue desea realizar: ";
+        cin >> input;
+        opcion = verifyMenuOption(input, OPCIONES_MAX); // Maneja errores
+        cin.ignore();
+
+
+        // Determinacion de funcion a ejecutar
+        switch (opcion) {
+            case ADD_CONTACT:
+                cout << "\nAGREAGANDO CONTACTO..." << endl;
+
+                // Usuario ingresa datos del contacto
+                cout << "Ingrese el nombre del nuevo contacto: ";
+                getline(cin, name_input);
+                cout << "Ingrese el numero del nuevo contacto: ";
+                cin >> phone_input;
+
+                // Agregar a memoria y al cloud
+                addToMemory(name_input, phone_input, memoryList);
+                addToCloud(name_input, phone_input, cloudList, cloud);
+
+
+                break;
+
+            case DELETE_CONTACT:
+                cout << "\nELIMINANDO CONTACTO... " << endl;
+                
+                break;
+
+            case SHOW_CLOUD:
+                cout << "\nALMACENAMIENTO Y CLOUD... " << endl;
+                showCloudList(cloudList);
+                cout << "\n----------Tabla Hash----------\n";
+                cloud.displayHash();
+                cout << "--------------------------------\n";
+                break;
+
+            case SHOW_CONTACTS:
+                cout << "\nLISTA DE CONTACTOS... " << endl;
+                showMemoryList(memoryList);
+                break;
+
+            case SALIR:
+                cout << "Gracias por utilizar el programa." << endl;
+                detener = true;
+                break;
+
+            default:
+                cout << "Opcion ingresada no valida." << endl;
+                break;
+        }
+        
+    }
+    // Liberar la memoria de las listas
+    freeCloudData(cloudList);
+    cloud.freeHashTable();
+    freeMemoryData(memoryList);
+
     return 0;
 }
