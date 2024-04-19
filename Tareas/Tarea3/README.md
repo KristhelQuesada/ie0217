@@ -1,24 +1,29 @@
 # Tarea 3: Manejo de Memoria, Estructura de Datos y Algoritmos
 #### Estudiante: Kristhel Quesada, C06153
 
-En el siguiente repositorio se encuentra un programa que 
+En el siguiente repositorio se encuentra un programa que pretende implementar la creacion de una app de contactos donde los estos seran guardados tanto en un espacio de "memoria" como en un "cloud", mediante el uso de memoria dinamica y estructuras de datos como lo son las HashTable y las listas enlazadas. En este caso se utilizan dos estructuras:
+- Nodo (para la creacion de una lista enlazada que contiene punteros contactos)
+- Contacto (para almacenas la informacion de contacto)
+
+Se aplica la solucion de colisiones mediante _direct chaining_, razon por la cual se hace una estructura nodo que contiene punteros a estructuras Contacto, para que de esta forma, cada nodo represente cada bucket del Hash Table, sin la necesidad de modificar los punteros de la lista enlazada del Cloud.
 
 
 ## Ejecucion de los Programas
-Para la ejecucion de los programas, posicionese en el directorio _.../ie0217/Tareas/Tarea2/src/_, y utilice los comandos:
+Para la ejecucion de los programas, posicionese en el directorio _.../ie0217/Tareas/Tarea3/src/_, y utilice los comandos:
 ```
->> g++ -o tryout.exe Planeta.cpp Continentes.cpp Funciones.cpp main.cpp Paises.cpp PaisesEnDesarrollo.cpp PaisesPrimerMundo.cpp
-
->> ./tryout.exe
+g++ -o tryout.exe main.cpp Funciones.cpp LinkedListFuncs.cpp HashTable.cpp
 ```
-
-Asimismo, para la documentacion de Doxygen, puede acceder al output de este mediante el uso de Netlify, para ello acceda al siguiente enlace:
 ```
-https://ie0217kriss.netlify.app/
+./tryout.exe
 ```
 
-## Flujo del programa
+Por otra parte, si es de su preferencia se incluye un _Makefile_, por tanto, gusta de hacer la compilacion y ejecucion en un solo comando, posicionese en el directorio mencionado anteriormente y ejecute:
 
+```
+make
+```
+
+Para la documentacion de Doxygen, esta no fue implementada.
 
 
 ## Parte Teorica
@@ -204,21 +209,36 @@ Un árbol binario es una estructura de datos no lineal en la que cada nodo puede
 
 
 ### 8. ¿Qué es una cola (queue) y en qué situaciones se utiliza comúnmente?
-
+Funciona de tal manera que el primer elemento en entrar es el primer elemento en salir. En esta estructura se tendran dos punteros donde ambos iniciaran en la misma posicion cuando no haya nada o un unico elemento, y conforme se vaya llenando la cola el puntero rear (trasero) comenzara a moverse y conforme se eliminen elementos, el puntero front (frontal) tambien comenzara a moverse hacia el rear. Una vez se hayan eliminado todos los elementos entonces ambos punteros regresan a la posicion inicial. Y se utiliza entonces en situaciones donde los procesos necesitan ser ejecutados en el orden en que fueron creados.
 
 ### 9. ¿Cuál es la diferencia entre una cola (queue) y una pila (stack)?
+La principal diferencia entre una cola (queue) y una pila (stack) esta dad por la forma en que se accede a los elementos. 
 
+#### Forma en que se insertan los elementos.
+En una cola, los elementos se insertan al final y se eliminan del principio (FIFO), mientras que en una pila, los elementos se insertan y eliminan del mismo extremo (LIFO, Last-In-First-Out). 
+
+#### Por tanto...
+En una pila, el último elemento insertado es el primero en ser eliminado, lo que significa que el acceso es secuencial y se sigue un orden inverso al de la inserción. En una cola, el acceso es secuencial y se sigue el mismo orden que el de la inserción.
 
 ### 10. Describe cómo funciona el algoritmo de inserción (insert) en una tabla hash.
+En una tabla hash, el algoritmo de inserción generalmente implica los siguientes pasos:
 
+1. Calcular el valor hash para la clave del elemento que se va a insertar. Este valor hash se utiliza para determinar la ubicación en la tabla hash donde se almacenará el elemento.
+2. Utilizar el valor hash calculado para determinar la posición (o índice) en la tabla hash donde se almacenará el elemento.
+3. Si la posición calculada está ocupada, es decir, si hay colisión, se debe resolver la colisión utilizando una técnica como encadenamiento (donde se almacenan múltiples elementos en la misma posición usando una estructura de datos como una lista enlazada) o resolución de colisiones abierta (donde se busca otra posición disponible).
+4. Insertar el elemento en la posición calculada de la tabla hash.
 
 ### 11. ¿Qué es la función de dispersión (hash function) y por qué es importante en las tablas hash?
+Una función de dispersión (hash function) es una función que convierte datos de entrada (como una clave) en un valor hash único y determinístico, que se utiliza para indexar o mapear los datos en una estructura de datos como una tabla hash. Esta función asigna cada clave a una posición en la tabla hash, permitiendo así el acceso rápido a los elementos.
+
+La importancia de la función de dispersión radica en su capacidad para distribuir uniformemente los datos en la tabla hash, minimizando así las colisiones (cuando dos claves diferentes se asignan a la misma posición en la tabla hash). Una buena función de dispersión ayuda a maximizar el rendimiento de la tabla hash, ya que reduce la probabilidad de colisiones y garantiza un acceso eficiente a los elementos almacenados.
 
 
 ### 12. ¿Cuál es la complejidad temporal promedio de búsqueda en una tabla hash bien implementada?
 
 
 ### 13. Explica cómo se realiza la operación de inserción (push) en una pila (stack).
+
 
 
 ### 14. ¿Cuál es la complejidad temporal de las operaciones de apilar (push) y desapilar (pop) en una pila?
@@ -228,12 +248,20 @@ Un árbol binario es una estructura de datos no lineal en la que cada nodo puede
 
 
 ### 16. ¿Qué es un nodo en una lista enlazada y qué contiene?
-
+En una lista enlazada, un nodo es una estructura de datos que consta de dos partes: miembros reservados para los tipos de datos que va a almacenar  y un puntero (o referencia) que apunta al siguiente nodo en la secuencia. En resumen, contiene su valor o contedino y ademas un puntero que apunta a otra estructura del mismo tipo, siendo esto lo que da el enlace.
 
 ### 17. ¿Cuál es la diferencia entre una lista enlazada simple y una lista enlazada doblemente enlazada?
-
+La diferencia se encuentra en la cantidad de punteros que tiene cada nodo. En la __lista enlazada simple__ cada nodo contiene un único puntero que apunta al siguiente nodo, mientras que en la __lista doblemente enlazada__ cada nodo contiene dos punteros: 
+- Uno que apunta al nodo siguiente
+- Otro que apunta al nodo anterior en la secuencia. 
+Esto permite la navegación en ambas direcciones (hacia adelante y hacia atrás) en la lista.
 
 ### 18. ¿Cómo se realiza la eliminación (delete) de un nodo en una lista enlazada?
+Para ello se debe:
+
+1. Encontrar el nodo que se desea eliminar y el nodo anterior a él en la lista.
+2. Actualizar el puntero del nodo anterior para que apunte al siguiente nodo después del que se desea eliminar.
+3. Liberar la memoria asignada al nodo que se desea eliminar.
 
 
 ### 19. Explica cómo funciona el algoritmo de recorrido (traversal) en un árbol binario.
