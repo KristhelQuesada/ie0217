@@ -27,6 +27,8 @@ Realiza lecturas, escrituras y puede moverse tanto hacia adelante como hacia
 atrás con el adicional de tener acceso aleatorio. En este caso, son compati-
 bles con contenedores secuenciales como:
   - Vectores, deques, arrays e iteradores string
+donde su nombre de acceso aleatorio es porque cuando queramos acceder a un
+elemento, el tiempo de ejecucion para este acceso siempre sera constante.
 */
 
 
@@ -129,7 +131,7 @@ int main() {
     vector<int>::iterator itr_last = vec.end() - 1; // -1 to not count the beyond
 
     // display the vector elements
-    // Leemos accediendo de la manera que queramos, por eso son de acceso aleatorio
+    // Leemos accediendo de la manera que queramos.
     cout << "First element: " << *itr_first << endl; // 1
     cout << "Second element: " << itr_first[1] << endl; // 2
 
