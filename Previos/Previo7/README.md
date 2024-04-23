@@ -1,8 +1,8 @@
 # Previo 5: Algoritmos de Ordenamiento
 
 ## Indice
-1. [Descripción](#descripción)
-2. [Ejecución de los Programas](#ejecución-de-los-programas)
+1. [Descripción](#descripcion)
+2. [Ejecución de los Programas](#ejecucion-de-los-programas)
 3. [Conceptos Importantes](#conceptos-importantes)
    - [Contenedores](#contenedores)
    - [Iteradores](#tipos-de-iteradores)
@@ -146,7 +146,7 @@ Es una combinación de los 4 básicamente. Realiza lecturas, escrituras y puede 
 
 donde su nombre de acceso aleatorio es porque cuando queramos acceder a un elemento, el tiempo de ejecucion para este acceso siempre sera constante.
 
-### Algoritmos SLT
+### Algoritmos STL
 En la STL existe una tercer caja de herramientas ademas de los contenedores e iteradores, la cual vamos a estar utilizando, y esta va a ser los algoritmos. En este caso solo vemos una cantidad reducida de algoritmos en comparación con la basta cantidad que existen, sin embargo, podemos encapsularlos en 6 burbujas o catgorias distintas:
 
 	1. Algoritmos de Búsqueda
