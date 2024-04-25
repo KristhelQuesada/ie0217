@@ -200,6 +200,8 @@ InputIterator find_if (InputIterator first, InputIterator last, Predicate pred);
 #### Valor de Retorno
 - Esta función devuelve un iterador al primer elemento en el rango [__first, last__) para el cual `pred` (función) devuelve verdadero. Si no se encuentra ningún elemento, es decir, el predicado siempre resulta en _false_ en la verificacion de cada elemento, entonces la función devuelve el iterador a __last__.
 
+_Todo lo anterior obtenido de [std::find_if](https://cplusplus.com/reference/algorithm/find_if/) y tambien [std::find_if , std::find_if_not in C++](https://www.geeksforgeeks.org/stdfind_if-stdfind_if_not-in-c/)._
+
 #### Ejemplo del Programa Implementado en el Laboratorio
 ESta funcion se utiliza en el archivo _"Biblioteca.cpp"_, a continuacion se detalla explicitamente su implementacion:
 
