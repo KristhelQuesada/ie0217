@@ -15,7 +15,7 @@ g++ -o tryout.exe main.cpp Libro.cpp Biblioteca.cpp
 
 ## Teoria Evaluada
 
-### Funciones Lambda [^1]
+### Funciones Lambda
 Las funciones lambda son funciones anonimas que son creadas en tiempo de ejecucion, no en tiempo de compilacion y que fueron agregadas a partir del estandar de C++ 11. Para ello exploremos su sintaxis:
 - [] dentro de ellos vienen los parametros de captura.
 - () dentro de ellos vienen los parametros normales como cualquier funcion.
@@ -68,14 +68,16 @@ Lo que diferencia una _funcion lambda_ de una funcion normal son los __parametro
 [=]        // captura todo el scope por copia o por valor
 ```
 
-Tambien se comenta que si queremos devolver una funcion que tenga acceso a las cosas de una clase entonces en el cuerpo de captura le podemos especificar ``` this ``` con lo cual inmediatamente en la funcion lambda que estamos declarando, si teniamos un atributo publico entonces podemos acceder directamente a ellos sin tener que pasarlos por parametros.
+Tambien se comenta que si queremos devolver una funcion que tenga acceso a las cosas de una clase entonces en el cuerpo de captura le podemos especificar ``` this ``` con lo cual inmediatamente en la funcion lambda que estamos declarando, si teniamos un atributo publico entonces podemos acceder directamente a ellos sin tener que pasarlos por parametros. [nota uno][1]
 
 ### Unary Functions
+Here
 
 
 ### STL Algorithm: find_if
+Here
 
 
 
 
-[^1]: Obtenido de https://openwebinars.net/blog/que-son-las-funciones-lambdas-en-cpp/
+[^1]: Obtenido de [enlace Funciones Lambda](http://ejehttps://openwebinars.net/blog/que-son-las-funciones-lambdas-en-cpp/mplo.com).
