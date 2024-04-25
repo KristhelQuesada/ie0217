@@ -1,10 +1,25 @@
 # Laboratorio 5
 
+## Indice
+1. [Resumen](#resumen)
+2. [Instrucciones de ejecucion](#instrucciones-de-ejecucion)
+3. [Teoria Evaluada](#teoria-evaluada)
+   - [Funciones Lambda](#funciones-lambda)
+   - [Predicados](#predicados)
+   - [STL Algorithm: find_if](#stl-algorithm-find_if)
+
+
 ## Resumen
-El presente laboratorio tenia el objetivo de realizar un programa que permite calcular los tiempos de ejecucion tras implementar diferentes algoritmos de ordenamiento. Para ello se crearon dos funciones ya que para algunos algoritmos de ordenamiento, las funciones que describen dichos algoritmos presentan argumentos distintos. Asi mismo, para el desarrollo de este laboratorio, se emple el uso de la libreria _chrono_ para poder determinar los tiempos de ejecucion.
+El presente laboratorio tenia el objetivo tomar el archivo _Laboratorio5.cpp_, ejecutarlo, entenderlo, agregar comentarios amplios del contenido del mismo, luego dividirlo en varios archivos de manera modular, y agregar más elementos al main de la función. En dicho archivo se tiene un ejemplo del uso de algoritmos de la STL como:
+- `sort()`
+- `find_if()`
+
+ademas del uso de contenedores e iteradores donde se utilizan explicitamente los __vectores__. Asi, para ello se separa el codigo en 5 archivos distintos (main.cpp, Libro.cpp, LIbro.hpp, Biblioteca.cpp y Biblioteca.hpp) y se procede a agregar los comentarios en dichos archivos. Adicionalmente, en el presente instructivo se agregan las instruccionesd de compilacion y ejecucion; al igual que un breve resumen teorico donde se agregan conceptos que se investigaron para el entendimiento y profundizacion del codigo mismo.
+
+<br>
 
 ## Instrucciones de ejecucion
-Asi, asumiendo que para la evaluacion del presente laboratorio se busca revisar unicamente los archivos modulados, los comandos de ejecucion para ello se presenta a continuacion, sin embargo, considere que se asume que se encuentra posicionado en el directorio _.../ie0217/Laboratorios/Laboratorio4_ :
+Asi, asumiendo que para la evaluacion del presente laboratorio se busca revisar unicamente los archivos modulados, entonces los comandos de ejecucion para ello se presentan a continuacion, sin embargo, considere que __se asume que se encuentra posicionado en el directorio__ _.../ie0217/Laboratorios/Laboratorio5_ :
 
 ```
 g++ -o tryout.exe main.cpp Libro.cpp Biblioteca.cpp
@@ -12,6 +27,7 @@ g++ -o tryout.exe main.cpp Libro.cpp Biblioteca.cpp
 ```
 ./tryout.exe
 ```
+<br>
 
 ## Teoria Evaluada
 
@@ -188,13 +204,11 @@ InputIterator find_if (InputIterator first, InputIterator last, Predicate pred);
 ESta funcion se utiliza en el archivo _"Biblioteca.cpp"_, a continuacion se detalla explicitamente su implementacion:
 
 ```cpp
-
 std::vector<Libro>::iterator Biblioteca::buscarLibroPorTitulo(const std::string& titulo) {
     return std::find_if(libros.begin(), libros.end(), [&titulo](const Libro& l) {
         return l.titulo == titulo; // comparacion booleana
     });
 }
-
 ```
 
 donde lo anterior entonces puede leerse como:
