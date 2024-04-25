@@ -208,9 +208,13 @@ donde lo anterior entonces puede leerse como:
 4. Entonces, en resumen:
 
 ```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+flowchart TD
+    A[Funcion Lambda] --> |Pregunta si| B(El titulo del libro iterado es igual al titulo en busqueda y retorna...)
+    B --> |True| C{find_if}
+    B --> |False| C{find_if}
+    C --> D(Si el valor que recibió fue)
+    D --> |true| E(Se retorna)
+    D --> |false| F(Se retorna)
+    E --> G[Iterador del primer elemento donde se activo el true]
+    F --> H["Iterador que corresponde al .end()"]
 ```
