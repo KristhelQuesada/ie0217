@@ -1,0 +1,81 @@
+# Laboratorio 5
+
+## Resumen
+El presente laboratorio tenia el objetivo de realizar un programa que permite calcular los tiempos de ejecucion tras implementar diferentes algoritmos de ordenamiento. Para ello se crearon dos funciones ya que para algunos algoritmos de ordenamiento, las funciones que describen dichos algoritmos presentan argumentos distintos. Asi mismo, para el desarrollo de este laboratorio, se emple el uso de la libreria _chrono_ para poder determinar los tiempos de ejecucion.
+
+## Instrucciones de ejecucion
+Asi, asumiendo que para la evaluacion del presente laboratorio se busca revisar unicamente los archivos modulados, los comandos de ejecucion para ello se presenta a continuacion, sin embargo, considere que se asume que se encuentra posicionado en el directorio _.../ie0217/Laboratorios/Laboratorio4_ :
+
+```
+g++ -o tryout.exe main.cpp Libro.cpp Biblioteca.cpp
+```
+```
+./tryout.exe
+```
+
+## Teoria Evaluada
+
+### Funciones Lambda [^1]
+Las funciones lambda son funciones anonimas que son creadas en tiempo de ejecucion, no en tiempo de compilacion y que fueron agregadas a partir del estandar de C++ 11. Para ello exploremos su sintaxis:
+- [] dentro de ellos vienen los parametros de captura.
+- () dentro de ellos vienen los parametros normales como cualquier funcion.
+- {} dentro de ellos viene el cuerpo de la funcion.
+- -> marca el tipo de variable que retorna la funcion.
+
+Considere el siguiente ejemplo:
+
+```cpp
+#include <iostream>
+
+class Foo {
+    public:
+        int m_attr;
+
+        // Usar el this en el parametro de captura me permite capturar
+        // todos los atributos de la clase sin tener que especificarlos
+        void foo() {
+            auto f=[this](){
+                m_attr;
+            };
+        }
+};
+
+int main() {
+    int b = 10;
+    int c = 100;
+
+    auto f = [&](int& a) -> int {
+        b += 1;
+        c += 1;
+        return a+b+c;
+    };
+
+    int a = 10;
+    std::cout << f(a) << std::endl; // Imprime 122
+    std::cout << b << std::endl;    // Imprime 11
+    std::cout << c << std::endl;    // Imprime 101
+
+    return 0;
+}
+```
+
+Lo que diferencia una _funcion lambda_ de una funcion normal son los __parametros de captura []__. Estos son muy utiles pues pueden capturar todo su entorno, todo el scope en el en el que han sido declaradas, y tomarlas para su cuerpo, por tanto busca las variables que esten dentro de [] en el scope que fue declarada la funcion para utilizarlas dentro de la funcion lambda libremente. Para ello considere las distintas formas que puede capturar variables:
+
+```cpp
+[a, b]     // captura por valor
+[&a, &b]   // captura por referencia
+[&]        // captura todo el scope por referencia
+[=]        // captura todo el scope por copia o por valor
+```
+
+Tambien se comenta que si queremos devolver una funcion que tenga acceso a las cosas de una clase entonces en el cuerpo de captura le podemos especificar ``` this ``` con lo cual inmediatamente en la funcion lambda que estamos declarando, si teniamos un atributo publico entonces podemos acceder directamente a ellos sin tener que pasarlos por parametros.
+
+### Unary Functions
+
+
+### STL Algorithm: find_if
+
+
+
+
+[^1]: Obtenido de https://openwebinars.net/blog/que-son-las-funciones-lambdas-en-cpp/
