@@ -3,6 +3,13 @@ using namespace std;
 
 /*
     DESCRIPCION
+    Este programa continua con la introduccion del concepto de los
+    templates con base en las diapositivas 9 de la presentacion.
+    Sin embargo, en este caso, se analizan class templates con mul-
+    tiples parametros, es decir, templates que permiten especificar
+    mas de un tipo de dato. Para ello, nada mas se agregan la canti-
+    dad de typename necesarios con el nombre de la variable especi-
+    fica dentro de los <>.
 
 */
 

@@ -4,12 +4,13 @@ using namespace std;
 
 /*
     DESCRIPCION
-    El suuiente programa pretende continuar con el estudio de los con-
+    El siguiente programa pretende continuar con el estudio de los con-
     ceptos basicos del manejo de excepciones en C++ utilizando con base
     a la diapositiva 14 de la presentacion. En este caso, se estudia el
     uso de (...) en el catch en casos donde se desconocen los tipos de
     excepciones que pueden ocurrir. Ademas, un ejemplo donde se tengan
-    multiples excepciones.
+    multiples excepciones, lo cual se traduce a especificar distintos
+    catch fuera del try, y distintos throw dentro del try.
 */
 
 int main() {

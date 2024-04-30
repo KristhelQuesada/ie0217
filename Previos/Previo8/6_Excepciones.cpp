@@ -3,7 +3,7 @@ using namespace std;
 
 /*
     DESCRIPCION
-    El suuiente programa pretende introducir los conceptos basicos del
+    El siguiente programa pretende introducir los conceptos basicos del
     manejo de excepciones en C++ utilizando como base el ejemplo de la
     diapositiva 12 de la presentacion. En este caso, el manejo de ex-
     cepciones se maneja mediante los bloques try, throw and catch.

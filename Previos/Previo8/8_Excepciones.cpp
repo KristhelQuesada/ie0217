@@ -4,6 +4,17 @@ using namespace std;
 
 /*
     DESCRIPCION
+    El siguiente programa pretende continuar con el estudio de los con-
+    ceptos basicos del manejo de excepciones en C++ utilizando con base
+    a la diapositiva 16 de la presentacion. En este caso, simplemente se
+    da a modo de cierre una ejemplificacion entre lo que deberia y no de-
+    beriamos hacer al escribir codigo. Basicamente, como buena practica
+    es necesario que sepamos identificar donde podrian ocurrir errores
+    para asi poder manejarlos correctamente sin necesidad de que luego
+    ocurra una caida innecesaria en el programa. Por ende, se exponen
+    la manera incorrecta y correcta de hacer las cosas, ademas del uso
+    de la biblioteca stdexcept para utilizar el runtime_error como ar-
+    gumento en el throw.
 
 */
 
@@ -22,7 +33,7 @@ int main() {
     resultado1 = numerador / denominador;
     cout << numerador << "/" << denominador << " = " << resultado1 << endl;
 
-    // COn la logica de manejo de excepciones (Buena implementacion)
+    // Con la logica de manejo de excepciones (Buena implementacion)
     try{
         // throw an exception if denominator is 0
         if (denominador == 0) {
