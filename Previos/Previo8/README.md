@@ -5,7 +5,7 @@
 2. [Ejecución de los Programas](#ejecucion-de-los-programas)
 3. [Conceptos Importantes](#conceptos-importantes)
    - [Templates](#templates)
-   - [Manejp de Excepciones](#manejo-de-excepciones)
+   - [Manejo de Excepciones](#manejo-de-excepciones)
 
 
 ## Descripcion
