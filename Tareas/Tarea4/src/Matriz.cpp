@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include "Matriz.hpp"
+#include "ValidadorDeEntrada.hpp"
 using namespace std;
 
 template <class T>
@@ -16,8 +17,6 @@ Matriz<T>::Matriz(int rows, int columns,
                   bool isResult,
                   bool isRand,
                   const std::vector<T>& valores) {
-    this->filas = rows;
-    this->columnas = columns;
     this->setDimensiones(rows, columns);
 
     if (isResult) {
@@ -27,22 +26,48 @@ Matriz<T>::Matriz(int rows, int columns,
     } else if (!isResult && !isRand) {
         this->llenarMatriz();
     }
-} // constructor
+} // constructor listo
 
 
 
 template <class T>
 Matriz<T>::~Matriz() {
-    cout << "No. de matriz destruida: " << endl;
-    //Count--;
-} // destructor
+    cout << "Matriz destruida" << endl;
+} // destructor listo
 
 
 
 // Configuracion de las dimensiones de la matriz
 template <class T>
 void Matriz<T>::setDimensiones(int rows, int columns) {
-    cout << "Funcion setDim" << endl;
+
+    // Verifica validez de las dimensiones
+    try{
+
+        // EL producto me dira si es negativo o cero
+        int producto = rows * columns;
+        bool isValid = ValidadorDeEntrada::validarDimensiones(producto);
+
+        if (isValid == false) {
+            throw invalid_argument("Las filas y columnas deben ser enteros "
+                                   "positivos diferentes de cero.");
+        }
+
+        // Si el producto resulta estar bien entonces
+        // Inicializa la matriz con filas y columnas
+        /*
+            Sea n = rows y m = columns
+            Entonces se crea una matriz de n filas, donde
+            cada fila contiene un vector de m tamanio que
+            representa la cantidad de columnas
+        */
+        this->filas = rows;
+        this->columnas = columns;
+        this->contenido.resize(rows, vector<T>(columns));
+
+    } catch(const std::invalid_argument& e) {
+        cerr << "Excepcion Found: " << e.what() << endl;
+    }
 }
 
 
@@ -58,13 +83,13 @@ void Matriz<T>:: llenarMatriz() {
 // Llenar la matriz de valores random
 template <class T>
 void Matriz<T>::llenarRandMatriz() {
-    cout << "Funcion llenar2" << endl;
+    cout << "Funcion llenar random" << endl;
 }
 
 // Llenar la matriz en base a un vector con los resultados
 template <class T>
 void Matriz<T>::llenarMatrizRslt(const std::vector<T>& valores) {
-    cout << "Funcion llenar2" << endl;
+    cout << "Funcion llenar resultado" << endl;
 }
 
 

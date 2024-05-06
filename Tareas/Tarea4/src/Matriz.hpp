@@ -24,7 +24,6 @@
 #define MATRIZ_HPP
 
 #include <vector>
-//static int Count = 0; //Keeps track of elements created
 
 /**
  * @class Matriz

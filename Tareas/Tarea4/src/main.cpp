@@ -65,7 +65,7 @@ int main() {
     Matriz<int> m1(2, 3, true, false, v1);
 
     // Matriz random
-    Matriz<int> m2(2, 3, false, true);
+    Matriz<int> m2(2, -3, false, true);
 
     // Matriz to fill
     Matriz<int> m3(2, 3, false, false);
@@ -78,14 +78,16 @@ int main() {
     while (detener == false) {
 
         // Menu para el ususario
-        cout << "\n______________________________________\n";
-        cout << "MENU:\n";
+        cout << "\n------------------------------------\n";
+        cout << "               MENU\n";
+        cout << "------------------------------------\n";
         cout << "1. Agregar matriz\n";
         cout << "2. MOstar matrices\n";
         cout << "3. Realizar operacion con matrices\n";
         cout << "4. Salir\n";
         cout << "\nQue desea realizar: ";
         cin >> input;
+        cout << "------------------------------------\n";
         opcion = verifyMenuOption(input, MENU_MAX_OPT); // Maneja errores
         cin.ignore();
 
@@ -105,7 +107,7 @@ int main() {
                 break;
 
             case EXIT:
-                cout << "Gracias por utilizar el programa." << endl;
+                cout << "Gracias por utilizar el programa.\n" << endl;
                 detener = true;
                 break;
 
