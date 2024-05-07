@@ -63,7 +63,7 @@ class Matriz {
         //Matriz operator*(const Matriz& other) const;
 
         // Imprimir la matriz
-        //void displayMatriz() const;        
+        void displayMatriz() const;        
 };
 
 #include "Matriz.cpp" // para que no hayn errores de ejecucion

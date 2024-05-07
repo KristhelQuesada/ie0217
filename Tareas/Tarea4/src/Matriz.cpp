@@ -5,9 +5,10 @@
 
 // Implementacion de la clase matriz
 #include <iostream>
-#include <algorithm>
+#include <algorithm> // Para el std::transform
 #include <vector>
 #include <string>
+#include <stdexcept> // Para std::invalid_argument
 #include "Matriz.hpp"
 #include "ValidadorDeEntrada.hpp"
 using namespace std;
@@ -40,14 +41,14 @@ Matriz<T>::~Matriz() {
 // Configuracion de las dimensiones de la matriz
 template <class T>
 void Matriz<T>::setDimensiones(int rows, int columns) {
+    // El producto dicta si es negativo o cero
+    int producto = rows * columns;
 
     // Verifica validez de las dimensiones
     try{
 
-        // EL producto me dira si es negativo o cero
-        int producto = rows * columns;
+        // Valida si el producto es positivo mayor de cero
         bool isValid = ValidadorDeEntrada::validarDimensiones(producto);
-
         if (isValid == false) {
             throw invalid_argument("Las filas y columnas deben ser enteros "
                                    "positivos diferentes de cero.");
@@ -68,14 +69,40 @@ void Matriz<T>::setDimensiones(int rows, int columns) {
     } catch(const std::invalid_argument& e) {
         cerr << "Excepcion Found: " << e.what() << endl;
     }
-}
+} // setDimensiones listo
 
 
 
 // LLenar la matriz de valores
 template <class T>
-void Matriz<T>:: llenarMatriz() {
-    cout << "Funcion llenar1" << endl;
+void Matriz<T>::llenarMatriz() {
+
+    // Iteradores con el fin de reducir el uso de auto
+    //class std::vector<std::vector<T>>::iterator itrFila;
+    //class std::vector<std::vector<T>>::iterator itrCol;
+    int contadorFila = 0;
+    int contadorCol = 0;
+
+    // Para cada fila
+    for (auto itrFila = contenido.begin();  itrFila != contenido.end(); itrFila++) {
+
+        // Cree otro iterador que recorre la fila de inicio hasta antes del final
+        for (auto itrCol = itrFila->begin(); itrCol != itrFila->end(); itrCol++) {
+
+            // Se declara el tipo de dato que debe recibir
+            T value;
+
+            // Solicita al usuario que digite el valor que desea agregar
+            cout << "Agregue el valor de [" << contadorFila << "," << contadorCol << "]: ";
+            cin >> value;
+
+            // Se *itrCol el valor que coontiene el iterador, entonces actualizamos
+            *itrCol = value;
+            ++contadorCol;
+        }
+        contadorCol = 0;
+        ++contadorFila;
+    }
 }
 
 
@@ -112,8 +139,16 @@ void Matriz<T>::llenarMatrizRslt(const std::vector<T>& valores) {
 //
 //
 //
-//// Imprimir la matriz
-//template <class T>
-//Matriz<T>::void displayMatriz() const; 
+// Imprimir la matriz
+template <class T>
+void Matriz<T>::displayMatriz() const {
+    for (const auto& fila : contenido) {
+
+        for (const auto& value : fila) {
+            cout << value << " ";
+        }
+        cout << endl; // Salto de línea después de imprimir una fila completa
+    }
+} 
 
 #endif
