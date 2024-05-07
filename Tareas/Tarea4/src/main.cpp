@@ -59,13 +59,15 @@ int main() {
     string input;
     int opcion;
 
-    //vector<int> v1 = {1, 2, 3, 4, 5, 6};
+    vector<int> v1 = {1, 2, 3, 4, 5, 6};
 
     // Matriz resultado
-    //Matriz<int> m1(2, 3, true, false, v1);
+    Matriz<int> m1(2, 3, true, false, v1);
+    m1.displayMatriz();
 
     // Matriz random
-    //Matriz<int> m2(2, -3, false, true);
+    Matriz<int> m2(2, 3, false, true);
+    m2.displayMatriz();
 
     // Matriz to fill
     Matriz<int> m3(2, 3, false, false);

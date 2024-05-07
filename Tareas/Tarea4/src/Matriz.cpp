@@ -22,8 +22,10 @@ Matriz<T>::Matriz(int rows, int columns,
 
     if (isResult) {
         this->llenarMatrizRslt(valores);
+
     } else if (!isResult && isRand) {
         this->llenarRandMatriz();
+
     } else if (!isResult && !isRand) {
         this->llenarMatriz();
     }
@@ -77,9 +79,7 @@ void Matriz<T>::setDimensiones(int rows, int columns) {
 template <class T>
 void Matriz<T>::llenarMatriz() {
 
-    // Iteradores con el fin de reducir el uso de auto
-    //class std::vector<std::vector<T>>::iterator itrFila;
-    //class std::vector<std::vector<T>>::iterator itrCol;
+    // Contadores para desplegar posicion del elemento a ingresar
     int contadorFila = 0;
     int contadorCol = 0;
 
@@ -103,20 +103,53 @@ void Matriz<T>::llenarMatriz() {
         contadorCol = 0;
         ++contadorFila;
     }
-}
+} // fin llenar matriz para valores ingresados
 
 
 
 // Llenar la matriz de valores random
 template <class T>
 void Matriz<T>::llenarRandMatriz() {
-    cout << "Funcion llenar random" << endl;
+    
+    // Semilla para el rand()
+	srand((unsigned) time(NULL));
+
+    // Para cada fila
+    for (auto itrFila = contenido.begin();  itrFila != contenido.end(); itrFila++) {
+
+        // Cree otro iterador que recorre la fila de inicio hasta antes del final
+        for (auto itrCol = itrFila->begin(); itrCol != itrFila->end(); itrCol++) {
+
+            // Se declara el tipo de dato que debe recibir
+            T value;
+
+            // Se inicializa el valor random a agregar
+            value = rand()%100;
+
+            // Se *itrCol el valor que coontiene el iterador, entonces actualizamos
+            *itrCol = value;
+        }
+    }
 }
+
+
 
 // Llenar la matriz en base a un vector con los resultados
 template <class T>
 void Matriz<T>::llenarMatrizRslt(const std::vector<T>& valores) {
-    cout << "Funcion llenar resultado" << endl;
+    int position = 0;
+
+    // Para cada fila
+    for (auto itrFila = contenido.begin();  itrFila != contenido.end(); itrFila++) {
+
+        // Cree otro iterador que recorre la fila de inicio hasta antes del final
+        for (auto itrCol = itrFila->begin(); itrCol != itrFila->end(); itrCol++) {
+
+            // Se *itrCol el valor que coontiene el iterador, entonces actualizamos
+            *itrCol = valores[position];
+            ++position;
+        }
+    }
 }
 
 
