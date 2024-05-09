@@ -37,8 +37,10 @@
 #include <string>
 #include <cstdlib>
 #include <vector>
+#include <stdexcept> // Para std::invalid_argument
 #include "Matriz.hpp"
 #include "Funciones.hpp"
+#include "OperacionesBasicas.hpp"
 using namespace std;
 
 
@@ -56,8 +58,10 @@ enum menuOpts {
 int main() {
     // Declaracion e inicializacion de variables
     bool detener = false; // bandera de detenimiento
-    string input;
-    int opcion;
+    bool isValid;
+    string input, inputDataType, inputRnd;
+    int opcion, filas, columnas;
+
 
     vector<int> v1 = {1, 2, 3, 4, 5, 6};
 
@@ -72,6 +76,10 @@ int main() {
     // Matriz to fill
     Matriz<int> m3(2, 3, false, false);
     m3.displayMatriz();
+
+
+    OperacionesBasicas<int>::suma(m2, m3);
+
 
 
 
@@ -97,23 +105,49 @@ int main() {
 
         // Determinacion de funcion a ejecutar
         switch (opcion) {
+
+            // OPCION PARA AGREGAR MATRIZ
             case ADD_MATRIX:
                 cout << "\nAGREGANDO MATRIZ..." << endl;
+                cout << "  > Ingresa el tipo de dato: ";
+                cin >> inputDataType;
+
+                try{
+                    isValid = ValidadorDeEntrada::validarTipoDato(inputDataType);
+                    if (!isValid) {
+                        throw invalid_argument("El tipo de dato es invalido");
+                    }
+
+                    
+
+
+                } catch (const std::invalid_argument& e) {
+                    cerr << "Excepcion Found: " << e.what() << endl;
+                }
+
                 break;
 
+
+            // OPCION PARA MOSTRAR MATRICES
             case SHOW_MATRIX:
                 cout << "\nMOSTRANDO MATRICES... " << endl;
                 break;
 
+
+            // OPCION PARA REALIZAR OPERACIONES
             case OPERATIONS:
                 cout << "\nREALIZANDO OPERACIONES... " << endl;
                 break;
 
+
+            // OPCION PARA SALIR
             case EXIT:
                 cout << "Gracias por utilizar el programa.\n" << endl;
                 detener = true;
                 break;
+            
 
+            // OPCION DEFAULT
             default:
                 cout << "Opcion ingresada no valida." << endl;
                 break;

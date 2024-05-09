@@ -54,16 +54,21 @@ class Matriz {
         void llenarMatrizRslt(const std::vector<T>& valores);
 
         // Sobrecarga del operador de suma
-        //Matriz operator+(const Matriz& other) const;
+        void operator+(Matriz<T>&b) const;
 
         // Sobrecarga del operador de resta
-        //Matriz operator-(const Matriz& other) const;
+        //Matriz operator-(Matriz<T>&b) const;
 
         // Sobrecarga del operador de multiplicacion
-        //Matriz operator*(const Matriz& other) const;
+        //Matriz operator*(Matriz<T>&b) const;
 
         // Imprimir la matriz
-        void displayMatriz() const;        
+        void displayMatriz() const;
+
+        // Extraer atributos privados
+        int getFilas();
+        int getColumnas();
+        std::vector<std::vector<T>> getContent();
 };
 
 #include "Matriz.cpp" // para que no hayn errores de ejecucion

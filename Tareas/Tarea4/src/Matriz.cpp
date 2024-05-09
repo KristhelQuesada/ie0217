@@ -11,13 +11,14 @@
 #include <stdexcept> // Para std::invalid_argument
 #include "Matriz.hpp"
 #include "ValidadorDeEntrada.hpp"
+#include "OperacionesBasicas.hpp"
 using namespace std;
 
 template <class T>
 Matriz<T>::Matriz(int rows, int columns,
                   bool isResult,
                   bool isRand,
-                  const std::vector<T>& valores) {
+                  const vector<T>& valores) {
     this->setDimensiones(rows, columns);
 
     if (isResult) {
@@ -155,11 +156,33 @@ void Matriz<T>::llenarMatrizRslt(const std::vector<T>& valores) {
 
 
 // Sobrecarga del operador de suma
-//template <class T>
-//Matriz<T>::Matriz operator+(const Matriz& other) const;
-//
-//
-//
+template <class T>
+void Matriz<T>::operator+(Matriz<T>&b) const {
+
+    // Aca se guardan los resultados de la suma de cada posicion
+    vector<T> temp;
+
+    // Contenido de b
+    vector<vector<T>> contentB = b.getContent();
+
+    // Traverse the Matrix x
+    for (int i = 0; i < this->filas; i++) {
+        for (int j = 0; j < this->columnas; j++) {
+ 
+            // Add the corresponding
+            // blocks of Matrices
+            T sum = this->contenido[i][j] + contentB[i][j];
+            temp.push_back(sum);
+        }
+    }
+
+    Matriz<T> resultado(this->filas, this->columnas, true, false, temp);
+
+    return resultado.displayMatriz();
+}
+
+
+
 //// Sobrecarga del operador de resta
 //template <class T>
 //Matriz<T>::Matriz operator-(const Matriz& other) const;
@@ -168,7 +191,25 @@ void Matriz<T>::llenarMatrizRslt(const std::vector<T>& valores) {
 //
 //// Sobrecarga del operador de multiplicacion
 //template <class T>
-//Matriz<T>::Matriz operator*(const Matriz& other) const;
+//Matriz<T>::Matriz operator*(const Matriz& other) const {
+//    vector<T> temp;
+//    //Matriz<T> resultado
+// 
+//    // Traverse the Matrix x
+//    for (int i = 0; i < ; i++) {
+//        for (int j = 0; j < N; j++) {
+// 
+//            // Add the corresponding
+//            // blocks of Matrices
+//            sum = this->contenido[i][j] + b->contenio[i][j];
+//            temp.push_back(sum)
+//        }
+//    }
+//
+//    Matriz<T> resultado(this->fila, b->columna, true, false, v1)
+//
+//    return resultado.displayMatriz();
+//}
 //
 //
 //
@@ -183,5 +224,22 @@ void Matriz<T>::displayMatriz() const {
         cout << endl; // Salto de línea después de imprimir una fila completa
     }
 } 
+
+// Extraccion de atributos
+template <class T>
+int Matriz<T>::getFilas() {
+    return this->filas;
+}
+
+template <class T>
+int Matriz<T>::getColumnas() {
+    return this->columnas;
+}
+
+template <class T>
+vector<vector<T>> Matriz<T>::getContent() {
+    return this->contenido;
+}
+
 
 #endif

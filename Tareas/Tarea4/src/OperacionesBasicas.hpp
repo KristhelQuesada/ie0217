@@ -1,14 +1,18 @@
 #ifndef OP_VERIFIER_HPP
 #define OP_VERIFIER_HPP
+#include "Matriz.hpp"
 
-class ValidacionDeOperaciones {
+template<class T>
+class OperacionesBasicas {
     public:
-        static validarSumaResta(Matriz<Template>&a, Matriz<Template>&b);
-        static validarMultiplicacion(Matriz<Template>&a, Matriz<Template>&b);
+        static bool validarSumaResta(Matriz<T>&a, Matriz<T>&b);
+        static bool validarMultiplicacion(Matriz<T>&a, Matriz<T>&b);
 
-        static suma(Matriz<Template>&a, Matriz<Template>&b);
-        static resta(Matriz<Template>&a, Matriz<Template>&b);
-        static multiplicacion(Matriz<Template>&a, Matriz<Template>&b);
-}
+        static void suma(Matriz<T>&a, Matriz<T>&b);
+        static void resta(Matriz<T>&a, Matriz<T>&b);
+        static void multiplicacion(Matriz<T>&a, Matriz<T>&b);
+};
 
-#endif
+#include "OperacionesBasicas.cpp"
+
+#endif // OP_VERIFIER_HPP
