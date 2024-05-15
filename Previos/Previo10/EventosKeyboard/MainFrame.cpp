@@ -4,7 +4,10 @@
 
 // Constructor de la clase
 MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) {
-    wxPanel* panel = new wxPanel(this);
+    /*
+        Indica que el panel va a recibir eventos de teclado incluso si no esta enfocando nada
+    */
+    wxPanel* panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxWANTS_CHARS);
     
     wxButton* btn1 = new wxButton(panel, wxID_ANY, "Button 1", wxPoint(300, 150), wxSize(200, 100));
 
