@@ -17,8 +17,9 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 
 // Funciones miembro privadas
 void MainFrame::OnMouseEvent(wxMouseEvent& evt) {
-    // Cuando solo se implementa la linea 21 y no la 22 hay una diferencia en los valores de
+    // Cuando solo se implementa la linea 22 y no la 23 hay una diferencia en los valores de
     // posicion como de 100 unidades
+    //wxPoint mousePos = evt.GetPosition();        // registra el boton como una ventana independiente
     wxPoint mousePos = wxGetMousePosition();   // posicion absoluta basado en la pantalla
     mousePos = this->ScreenToClient(mousePos); // posicion absoluta basado en el frame
     wxString message = wxString::Format("Mouse Event Detected! (x=%d y=%d)", mousePos.x, mousePos.y);
