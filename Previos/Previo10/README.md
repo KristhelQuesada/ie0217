@@ -3,24 +3,35 @@
 ## Indice
 1. [Descripción](#descripcion)
 2. [Ejecución de los Programas](#ejecucion-de-los-programas)
-3. [Conceptos Importantes](#conceptos-importantes)
-4. [Instalacion de wxWidgets en Ubuntu](#instalacion-de-wxwidgets-en-ubuntu)
+3. [Instalacion de wxWidgets en Ubuntu](#instalacion-de-wxwidgets-en-ubuntu)
+4. [Instalacion de FLTK en Ubuntu](#instalacion-de-fltk-en-ubuntu)
+<!--3. [Conceptos Importantes](#conceptos-importantes)-->
 
 ## Descripcion
-El objetivo de este previo consiste en el estudio de los templates, su implementacion y uso tanto para describir funciones o clases con uno o multiples tipos de datos; por otra parte, se introduce al tema de manejo de excepciones donde se explican la funcionalidad de los bloques _try, throw y catch_.  En resumen, los topicos a desarrollar son los siguientes:
-- Templates
-- Manejo de Excepciones
-
+El objetivo de este previo consiste en el estudio de la instalacion de algunas herramientas para el trabajo con Interfaces Graficas, entre ellas las herramientas instaladas fueron wxWidgets y FLTK; para cada una de ellas se brinda la guia de instalacion realizada para una version de Ubuntu 22.04 LTS, de tal forma que se brinda un paso a paso al igual que maneras de verificar si la instalacion fue realizada con exito. La segunda parte de este previo consiste en la familiarizacion con las herramientas que brinda wxWidgets de tal manera que se desarrollan 9 proyectos o subprogramas con el fin de observar diferentes funcionalidades.
 <br>
 
 ## Ejecucion de los Programas
-Para el desarrollo de este previo, se implementaron 3 programas, para cada uno su compilacion es diferente, por tanto se especifica el directorio a posicionarse en cada uno para su correcta ejecucion.
+A continuacion se brinda una tabla que resume los programas implementados tal que se especifica una breve descripcion de los mismos, el directorio correspondiente para su compilacion, el comando de compilacion y el comando de ejecucion. Para ello considere que usted debe ubicarse en el directorio _.../ie0217/Previos/Previo10/_, por tanto:
+
+| Proyecto | Descripción | Directorio de Compilación | Comando de Compilación | Comando de Ejecución |
+|----------|-------------|---------------------------|:-------------------------:|:----------------------:|
+| InstallTest | Se utiliza como metodo para verificar la instalacion correcta de wxWidgets. | _.../InstallTest_ | ```g++ main.cpp `wx-config --cxxflags --libs` -o try.exe``` | `/try.exe` |
+| BasicWindow | Se incializa el constructor de MainFrame solo para que se pueda desplegar una ventana en blanco. | _.../BasicWindow_ | `make` | `/try.exe` |
+| Controles | Se crean 10 controles mediante la instanciacion de objetos de distintas clases, entre los controles creados fueron: el panel (contiene el resto de controles), botones, checkbox, texto estatico, texto modificable, slider, barra de progreso, seleccion entre opciones, incrementador de valores, listas y seleccion por puntos (RadioBox). | _.../Controles_ | `make` | `/try.exe` |
+| Estilos | Se le agregaron distintas banderas al final de los argumentos que recibia cada constructor de los controles creados con el fin de observar como estos modificaban a los originales.| _.../Estilos_ | `make` | `/try.exe` |
+| ManejoEstatico | Utilizamos la tabla de eventos, enums para identificadores personalizados, luego se define el macro de la tabla de eventos que contienen macros internos de tal forma que estos indican que queremos que suceda cuando se ejecuten las diferentes funciones miembro de MainFrame. Se intoduce el concepto de `CreateStatusBar()-wxLogStatus(string)` (barra que despliega mensajes informativos). | _.../ManejoEstatico_ | `make` | `/try.exe` |
+| ManejoDinamico | Se intoduce el concepto de _binding_ como el proceso de enlazar dos elementos (ej. boton y la funcion que lo ejecuta) de tal manera que se busque una alternativa a la rigidez del manejo estatico. Para ello utilizamos `[objeto]->Bind(...)`, todo sin necesidad de crear macros. Tambien se introduce la funcion de `->Unbind(...)` como metodo para remover el enlace. | _.../ManejoDinamico_ | `make` | `/try.exe` |
+| PropagacionDeEventos | Se estudian las jerarquias mediante el ejemplo de botones, donde se tienen varias formas de realizar enlaces siendo `this->Bind()` el mas general ya que engloba todo el frame. Ademas se introduce el `evt.Skip()` como forma para propagar eventos tal que se ejecute el siguiente enlace segun lo estipule la jerarquia. | _.../PropagacionDeEventos_ | `make` | `/try.exe` |
+| EventosDelMouse | Se utiliza el metodo `OneMouseEvent` con el parametro `wxMouseEvent` para el reconocimiento de entradas del teclado de tal forma que se busca que se reconozca la posicion del mouse de manera lineal sin cortarse entre eventos (se utiliza un boton para mostrar la continuidad). | _.../EventosDelMouse_ | `make` | `/try.exe` |
+| EventosKeyboard | Se utiliza el metodo `OneKeyEvent` con el parametro `wxKeyEvent` para el reconocimiento de entradas del teclado de tal forma que se busca que su identificacion sea independiente del evento enfocado. | _.../EventosKeyboard_ | `make` | `/try.exe` |
+
 
 
 <br>
 
-## Conceptos Importantes
-<br>
+<!--## Conceptos Importantes-->
+<!--<br>-->
 
 ## Instalacion de wxWidgets en Ubuntu
 A continuacion se muestra una serie de articulos consultados para la instalacion de los programa, ademas se brinda un paso a paso de como se implemento personalmente dicha instalacion:
