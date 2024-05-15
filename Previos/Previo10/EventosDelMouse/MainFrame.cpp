@@ -5,20 +5,22 @@
 // Constructor de la clase
 MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) {
     wxPanel* panel = new wxPanel(this);
+    wxButton* button = new wxButton(panel, wxID_ANY, "Button", wxPoint(300, 250), wxSize(200, 100));
 
-    // Se puede hacer esto adicionalmente
-    // Hace que el registro sea mas lineal de tal forma que no necesita de un click 
-    // para registrarlo sino que conforme se mueve el mouse asi lo registra
-    // contrarresta el parpadeo en la actualizacion del statusBar
     wxStatusBar* statusBar = CreateStatusBar();
-    //CreateStatusBar();
-    //panel->Bind(wxEVT_LEFT_DOWN, &MainFrame::OnMouseEvent, this);
+    statusBar->SetDoubleBuffered(true);
+
+
     panel->Bind(wxEVT_MOTION, &MainFrame::OnMouseEvent, this); // esto le da la continuidad
+    button->Bind(wxEVT_MOTION, &MainFrame::OnMouseEvent, this); // esto le da la continuidad
 }
 
 // Funciones miembro privadas
 void MainFrame::OnMouseEvent(wxMouseEvent& evt) {
-    wxPoint mousePos = evt.GetPosition();
+    // Cuando solo se implementa la linea 21 y no la 22 hay una diferencia en los valores de
+    // posicion como de 100 unidades
+    wxPoint mousePos = wxGetMousePosition();   // posicion absoluta basado en la pantalla
+    mousePos = this->ScreenToClient(mousePos); // posicion absoluta basado en el frame
     wxString message = wxString::Format("Mouse Event Detected! (x=%d y=%d)", mousePos.x, mousePos.y);
     wxLogStatus(message);
 }
