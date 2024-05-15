@@ -5,16 +5,16 @@
 // Constructor de la clase
 MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) {
     wxPanel* panel = new wxPanel(this);
-    wxButton* btn1 = new wxButton(panel, wxID_ANY, "Button 1", wxPoint(300, 250), wxSize(200, 100));
-    wxButton* btn2 = new wxButton(panel, wxID_ANY, "Button 2", wxPoint(300, 250), wxSize(200, 100));
+    
+    wxButton* btn1 = new wxButton(panel, wxID_ANY, "Button 1", wxPoint(300, 150), wxSize(200, 100));
+
+    wxButton* btn2 = new wxButton(panel, wxID_ANY, "Button 2", wxPoint(300, 350), wxSize(200, 100));
 
     /*
-    Solo asi lo que sucede es que se detecta la entrada del teclado cuando no
-    estamos seleccionando el boton
+    wxEVT_CHAR_HOOK permite detectar la entrada independientemente de que
+    estemos seleccionando
     */
-    panel->Bind(wxEVT_KEY_DOWN, &MainFrame::OnKeyEvent, this);
-    btn1->Bind(wxEVT_KEY_DOWN, &MainFrame::OnKeyEvent, this);
-    //button->Bind(wxEVT_KEY_DOWN, &MainFrame::OnKeyEvent, this);
+    panel->Bind(wxEVT_CHAR_HOOK, &MainFrame::OnKeyEvent, this);
     
     
     CreateStatusBar();
