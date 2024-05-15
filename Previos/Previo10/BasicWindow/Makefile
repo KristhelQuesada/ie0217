@@ -11,7 +11,7 @@ LDFLAGS = --libs
 SOURCES = MyApp.cpp MainFrame.cpp
 
 # Nombre del ejecutable
-EJECUTABLE = basicWindow.exe
+EJECUTABLE = try.exe
 
 # La regla predeterminada que se ejecuta cuando escribes 'make'
 all: $(EJECUTABLE)
