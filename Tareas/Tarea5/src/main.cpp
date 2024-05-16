@@ -24,7 +24,7 @@ int main() {
         cout << "               MENU\n";;
         cout << "1. Verificar correo electronico\n";
         cout << "2. Salir\n";
-        cout << "\nQue desea realizar: ";
+        cout << "Que desea realizar: ";
         cin >> optInput;
         opcion = verifyMenuOption(optInput, MENU_MAX_OPT); // Maneja errores
         cin.ignore();

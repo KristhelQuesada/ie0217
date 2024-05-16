@@ -43,6 +43,11 @@ bool ValidadorEmail::verifyEmail(const string& email) {
     // IF ALL ABOVE WERE RIGHT
     // Extract every part of the mail: nombre, dominio and extesion
     int extBegin = email.find_first_of(".", atPosition);
+    if (extBegin == string::npos) {
+        throw invalid_argument("El dominio debe contener al menos un punto (Error)");
+
+    }
+
     string nombre = email.substr(0, atPosition); // del inicio hasta el @
     string dominio = email.substr(atPosition+1); // para no comtemplar el @ de separacion
     string extension = email. substr(extBegin+1); // para no contemplar el . de separacion
