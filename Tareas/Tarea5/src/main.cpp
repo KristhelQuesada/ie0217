@@ -5,14 +5,14 @@ using namespace std;
 
 // Funcion generica para validar la expresion
 bool Email(string email) {
-    const regex pattern(R"(^(?![\.\-\_])([a-zA-Z0-9\.\-\_]{1,15}[\.\-\_]?)([^\.\-\_])@([^\.\-\_])([a-zA-Z]{3,30}[\.]?)([^\.\-\_])\.([a-zA-Z]{2,6})([^0-9\.\-\_])$)");
-
+    const 
+regex pattern(R"(^(?![\.\-\_])([a-zA-Z0-9\.\-\_]{1,15}[\.\-\_]?)([^\.\-\_])@([^\.\-\_])([a-zA-Z]{3,30}[\.]?)([^\.\-\_])\.([a-zA-Z]{2,6})([^0-9\.\-\_])$)");
     return regex_match(email, pattern);
 }
 
 int main() {
     // Pruebas
-    string emailOnTry = "kris.quesadagmail.com";
+    string emailOnTry = ".kris.quesada@gmail.com";
     try {
         bool isValid = ValidadorEmail::verifyEmail(emailOnTry);
 
