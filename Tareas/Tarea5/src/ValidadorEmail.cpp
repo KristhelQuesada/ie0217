@@ -15,8 +15,8 @@ bool ValidadorEmail::verifyEmail(const string& email) {
 
     // expresiones regulares
     regex namePtrn("^(?![._-])([a-zA-Z0-9._-]{1,14}[^._-])$");
-    regex domPtrn("^(?![._-])([a-zA-Z.]{3,29}[^._-])$");
-    regex extPtrn("^(?![._-])([a-zA-Z.]{2,5}[^._-])$");
+    regex domPtrn("^(?![._-])([a-zA-Z]{3,29}[.]+[^0-9._-])$");
+    regex extPtrn("^(?![._-])([a-zA-Z.]{2,5}[^0-9._-])$");
 
     // mensajes de error comunes
     string iniDotErr = "No debe incluir un punto al inicio (Error)";
@@ -43,10 +43,6 @@ bool ValidadorEmail::verifyEmail(const string& email) {
     // IF ALL ABOVE WERE RIGHT
     // Extract every part of the mail: nombre, dominio and extesion
     int extBegin = email.find_first_of(".", atPosition);
-    if (extBegin == string::npos) {
-        throw invalid_argument("El dominio debe contener al menos un punto (Error)");
-
-    }
 
     string nombre = email.substr(0, atPosition); // del inicio hasta el @
     string dominio = email.substr(atPosition+1); // para no comtemplar el @ de separacion
@@ -105,6 +101,11 @@ bool ValidadorEmail::verifyEmail(const string& email) {
         int domSizeNoDots = dominio.size()-dotCounter;
         
         // Se evaluan casos para determinar la razon de no-match
+        if (extBegin == string::npos) {
+            throw invalid_argument("El dominio debe contener al menos un punto (Error)");
+
+        }
+
         if (dominio.find_first_not_of(onlyLrtsAndDot) != string::npos) {
             throw invalid_argument("Se detectaron caracteres diferentes de letras, "
                                    "numeros, punto, guiones (Error)");
