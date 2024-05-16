@@ -1,19 +1,35 @@
-# Tarea 6: Expresiones Regulares y Makefile
+# Tarea 5: Expresiones Regulares y Makefile
 
 ## Indice
 1. [Descripción](#descripcion)
 2. [Ejecución de los Programas](#ejecucion-de-los-programas)
-3. [Conceptos Importantes](#conceptos-importantes)
-   - [Templates](#templates)
-   - [Manejo de Excepciones](#manejo-de-excepciones)
+3. [Nota Teorica](#nota-teorica)
+
 
 ## Descripcion
+El programa desarrollado para esta tarea consistia en la verificacion de la direccion de correo electronico.
 
+
+<br>
 
 ## Ejecucion de los programas
+### Compilacion y ejecucion del programa
+Con el fin de ejecutar el programa solicitado se recomienda seguir los siguientes pasos:
 
+1. Posicionese sobre el directorio _ie0217/Tareas/Tarea5/_
+2. Ejecute el comando para la compilacion y ejecucion:
+```sh
+make
+```
+3. Cuando finalizado con las pruebas necesarias, ejecute el siguiente comando para eliminar los archivos ejecutables.
+```sh
+make clean
+```
 
-## Campo adaptable
+### Doxygen
+La documentacion correspondiente generada a partir del formato doxygen se encuentra en el siguiente enlace: https://tarea5c06153.netlify.app/globals_func.html
+
+<br>
 
 
 ## Nota Teorica
