@@ -1,4 +1,4 @@
-# Tarea 6> EXpresiones Regulares y Makefile
+# Tarea 6: Expresiones Regulares y Makefile
 
 ## Indice
 1. [Descripción](#descripcion)
@@ -82,10 +82,10 @@ Como se menciono en la pregunta 3, los parentesis en las expresiones regulares d
 
 Por ejemplo, sin paréntesis, el patrón `go+` significa el carácter `g`, seguido por `o` repetido una o más veces. Por ejemplo, `goooo` o `gooooooooo`. Los paréntesis agrupan los carácteres juntos, por lo tanto `(go)+` significa `go`, `gogo`, `gogogo` etcétera.
 
-### Cual es la diferencia entre \d y \D en una expresion regular?
+### 6. Cual es la diferencia entre \d y \D en una expresion regular?
 El \d (character) es el equivalente a [0-9], lo cual significa que genera un coincidencia con cualquier numero, luego, todos aquellos caracteres que no coinciden con \d podran ser matcheados mediante el uso de \D. \D por tanto es el equivalente a [^0-9] lo cual significa que existira una coincidencia con cualquier caracter a excepcion de un digito numerico.
 
-### Como se representa una clase de caracteres en una expresion regular?
+### 7. Como se representa una clase de caracteres en una expresion regular?
 Una clase puede ser representada mediante los [], de tal manera que definen conjuntos (_sets_) o rangos de caracteres y generan un match con cualquier caracter del set de caracteres que se incluyo dentro de los parentesis cuadrados. Las clases de caracteres hacen sencillo generar una coincidencia con un set especifico o bien, excluir ciertos caracteres, por ejemplo, la expresion regular  [aeiou] genera una coincidencia con cualquier vocal, mientras que [^aeiou] genera un match con cualquier caracter siempre y cuando no sea una vocal.
 
 > **Nota:** Las clases de caracter solo generan un match con un solo caracter a la vez, por tanto, si se requiere generar un match multiples veces a la vez, se necesitara de cuantificadores como +(repite minimo 1 vez lo que se especificase anterior a el) o *(repite cero o varias veces lo que se especificase anterior a el).

@@ -27,7 +27,7 @@ using namespace std;
 // https://www.geeksforgeeks.org/processing-strings-using-stdistringstream/
 // Funcion que verifica la opcion ingresada en el menu
 int verifyMenuOption(string input, int out_range) {
-    int size_input = size(input); // determina el tamanio del string
+    int size_input = input.size(); // determina el tamanio del string
     int verified_input;
 
     // Las opciones que queremos verificar solo tienen un caracter,

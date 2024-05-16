@@ -14,9 +14,9 @@ bool ValidadorEmail::verifyEmail(const string& email) {
     string onlyLrtsAndDot = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.";
 
     // expresiones regulares
-    regex namePtrn("^(?![._-])([a-zA-Z0-9._-]{1,15}[._-]?)([^._-])$");
-    regex domPtrn("^([^._-])([a-zA-Z]{3,30}[._-]?)([^._-])$");
-    regex extPtrn("^([a-zA-Z]{2,6})([^0-9._-])$");
+    regex namePtrn("^(?![._-])([a-zA-Z0-9._-]{1,14}[^._-])$");
+    regex domPtrn("^(?![._-])([a-zA-Z.]{3,29}[^._-])$");
+    regex extPtrn("^(?![._-])([a-zA-Z.]{2,5}[^._-])$");
 
     // mensajes de error comunes
     string iniDotErr = "No debe incluir un punto al inicio (Error)";
