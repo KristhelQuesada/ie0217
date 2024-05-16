@@ -1,5 +1,6 @@
 #include <iostream>
 #include<regex>
+#include "ValidadorEmail.hpp"
 using namespace std;
 
 // Funcion generica para validar la expresion
@@ -11,6 +12,16 @@ bool Email(string email) {
 
 int main() {
     // Pruebas
+    string emailOnTry = "kris.quesadagmail.com";
+    try {
+        bool isValid = ValidadorEmail::verifyEmail(emailOnTry);
+
+        cout << "El email ingresado fue satisfactorio" << endl;
+    } catch(const invalid_argument& e) {
+        cerr << "Excepcion Found: " << e.what() << endl;
+    }
+
+
     string emailValido = "kris.quesada@gm.ail.com";
     string emailInvalido = "kris.quesadagmail.com";
 
