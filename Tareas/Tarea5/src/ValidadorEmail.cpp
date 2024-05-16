@@ -1,6 +1,6 @@
 // Implementacion de la clase ValidadorEmail
 #include <iostream>
-#include <stdexcept> 
+#include <stdexcept>
 #include <regex>
 #include "ValidadorEmail.hpp"
 using namespace std;
@@ -47,15 +47,15 @@ bool ValidadorEmail::verifyEmail(const string& email) {
     string dominio = email.substr(atPosition+1); // para no comtemplar el @ de separacion
     string extension = email. substr(extBegin+1); // para no contemplar el . de separacion
 
-    cout << "Nombre: " << nombre << endl;
-    cout << "Dominio: " << dominio << endl;
-    cout << "Extension: " << extension << endl;
+    cout << "  > Nombre: " << nombre << endl;
+    cout << "  > Dominio: " << dominio << endl;
+    cout << "  > Extension: " << extension << endl;
 
 
     // --------------------------------------------------------
     // CHECK #2: Verifies if 'nombre' is correct
     if (!regex_match(nombre, namePtrn)) {
-        cout << "Se detecta error en el nombre" << endl;
+        cout << "\nSe detecta error en el nombre" << endl;
         
         // Se evaluan casos para determinar la razon de no-match
         if (nombre.find_first_not_of(allowedChars) != string::npos) {
@@ -89,12 +89,79 @@ bool ValidadorEmail::verifyEmail(const string& email) {
 
     // --------------------------------------------------------
     // CHECK #3: Verifies if 'dominio' is correct
+    if (!regex_match(dominio, domPtrn)) {
+        cout << "\nSe detecta error en el dominio" << endl;
+        int dotCounter = 0;
 
+        // Cuenta la cantidad de puntos que trae el dominio
+        for (int i = 0; i < dominio.size(); i++) {
+            if (dominio[i] == '.') dotCounter++;
+        }
+        int domSizeNoDots = dominio.size()-dotCounter;
+        
+        // Se evaluan casos para determinar la razon de no-match
+        if (dominio.find_first_not_of(onlyLrtsAndDot) != string::npos) {
+            throw invalid_argument("Se detectaron caracteres diferentes de letras, "
+                                   "numeros, punto, guiones (Error)");
+        }
+
+        if (dominio[0] == '.') throw invalid_argument(iniDotErr);
+
+        if (dominio[dominio.size()] == '.') throw invalid_argument(endDotErr);
+
+        if (domSizeNoDots < 3) {
+            throw invalid_argument("No se permiten menos de 3 letras (Error)");
+        }
+
+        if (domSizeNoDots > 30) {
+            throw invalid_argument("Ha superado la cantidad de 30 letras permitidos (Error)");
+        }
+
+        for (int i = 0; i < dominio.size(); i++) {
+            // Verifica si en esa posicion hay un caracter especial
+            if (dominio[i] == '.' || dominio[i] == '-' || dominio[i] == '_') {
+
+                // Verifica si en la posicion siguiente existe otro caracter especial
+                if (dominio[i+1] == '.' || dominio[i+1] == '-' || dominio[i+1] == '_') {
+
+                    throw invalid_argument(consCharsErr);
+                
+                }
+            }
+        }
+
+    }
 
 
     // --------------------------------------------------------
     // CHECK #4: Verifies if 'extension' is correct
+    if (!regex_match(extension, extPtrn)) {
+        /* Aca no se valida:
+            - puntos al inicio o al final
+            - caracteres consecutivos
+            - caracteres no validos
+           ya que de todo lo anterior se tuvo que encargar la validacion del dominio 
+        */
 
+        cout << "\nSe detecta error en la extension" << endl;
+        int dotCounter = 0;
+
+        // Cuenta la cantidad de puntos que trae el dominio
+        for (int i = 0; i < extension.size(); i++) {
+            if (extension[i] == '.') dotCounter++;
+        }
+        int extSizeNoDots = extension.size()-dotCounter;
+        
+        // Verifica si se exedio el rango permitido
+        if (extSizeNoDots < 2) {
+            throw invalid_argument("No se permiten menos de 2 letras (Error)");
+        }
+
+        if (extSizeNoDots > 6) {
+            throw invalid_argument("Ha superado la cantidad de 6 letras permitidos (Error)");
+        }
+
+    }
 
 
     // -------------------------------------------
