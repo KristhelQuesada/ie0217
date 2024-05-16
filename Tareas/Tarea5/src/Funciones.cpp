@@ -20,6 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+/**
+ * @file Funciones.cpp
+ * @brief Implementacion de la funcion verifyMenuOption()
+ * @date 16-05-2024
+ */
+
 #include <sstream>
 #include "Funciones.hpp"
 using namespace std;
