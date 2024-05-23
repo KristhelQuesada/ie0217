@@ -35,7 +35,7 @@ Por otra parte, esta base de datos es de mayor escala, de tal manera que su prop
 #### 1. [__northwind.db, Facil__] Show all the contact_name, address, city of all customers which are not from 'Germany', 'Mexico', 'Spain'.
 
 <details>
-<summary> Solucion 2 </summary>
+<summary> Solucion 1 </summary>
 
 ```sql 
 SELECT contact_name, address, city
@@ -232,7 +232,7 @@ HAVING
 #### 1. [__hospital.db, Dificil__] Show patient_id, first_name, last_name from patients whos diagnosis is 'Epilepsy' and doctors first name is 'Lisa'.
 
 <details>
-<summary> Solucion 2 </summary>
+<summary> Solucion 1 </summary>
 
 ```sql 
 SELECT 
@@ -321,7 +321,7 @@ group by c.category_name
 #### 1. [__hospital.db, Media__] Display patient's full name, height in the units feet rounded to 1 decimal, weight in the unit pounds rounded to 0 decimals, birth_date, gender non abbreviated. Convert CM to feet by dividing by 30.48. Convert KG to pounds by multiplying by 2.205.
 
 <details>
-<summary> Solucion 2 </summary>
+<summary> Solucion 1 </summary>
 
 ```sql 
 -- Change the titles
