@@ -15,6 +15,18 @@ __BREAKROOM 6__
 
 
 ## Bases de datos analizadas
+### Base de Datos: _hospital.db_
+En general, esta base de datos, lleva el registro de la cantidad de pacientes que ingresan a un hospital, donde se tiene detallada la cantidad de veces que visitan el mismo, el doctor que los atientes y la informacion personal de cada paciente. Esta base de datos contiene 4 tablas que se resumen a continuacion:
+- patients: contiene la informacion personal de todos los pacientes.
+- doctors: contiene la informacion tecnica de los doctores (nombre, ID y especialidad)
+- admissions: Contiene la informacion de cuantas veces ingresaron los pasientes, tal que el atributo __patient\_id__ esta sujeto a una relacion Foreign Key lo cual permite su instanciacion en multiples ocasiones.
+- province\_names: Esta sujeto a un atributo Foreign Key, no obstante Many-To-One de tal forma que de muchas identificaciones de provicia, se restringue su casificacion para que no pueda ser repetiva dentro de esta tabla.
+
+### Base de Datos: _northwind.db_
+Por otra parte, esta base de datos es de mayor escala, de tal manera que su proposito es llevar el registro de loo que parece comida oriental. Esta DB lleva el registro de los productos disponibles, con su especifica categoria y clugar de donde se obtiene el producto. Ademas, lleva el registro de las ordenes de compra detallando la informacion del cliente respectivo, el empleado a cargo de la venta, y la informacion de envio. Asimismo, pareciera que existen diversas sucursales por lo que se explicita la ubicacion de los empleados y las regiones a las cuales tienen cobertura. En general, la base de datos cuenta de 11 tablas en total.
+
+
+<br>
 
 
 ## Problemas desarrollados
@@ -362,17 +374,6 @@ group by has_insurance
 <summary> Solucion 3 </summary>
 
 ```sql 
-
-```
-
-</details>
-
-#### 4. [__northwind.db, Dificil__]
-
-<details>
-<summary> Solucion 4 </summary>
-
-```sql
 SELECT
   -- doctor ID
   d.doctor_id as doctor_id,
@@ -393,6 +394,31 @@ GROUP BY
   doctor_name,
   selected_year
 ORDER BY doctor_id, selected_year
+```
+
+</details>
+
+#### 4. [__northwind.db, Dificil__] Show how much money the company lost due to giving discounts each year, order the years from most recent to least recent. Round to 2 decimal places.
+
+<details>
+<summary> Solucion 4 </summary>
+
+```sql
+Select
+	-- extract the year
+	YEAR(o.order_date) AS 'order_year' , 
+    -- obtain the total discount based on o.order_date
+	ROUND(SUM(p.unit_price * od.quantity * od.discount),2) AS 'discount_amount' 
+
+-- Extract data from orders
+-- also combine/extract data from order_details and products
+from orders o 
+JOIN order_details od ON o.order_id = od.order_id
+JOIN products p ON od.product_id = p.product_id
+
+-- Organization sets
+group by YEAR(o.order_date)##
+order by order_year desc;
 ```
 
 </details>
