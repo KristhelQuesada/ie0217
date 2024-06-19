@@ -1,4 +1,4 @@
-# Tarea 5: Expresiones Regulares y Makefile
+# Tarea 6: Manejo de Bases de Datos con MySQL y operaciones CRUD
 
 ## Indice
 1. [Descripción](#descripcion)
@@ -26,8 +26,6 @@ make
 make clean
 ```
 
-### Doxygen
-La documentacion correspondiente generada a partir del formato doxygen se encuentra en el siguiente enlace: https://tarea5c06153.netlify.app/globals_func.html
 
 <br>
 
@@ -37,14 +35,15 @@ La documentacion correspondiente generada a partir del formato doxygen se encuen
 
 ### Insercion de datos
 
+### Operaciones CRUD
 
-### Consultas
+#### Crear (Create)
 
+#### Leer (Read)
 
-### Actualizaciones
+#### Actualizar (Update)
 
-
-### Eliminaciones
+#### Eliminar (Delete)
 
 
 <br>
@@ -57,6 +56,7 @@ La documentacion correspondiente generada a partir del formato doxygen se encuen
 
 Una base de datos relacional (RDB) es una forma de estructurar información en tablas, filas y columnas con la capacidad de establecer vínculos (o relaciones) entre información mediante la unión de tablas a través de una clave principal o una clave externa. Estos identificadores únicos demuestran las diferentes relaciones que existen entre las tablas y estas relaciones generalmente se ilustran a través de diferentes tipos de modelos de datos. Adicionalmente, Los analistas utilizan consultas SQL
 
+**Caracteristicas Fundamentales**
 - **Tablas**: Estructuras bidimensionales de filas y columnas que contienen los datos.
 - **Relaciones**: Conexiones entre tablas mediante claves primarias y foráneas.
 - **SQL (Structured Query Language)**: Lenguaje estándar para la manipulación y consulta de datos.
@@ -72,62 +72,134 @@ Por ejemplo, utilizando como referencia el enunciado de la tarea, la Tabla `Curs
 Segun el diseño, se establecio _id\_curso_ como clave primaria, pero perfectamente pudo ser _sigla_ o incluso _nombre_, porque son columnas que fueron configuradas para que no pudieran ser nulas y unicas; contrario de _semestre_ y _creditos_ donde semestre puede ser nulo y tener repeticion de valores porque varips cursos pueden pertenecer a un mismo semestre, lo mismo con creditos porque estos pueden ser los mismos para varios cursos.
 
 ### 3. ¿Qué son las claves foráneas y cómo se utilizan para mantener la integridad referencial en una base de datos?
-- **Clave Foránea**: Es un campo (o conjunto de campos) en una tabla que establece y refuerza un vínculo con la clave primaria de otra tabla.
-- **Integridad Referencial**: Se mantiene asegurando que cada valor de clave foránea en una tabla tenga un valor correspondiente en la clave primaria de la tabla referenciada. Esto previene entradas huérfanas y asegura la consistencia de los datos.
+- **Clave Foránea**: Corresponde a una relacion que vincula la columna de una tabla con el identificador _Primary Key_ de otra tabla. Por ejemplo, tomando como referencia la tarea nuevamente, id_curso y id_curos de la Tabla `Requisitos` contienen cada una una clave o llave foreanea que dicta que esos id's hacen referencia al primary key de la Tabla `Cursos`.
+
+En lo que respecta a la integridad referencial, este es el termino que define la relación entre tablas, cuando una llave primaria de una tabla aparece en otra tabla, es decir, cuando se crean foreign keys.
+
+Como las llaves foráneas unen tablas y establecen dependencias entre tablas, estas tablas pueden formar una jerarquía de dependencias de tal manera que se cambia o elimina una fila en una tabla, se puede destruir el significado de las filas en otras tablas que eran dependientes de ellas. Es ahi donde la integridad referencial toma sentido, ya que esta define ademas la dependencia lógica de una llave foránea con llave clave primaria, ya que la integridad de una fila que contiene una llave foránea depende de la integridad de la fila a la que hace referencia (la fila que contiene la llave primaria correspondiente).
+
+Por default, el servidor de la base de datos no permite violar la integridad referencial y envia un mensaje de error si se intenta eliminar una fila de la tabla principal antes de eliminar filas de la tabla secundaria. Sin embargo, se puede habilitar la opcion de `ON DELETE CASCADE` que elimina en cascada todos aquellos registros dependientes de ese primary key, no obstante, debe usarse con cuidado ya que si se elimina por error puede ser contraproducente si hay muchos datos asociados que no puedan ser recuperados con facilidad.
+
+_Obtenido de [Referential integrity](https://www.ibm.com/docs/en/informix-servers/14.10?topic=integrity-referential)_.
+
 
 ### 4. ¿Qué es una transacción en el contexto de bases de datos y cuáles son las propiedades ACID que debe cumplir?
-- **Transacción**: Es una unidad de trabajo que se ejecuta completamente o no se ejecuta en absoluto, asegurando la consistencia de la base de datos.
-- **Propiedades ACID**:
-  - **Atomicidad**: La transacción se ejecuta completamente o no se ejecuta en absoluto.
-  - **Consistencia**: La transacción lleva la base de datos de un estado consistente a otro estado consistente.
-  - **Aislamiento**: Las transacciones concurrentes no interfieren entre sí.
-  - **Durabilidad**: Una vez que una transacción se ha comprometido, sus cambios son permanentes, incluso en caso de fallo del sistema.
+
+Una transaccion es la ejecucion de usualmente varios queries pero vistos como una sola unidad de trabajo, permitiendo que de esta forma su ejecucion debpenda de la ejecucion correcta de todas sus partes. Por ejemplo, supongamos que tenemos una base de datos de una tienda de ropa, digamos que tenemos una tabla `Inventario` y una tabla `Pedidos` muy simplificadamentente; entonces que pasa si:
+
+> Un cliente realiza un pedido indicando que este es efectivo pero internamente en la base de datos ese producto reduce su cantidad de nventario pero por alguna razon hubo un fallo en la actualizacion de pedidos?
+
+Lo que sucede entonces, es que el manager de la tienda nunca hará el envio de ese producto y por tanto el cliente habria perdido su dinero. De esta forma, una transaccion me permite realizar los cambios necesarios unicamente si todos los cambios pudieron ser completados con exitos, para este caso, sun el uso de transaction el cliente perderia o a lo mucho deberia realizar pasos adicionales para recuperar su dinero y recibir su producto. Sin embargo, con el uso de `Transactions` como hubo un fallo en la actualizacion de `Pedidos` entonces `Inventario` descartara sus cambios ydel todo nada habria cambiado. Para generar una transaccion se necesitaran de dos comandos y opcionalmente un tercero:
+
+- `TRANSACTION` Permite iniciar una transaccion bajo una logica de "todo o nada".
+- `COMMIT` Finaliza la transaccion de manera oficial y cualquier TRANSACTION anterior a él sera ejecutado de forma permatente e irreversible.
+- `ROLLBACK` Permite revertir la transaccion siempre y cuando no se haya aplicado el comando de `COMMIT`.
+
+Vease a continuacion un ejemplo
+<details>
+<summary> Ejemplo de transaction, comiit, rollback y savepoint </summary>
+
+```sql
+START TRANSACTION;  
+  
+SELECT * FROM Orders;  
+  
+INSERT INTO Orders(order_id, prod_name, order_num, order_date)   
+VALUES (6, 'Printer', 5654, '2020-01-10');  
+  
+SAVEPOINT my_savepoint;  
+  
+INSERT INTO Orders(order_id, prod_name, order_num, order_date)   
+VALUES (7, 'Ink', 5894, '2020-03-10');  
+  
+ROLLBACK TO SAVEPOINT my_savepoint;  
+  
+INSERT INTO Orders(order_id, prod_name, order_num, order_date)   
+VALUES (8, 'Speaker', 6065, '2020-02-18');  
+  
+COMMIT;
+```
+
+> Donde `SAVEPOINT` es una directiva que me permite establecer un punto de retorno al aplicar un `ROLLBACK`.
+
+</details> <br>
+
+Ahora bien, las transacciones cumplen con las propiedades ACID, estas son:
+
+- **(A)tomicity:** La atomicidad hace referencia a la propiedad de _todo o nada_ que mencionamos anteriormente. Cuando se confirma una transacción, la base de datos completa la transacción con éxito o la revierte para que la base de datos vuelva a su estado original. Por ejemplo, en una aplicación de reserva de boletos en línea, una reserva puede consistir en dos acciones separadas que forman una transacción: reservar el asiento para el cliente y pagar por el asiento. Una transacción garantiza que, cuando se completa una reserva, ambas acciones, aunque independientes, ocurren dentro de la misma transacción. Si alguna de las acciones falla, se revierte toda la transacción y la reserva queda libre para que otra transacción intente tomarla.
+
+- **(C)onsistency:** Esata propiedad hace referencia a la capacidad de mantener la integridad de los datos, independientemente de si tiene éxito o falla. Las transacciones solo pueden alterar los datos afectados de una manera que esté autorizada por el motor de la base de datos, asegurando que se mantenga una vista consistente de los datos en todo momento. Por ejemplo, cuando los usuarios depositan dinero en una aplicación de banca en línea, quieren ver el resultado de este depósito reflejado inmediatamente cuando consultan su saldo, para asegurarse de que su dinero no se ha perdido. Con una fuerte consistencia transaccional, nunca debería parecer que hay más o menos dinero en total en el banco del que realmente hay.
+
+> Una vez que una transacción se confirma, se garantiza que cualquier transacción subsecuente de lectura-escritura —sin importar qué réplica la esté procesando— leerá todos los datos que fueron escritos por la transacción anterior. Sin embargo, cuando se trata de bases de datos a gran escala con múltiples réplicas en varias geolocalizaciones, la mayoría de los sistemas SQL y NoSQL no pueden garantizar la consistencia global de las réplicas. En su lugar, permiten que las réplicas diverjan temporalmente, y el resultado de una transacción puede variar dependiendo de a qué réplica se envíe.
+
+- **(I)solation:** Esta propiedad asegura que con múltiples transacciones concurrentes ejecutándose al mismo tiempo, cada transacción debe mantenerse independiente sin afectar a otras transacciones que se ejecuten simultáneamente. Para la mayoría de los sistemas de bases de datos, el orden de las transacciones no se conoce de antemano. Las transacciones se ejecutan en paralelo y se utiliza alguna forma de bloqueo de base de datos para asegurar que el resultado de una transacción no impacte en el de otra. Normalmente, las bases de datos ofrecen varios niveles de aislamiento para controlar el grado de integridad transaccional.
+
+- **(D)urability:** FInalmente, la durabilidad significa que una confirmación exitosa de una transacción perdurará de manera permanente. Para lograr esto, se añade una entrada al registro de transacciones de la base de datos por cada transacción exitosa.
+
+<br>
+
+_Obtenido de [What is a database transaction?](https://fauna.com/blog/database-transaction)_.
+
+<br>
+
 
 ### 5. ¿Qué son las vistas (views) en SQL y cuáles son los beneficios y limitaciones de su uso?
-- **Vistas (Views)**: Son consultas almacenadas que se pueden tratar como tablas virtuales. No almacenan datos físicamente, sino que presentan datos de una o más tablas.
-- **Beneficios**:
-  - Simplificación de consultas complejas.
-  - Mejora de la seguridad al restringir el acceso a datos sensibles.
-  - Facilitación de la gestión de permisos.
-- **Limitaciones**:
-  - Pueden ser menos eficientes que las tablas directas para consultas complejas.
-  - Algunas vistas no permiten actualizaciones directas en los datos subyacentes.
+
+Las **vistas** nos permiten tomar usualmente queries o statements complejos que resultan tediosas de escribir y almacenarlas bajo un nombre como si fueran una variable, en general, actual como una **tabla virtual** donde es posible acceder al nombre de esa vista como si fuera una tabla verdadera.
+
+Consideremos un ejemplo donde tengamos tres tablas y queremos visualizar cierta informacion de las tres como un todo. Para ello podemos hacer un `JOIN` de las tres tablas pero en vez de crear una tabla, podemos crear una vista; esto es mejor en terminos de eficiencia porque crear una tabla nueva que contenga esta informacion:
+
+1. Duplica datos por ende consume mayor almacenamiento,
+2. Se debe actualizar cada que se agregue un dato a las tablas dependientes.
+
+Sin embargo, las vistas me permiten tener una version actualizada de esa informacion especifica asociada a tablas reales que queramos tener a primera mano sin la necesidad de crear una tabla adicional y utilizar mas recursos. Las vistas ademas, tiene la ventaja de siempre mantener una actualizacion con respecto a las tablas reales asociadas, y adicionalmente las vistas como pueden ser consideradas **tablas virtuales** permiten la manipulacion de las mismas como si fueran tablas reales. Para crear una vista, puede implementarse mediante el siguiente comando:
+
+```sql
+CREATE VIEW <name of the view> AS
+-- STATEMENT
+```
+
+donde el `STATEMENT` viende haciendo aquel query o conjunto de queries necesarios para la seleccion de la informacion que contendrá o estará asociada a la vista. En resumen, una vista es una tabla virtual que puede almacenarse bajo un nombre especifico como si fuera una variable, y nos permite visualizar de manera actualizada los datos que contiene como si fuese una tabla real, sin la necesidad de duplicar informacion.
+
+Sin embargo, cabe destacar que tienden a limitar las actualizaciones, por ejemplo el modifciar datos de una tabla como creacion, eliminacion o actualizacion de los mismos, mayoritariamente buscan ejecutar queries de visualiacion para un solo conjunto de datos.
+
+<br>
+
+_Obtenido de [SQL Views In 4 Minutes: Super Useful! Wow! Crazy! Amazing! I'm Crying Tears Of SQL Joy.](https://www.youtube.com/watch?v=vLLkNI-vkV8&pp=ygUJdmlld3Mgc3Fs) y [MySQL views are awesome](https://www.youtube.com/watch?v=wciubfRhvtM&pp=ygUJdmlld3Mgc3Fs)_.
+
+_Para mayor informacion: [SQL Views](https://www.geeksforgeeks.org/sql-views/), [What is a database view?](https://www.dremio.com/wiki/database-view/), [Advantages and disadvantages of views in Classic federation](https://www.ibm.com/docs/en/icfsfz/11.3.0?topic=views-advantages-disadvantages-in-classic-federation) y [Table vs View in Database: Understanding the Differences](https://medium.com/@ansam.yousry/table-vs-view-in-database-understanding-the-differences-96c769895db5)_.
+
+
+<br>
+
 
 ### 6. ¿Qué es la normalización en bases de datos y cuáles son las diferentes formas normales (normal forms)?
-- **Normalización**: Es el proceso de organizar los datos para minimizar la redundancia y evitar problemas de inconsistencia.
-- **Formas Normales**:
-  - **Primera Forma Normal (1NF)**: Eliminación de grupos repetitivos, asegurando que cada campo contiene solo valores atómicos.
-  - **Segunda Forma Normal (2NF)**: Cumple con 1NF y todos los campos no clave dependen completamente de la clave primaria.
-  - **Tercera Forma Normal (3NF)**: Cumple con 2NF y todos los campos no clave son independientes entre sí.
-  - **Forma Normal de Boyce-Codd (BCNF)**: Versión más estricta de 3NF.
-  - **Cuarta Forma Normal (4NF)** y **Quinta Forma Normal (5NF)**: Tratan dependencias multivaluadas y uniones, respectivamente.
+
+La normalizacion de las bases de datos implican que su estructuracion está diseñada de tal forma que no se permiten informaciones redundabtes que afecten a la integridad de los datos, por ejemplo, considere una tabla que contenga el ID de una persona y su fecha de nacimiento, tener dos registros con una misma ID pero distinta fehca de cumpleaños es incongruente por lo que representa una falla de integridad.
+
+Asimismo, l normalizacion de las bases de datos no solo permiten el ingreso de informacion contradictoria sino que ademas:
+
+- Son faciles de comprender.
+- Faciles de mojarar y ampliar.
+- Brindan mayor proteccion contra anomalias de insercion, actualizaciones y eliminaciones.
+
+A modo de verificar si una base de datos cumple con los criterios de normalizacion, se tienen cinco forms o fundamentos de normalizacion
+
+
+https://builtin.com/data-science/database-normalization
+
+https://www.geeksforgeeks.org/normal-forms-in-dbms/https://www.geeksforgeeks.org/normal-forms-in-dbms/
+
+https://learn.microsoft.com/en-us/office/troubleshoot/access/database-normalization-description
 
 ### 7. ¿Cómo funcionan los índices en SQL y cuál es su impacto en el rendimiento de las consultas?
-- **Índices**: Estructuras de datos que mejoran la velocidad de las operaciones de búsqueda en una tabla.
-- **Impacto en el Rendimiento**:
-  - **Beneficios**: Mejoran significativamente la velocidad de las consultas SELECT.
-  - **Limitaciones**: Pueden degradar el rendimiento de las operaciones de inserción, actualización y eliminación debido a la sobrecarga de mantener el índice.
+Los indices SQL son como un tipo de punteros que permiten el rendimiento de busqueda de ciertos datos de manera mas rapida y eficiente. Los indices son aplicados sobre columnas de tablas, pero toman memoria, es por esto que se recomienda crear indices unicamnente sobre las columnas que sean mas propensas a busacr informacion sobre ellas.
 
 ### 8. ¿Qué es SQL Injection y cuáles son las mejores prácticas para prevenir este tipo de ataque?
-- **SQL Injection**: Es un ataque donde un atacante inserta o manipula consultas SQL a través de la entrada de datos, comprometiendo la base de datos.
-- **Mejores Prácticas para Prevenir**:
-  - **Uso de consultas preparadas (Prepared Statements)**.
-  - **Validación y sanitización de entradas**.
-  - **Limitación de los privilegios de la base de datos**.
-  - **Uso de procedimientos almacenados**.
-  - **Implementación de controles de acceso adecuados**.
+
 
 ### 9. ¿Qué son los procedimientos almacenados (stored procedures) en SQL y cómo pueden mejorar la eficiencia y seguridad de las operaciones de base de datos?
-- **Procedimientos Almacenados**: Son conjuntos de instrucciones SQL precompiladas y almacenadas en la base de datos que se pueden ejecutar como una sola llamada.
-- **Beneficios**:
-  - **Eficiencia**: Reducción de la sobrecarga de compilación repetida de consultas.
-  - **Seguridad**: Encapsulamiento de la lógica de negocio y control de acceso a los datos.
-  - **Mantenibilidad**: Facilitan la gestión de lógica compleja y permiten cambios centralizados.
+
 
 ### 10. ¿Cómo se implementan las relaciones uno a uno, uno a muchos y muchos a muchos en una base de datos relacional y qué consideraciones se deben tener en cuenta en cada caso?
-- **Relación Uno a Uno**: Se implementa usando una clave primaria en una tabla y una clave foránea única en otra tabla.
-  - **Consideración**: Útil para dividir una entidad en varias tablas por razones de organización o seguridad.
-- **Relación Uno a Muchos**: Se implementa usando una clave primaria en la tabla "uno" y una clave foránea en la tabla "muchos".
-  - **Consideración**: Es la relación más común y debe asegurarse la integridad referencial.
-- **Relación Muchos a Muchos**: Se implementa usando una tabla intermedia que contiene claves foráneas de las dos tablas relacionadas.
-  - **Consideración**: La tabla intermedia puede incluir campos adicionales que describan la relación.
+
