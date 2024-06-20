@@ -16,18 +16,7 @@ Para ello, se agregaran los cursos del plan basico de lincenciatura de la carrer
 <br>
 
 ## Ejecucion de los programas
-### Compilacion y ejecucion del programa
-Con el fin de ejecutar el programa solicitado se recomienda seguir los siguientes pasos:
-
-1. Posicionese sobre el directorio _ie0217/Tareas/Tarea5/_
-2. Ejecute el comando para la compilacion y ejecucion:
-```sh
-make
-```
-3. Cuando finalizado con las pruebas necesarias, ejecute el siguiente comando para eliminar los archivos ejecutables.
-```sh
-make clean
-```
+En este caso no existe programa que ejecutar. La evidencia del procedimiento dado fue implementada en MySQL Workbench, a continuacion se muestran todos los queries asociados a su implementacion.
 
 
 <br>
