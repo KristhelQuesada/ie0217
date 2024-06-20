@@ -399,7 +399,7 @@ SELECT * FROM `Tarea06_db`.Descripciones;
 **2.1. Realiza consultas para listar todos los cursos con su sigla, nombre, semestre, creditos, descripcion y dificultad.**
 
 <details>
-<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+<summary> Codigo </summary>
 
 ```sql
 SELECT 
@@ -417,7 +417,7 @@ INNER JOIN `Tarea06_db`.Descripciones ON Cursos.id_curso = Descripciones.id_curs
 **2.2. Realiza consultas para listar todos los requisitos de un curso especifico.**
 
 <details>
-<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+<summary> Codigo </summary>
 
 ```sql
 -- Realiza consultas para listar todos los requisitos de un curso especifico.
@@ -441,7 +441,7 @@ WHERE cmain.nombre = "Electronica Industrial";
 **2.3. Realizar consulta para listar los cursos que no son optativos.**
 
 <details>
-<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+<summary> Codigo </summary>
 
 ```sql
 -- Realizar consulta para listar los cursos que no son optativos.
@@ -457,7 +457,7 @@ WHERE nombre NOT LIKE "%Optativa%";
 **2.4. Listar los cursos que pertenecen al semestre X.**
 
 <details>
-<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+<summary> Codigo </summary>
 
 ```sql
 -- Listar los cursos que pertenecen al semestre X
@@ -484,7 +484,7 @@ WHERE semestre="X";
 **3.1. Actualiza el nombre y creditos de 3 de los cursos optativos.**
 
 <details>
-<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+<summary> Codigo </summary>
 
 ```sql
 
@@ -499,7 +499,7 @@ WHERE semestre="X";
 **3.2. Actualiza la descripcion y dificultad de 3 cursos existentes.**
 
 <details>
-<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+<summary> Codigo </summary>
 
 ```sql
 
@@ -517,7 +517,7 @@ WHERE semestre="X";
 **4.1. Eliminar un curso inventado y 2 cursos del plan, con sus respectivas descripciones asociadas.**
 
 <details>
-<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+<summary> Codigo  </summary>
 
 ```sql
 
@@ -531,7 +531,7 @@ WHERE semestre="X";
 **4.2. Eliminar requisitos especificos de 2 cursos existentes.**
 
 <details>
-<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+<summary> Codigo </summary>
 
 ```sql
 

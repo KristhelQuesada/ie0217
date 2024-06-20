@@ -616,5 +616,112 @@ SELECT * FROM `Tarea06_db`.Descripciones;
 --                 Operaciones CRUD
 -- -------------------------------------------------------
 -- Realiza consultas para listar todos los cursos con su sigla, nombre, semestre, creditos, descripcion y dificultad.
+SELECT 
+	Cursos.id_curso, Cursos.sigla, Cursos.nombre, Cursos.semestre, Cursos.creditos,
+    Descripciones.descripcion, Descripciones.dificultad
+FROM `Tarea06_db`.Cursos
+INNER JOIN `Tarea06_db`.Descripciones ON Cursos.id_curso = Descripciones.id_curso;
+
+-- Realiza consultas para listar todos los requisitos de un curso especifico.
+USE `Tarea06_db`;
+SELECT 
+	cmain.id_curso AS CursoID, 
+    cmain.nombre AS NombreCurso,
+	creq.id_curso AS CursoID_Requisito, 
+    creq.nombre AS NombreRequisito
+FROM Requisitos
+JOIN Cursos cmain ON Requisitos.id_curso = cmain.id_curso
+JOIN Cursos creq ON Requisitos.id_curso_requisito = creq.id_curso
+WHERE cmain.nombre = "Electronica Industrial";
+
+-- Realizar consulta para listar los cursos que no son optativos.
+SELECT * FROM Cursos
+WHERE nombre NOT LIKE "%Optativa%";
+
+-- Listar los cursos que pertenecen al semestre X
+-- Nos dimos cuenta que no pusimos que optativa 3 y 4 eran del semestre 10 entonces
+UPDATE Cursos
+SET semestre="X" 
+WHERE id_curso IN (8,9);
+
+-- Ahora si seleccionamos
+SELECT * FROM Cursos
+WHERE semestre="X";
 
 
+-- -----------------------------------------------------------------
+-- OPERACIONES DE ACTUALIZACION
+-- 1. Actualiza el nombre y creditos de 3 de los cursos optativos
+UPDATE Cursos
+SET nombre="Verificación funcional del diseño de circuitos integrados", creditos=4
+WHERE id_curso=4;
+
+UPDATE Cursos
+SET nombre="Microelectrónica: Sistemas en silicio", creditos=4
+WHERE id_curso=5;
+
+UPDATE Cursos
+SET nombre="Laboratorio de sistemas incrustados", creditos=4
+WHERE id_curso=8;
+
+-- 2. Actualiza la descripcion y dificultad de 3 cursos existentes a tu eleccion.
+UPDATE Descripciones
+SET descripcion="Curso del primer semestre de licenciatura", dificultad="Dificil"
+WHERE id_curso=1;
+
+UPDATE Descripciones
+SET descripcion="Curso del semestre numero 10", dificultad="Medio"
+WHERE id_curso=6;
+
+UPDATE Descripciones
+SET descripcion="Curso de Bachillerato de 5to semestre y basico de circuitos analogicos", dificultad="Facil"
+WHERE id_curso=12;
+
+SELECT * FROM Descripciones;
+
+
+-- -----------------------------------------------------------------
+-- OPERACIONES DE ELIMINACION
+-- 1. Elimina un curso inventado y 2 cursos del plan y sus descripciones asociadas.
+DELETE FROM Cursos
+WHERE nombre="Principios de diseño analogico";
+
+DELETE FROM Cursos
+WHERE nombre="Seguridad Ocupacional";
+
+DELETE FROM Cursos
+WHERE nombre="Anteproyecto de TFG";
+
+SELECT * FROM Cursos;
+SELECT * FROM Descripciones;
+
+
+-- 2. Elimina requisitos especificos de 2 cursos existentes.
+DELETE FROM Requisitos
+WHERE id_curso=(SELECT id_curso FROM Cursos WHERE nombre="Electronica Industrial");
+
+DELETE FROM Requisitos
+WHERE id_curso=(SELECT id_curso FROM Cursos WHERE nombre="Seguridad ocupacional");
+
+-- Ver el resultado
+SELECT 
+	cmain.id_curso AS CursoID, 
+    cmain.nombre AS NombreCurso,
+	creq.id_curso AS CursoID_Requisito, 
+    creq.nombre AS NombreRequisito
+FROM Requisitos
+JOIN Cursos cmain ON Requisitos.id_curso = cmain.id_curso
+JOIN Cursos creq ON Requisitos.id_curso_requisito = creq.id_curso
+WHERE cmain.nombre = "Electronica Industrial";
+
+SELECT 
+	cmain.id_curso AS CursoID, 
+    cmain.nombre AS NombreCurso,
+	creq.id_curso AS CursoID_Requisito, 
+    creq.nombre AS NombreRequisito
+FROM Requisitos
+JOIN Cursos cmain ON Requisitos.id_curso = cmain.id_curso
+JOIN Cursos creq ON Requisitos.id_curso_requisito = creq.id_curso
+WHERE cmain.nombre = "Seguridad ocupacional";
+
+SELECT * FROM Requisitos;
