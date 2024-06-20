@@ -139,21 +139,409 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 </details> <br>
 
+A continuacion se muestra la informacion contenida en las tablas de las bases de datos al crearlas:
 
+![Tabla de Cursos inicialmente](./images/curso_ini.png)
 
+![Tabla de Descripciones inicialmente](./images/descriptions_table_ini.png)
+
+![Tabla de Requisitos inicialmente](./images/reqTable_ini.png)
+
+<br>
 
 ### Insercion de datos
+**Informacion basica de los cursos de licenciatura**
 
+Inicialmente se agregaron los cursos que pertenecen al plan general de licenciatura e igualmente los requisitos de dichos cursos. Luego, se creo la relacion entre ambos y finalmente se agregaron las descripciones de cada curso. A continuacion se detallan los queries y los resultados (imagenes) de cada una de las tablas tras ejecutar dichos statements.
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Cursos </summary>
+
+```sql
+-- 1.1. Agregar los cursos de licenciatura (Main)
+INSERT INTO `Tarea06_db`.Cursos(sigla, nombre, semestre, creditos)
+VALUES("IE-0579", "Administracion de sistemas", "IX", 4),
+	  ("IE-0613", "Electronica Industrial", "IX", 4),
+      ("IE-0599", "Anteproyecto de TFG", "IX", 4),
+      ("IE-XXXX", "Optativa I", "IX", 3),
+      ("IE-YYYY", "Optativa II", "IX", 3),
+      ("IE-0679", "Ciencia de datos para la est. y pron. de eventos", "X", 3),
+      ("IE-0541", "Seguridad ocupacional", "X", 3),
+      ("IE-ZZZZ", "Optativa III", "IX", 3),
+      ("IE-WWWW", "Optativa IV", "IX", 3);
+      
+-- 1. 2. Agregar los cursos requisito del plan de licenciatura original
+INSERT INTO `Tarea06_db`.Cursos(sigla, nombre, semestre, creditos)
+VALUES("IE-0479", "Ingenieria economica", "VIII", 3),
+	  ("IE-0315", "Maquinas Electricas I", "VI", 4),
+	  ("IE-0413", "Electronica II", "V", 3),
+      ("IE-0499", "Proyecto electrico", "VIII", 3),
+      ("IE-0405", "Modelos probabilísticos de señales y sistemas", "VI", 3),
+      ("IE-0501", "Responsabilidades en el ejercicio profesional", "VI", 1);
+```
+
+![Tabla de Cursos, primera adicion](./images/1_Cursos.png)
+
+</details> <br>
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Requisitos </summary>
+
+```sql
+-- 2. Agregar la informacion correpospondiente a la Tabla de Requisitos
+-- ... no se agregan los requisitos de requisitos
+INSERT INTO `Tarea06_db`.Requisitos(id_curso, id_curso_requisito)
+VALUES ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Administracion de sistemas"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Ingenieria economica")),
+       ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Electronica Industrial"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Electronica II")),
+       ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Electronica Industrial"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Maquinas Electricas I")),
+       ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Anteproyecto de TFG"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Proyecto electrico")),
+       ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Ciencia de datos para la est. y pron. de eventos"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Modelos probabilísticos de señales y sistemas")),
+       ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Seguridad ocupacional"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Responsabilidades en el ejercicio profesional"));
+SELECT * FROM `Tarea06_db`.Requisitos;
+```
+
+![Tabla de Requisitos, primera adicion](./images/1_Requisitos.png)
+
+</details> <br>
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+
+```sql
+-- 3. Agregar la informacion correpospondiente a la Tabla de Descripciones
+-- no se agrega descripcion a las Optativas I, II, III y IV
+INSERT INTO `Tarea06_db`.Descripciones (id_curso, descripcion, dificultad)
+VALUES
+    (1,
+     "En este curso, se considerará la organización o empresa como la unidad de estudio, 
+      sobre la cual se desarrollará el análisis de factores internos y externos tales como 
+      geopolítica, evolución tecnológica, globalización de mercados, cambios económicos, 
+      transformaciones del mercado, papel del estado, y otros, aspectos que gravitan en el 
+      adecuado accionar de estos sistemas.",
+     "Facil"),
+    (2, 
+     "El curso de Electrónica de Potencia introduce los principios fundamentales y aplicaciones
+      de los convertidores electrónicos, abordando desde los convertidores DC-DC con análisis 
+      detallado de modos de conducción y pérdidas, hasta transformadores AC-AC y semiconductores 
+      de potencia actuales. También cubre conceptos esenciales como la transmisión de energía, 
+      el factor de potencia y la mitigación de corrientes armónicas, junto con el diseño y 
+      funcionamiento de diversos tipos de rectificadores monofásicos y trifásicos, incluyendo los 
+      controlados y los de modulación de ancho de pulso (PWM).", 
+     "Medio"),
+    (3, 
+     "El curso de Anteproyecto de Tesis es un curso orientado a desarrollar en el estudiante las 
+      habilidades necesarias para elaborar su propuesta de investigación.", 
+     "Facil"),
+    (6,
+     "El curso de Integración Profesional en Ingeniería Eléctrica combina conocimientos previos 
+      con nuevas herramientas para el análisis sistemático de eventos. Incluye optimización, 
+      ciencia de datos con técnicas de preprocesamiento y extracción de características, métodos 
+      computacionales como K-Means y máquinas de soporte vectorial, análisis de componentes 
+      principales, árboles de decisión, pronóstico cualitativo y cuantitativo, modelos de series 
+      de tiempo, probabilidad y estadística, detección de señales y pruebas de hipótesis, preparando 
+      a los estudiantes con habilidades avanzadas para su desarrollo profesional en ingeniería eléctrica.",
+     "Dificil"),
+    (7,
+     "El curso sobre Salud y Seguridad Ocupacional cubre una variedad de temas esenciales para 
+      garantizar ambientes laborales seguros y saludables. Incluye la normativa sobre hostigamiento 
+      sexual (Ley 7476-31-8-2020), fundamentos de salud ocupacional, conceptos clave como riesgos 
+      del trabajo y seguridad industrial, así como la prevención de riesgos físicos, químicos, 
+      biológicos y ergonómicos. También se abordan temas como accidentes laborales, enfermedades 
+      ocupacionales, y normativas específicas como las Normas OHSAS 45000 y el reglamento de seguridad 
+      en la construcción.",
+     "Facil"),
+    (10,
+     "El curso introductorio abarca los fundamentos de la teoría microeconómica y macroeconómica, 
+      con enfoque en metodologías y herramientas clave. Está dirigido a estudiantes sin experiencia 
+      previa en economía, ingeniería económica o evaluación de proyectos. Se centra en desarrollar 
+      habilidades para la toma de decisiones en inversiones privadas o públicas, y explora la 
+      Evaluación Social de proyectos como instrumento para la gestión eficiente de recursos públicos. 
+      Al finalizar, los estudiantes podrán preparar y evaluar proyectos con una comprensión del mercado 
+      nacional e internacional y sus tendencias futuras.",
+     "Facil"),
+    (11,
+     "El curso pretende familiarizar a los estudiantes, con las máquinas eléctricas estacionarias y 
+      giratorias, que se encuentran en la industria y en los sistemas eléctricos de potencia. Para tal 
+      efecto, se hace énfasis en el análisis en régimen permanente, de los transformadores eléctricos 
+      de potencia, y las máquinas de inducción trifásicas.",
+     "Medio"),
+    (12,
+     "Éste es un curso de electrónica analógica muy basado en el análisis y diseño de circuitos con amplificadores operacionales.",
+     "Dificil"),
+    (13,
+     "El curso de Proyecto Eléctrico es una parte crucial del bachillerato en ingeniería eléctrica, 
+      diseñado para integrar y aplicar estrategias de diseño, investigación y solución de problemas 
+      en este campo y áreas relacionadas. Se distingue por su enfoque integral y su conexión directa 
+      con el proceso formativo del estudiante, aprovechando los conocimientos previamente adquiridos. 
+      Este curso facilita la convergencia de habilidades y conocimientos, preparando a los estudiantes 
+      para enfrentar desafíos y aprovechar oportunidades tanto académicas como profesionales en el 
+      desarrollo de proyectos eléctricos.",
+     "Dificil"),
+    (14,
+     "El curso de Teoría de la Probabilidad cubre desde conceptos básicos como definiciones y teoría de 
+      conjuntos, hasta variables aleatorias (discretas y continuas), distribuciones de probabilidad, 
+      procesos estocásticos (estacionaridad, autocorrelación, espectro de densidad de potencia) y cadenas 
+      de Markov (tipos, aplicaciones en análisis de señales y sistemas). Está diseñado para estudiantes de 
+      ingeniería eléctrica interesados en aplicaciones prácticas como modulación digital, estimación de 
+      estados con ruido y filtros de Kalman.",
+     "Medio"),
+    (15,
+     "El curso teórico aborda la responsabilidad en el ejercicio profesional, destacando su relevancia 
+      social y económica. Se enfoca en la ética como fundamento principal, explorando los principios éticos 
+      que guían la conducta profesional a través de la ética profesional y la deontología.",
+     "Facil");
+```
+
+![Tabla de Descripciones, primera adicion](./images/1_Descripciones.png)
+
+</details> <br>
+
+
+<br>
 
 ### Operaciones CRUD
+A continuacion se listan una serie de casos que requieren de operaciondes CRUD. Al igual que para casos anteriores, las pestañas contienen el query correspondiente al igual que la imagen que muestra el resultado de la consulta.
 
 #### Crear (Create)
 
+**1. Cursos Adicionales**
+
+A continuacion se agregan los dos cursos nuevos que se solicitaban, el query agregado no fue ejecutado continuamente sino que por partes donde los `SELECT` funcionan como delimitadores visuales para ir viendo el progreso. AL igual que para la parte anteriorm se agregan lasimagenes correspondientes.
+
+<details>
+<summary> Codigo para la insercion de dos cursos nuevos </summary>
+
+```sql
+-- 4.1. Insercion de 2 Cursos propuestos por el estudiante
+INSERT INTO `Tarea06_db`.Cursos(sigla, nombre, semestre, creditos)
+VALUES("IE-1010", "Principios de diseño analogico", NULL, 4),
+	  ("IE-1011", "Diseño digital", NULL, 4),
+      ("IE-0523", "Circuitos digitales II", "VI", "3"),
+      ("IE-0311", "Dispositivos Semiconductores", "VI", "3");
+SELECT * FROM `Tarea06_db`.Cursos;
+
+
+-- 4.2. Actualizar la Tabla de Requisitos
+INSERT INTO `Tarea06_db`.Requisitos(id_curso, id_curso_requisito)
+VALUES ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Principios de diseño analogico"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Circuitos digitales II")),
+	   ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Principios de diseño analogico"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Electronica II")),
+       ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Diseño digital"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Circuitos digitales II")),
+	   ((SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Diseño digital"), 
+		(SELECT id_curso FROM `Tarea06_db`.Cursos WHERE nombre="Dispositivos Semiconductores"));
+SELECT * FROM `Tarea06_db`.Requisitos;
+
+
+-- 4.3. Actualizar la Tabla de Descripciones
+INSERT INTO `Tarea06_db`.Descripciones (id_curso, descripcion, dificultad)
+VALUES
+    (16,
+     "Este curso abarca interfaces de E/S eléctricas y ópticas de alta velocidad, sistemas de 
+      recuperación de reloj, transceptores RF, circuitos de recolección de energía, MEMS RF, 
+      sensores activos y pasivos, circuitos de microondas, procesamiento de señales robusto, 
+      diseño de circuitos analógicos de alto rendimiento con baja tensión, diagnóstico de fallos 
+      en circuitos integrados de modo mixto analógico, gestión de energía y circuitos y sistemas biomédicos.",
+     "Dificil"),
+    (17, 
+     "Este curso introductorio aborda los fundamentos de la lógica digital, los circuitos 
+      digitales y los dispositivos programables. Su objetivo es proporcionar a los estudiantes 
+      una comprensión de los elementos básicos de los sistemas digitales modernos y los métodos 
+      para diseñar, simular y realizar dichos sistemas. El énfasis está en entender los fundamentos 
+      del diseño digital a través de diferentes niveles de abstracción utilizando lenguajes de 
+      descripción de hardware, y en desarrollar una perspectiva sólida para el diseño de sistemas 
+      digitales complejos.", 
+     "Dificil"),
+	(18, 
+     "El curso tiene como objetivo desarrollar habilidades para el diseño lógico de sistemas 
+      digitales, con un enfoque principal en ASICs y aplicaciones en FPGAs y tarjetas impresas. 
+      Los estudiantes aprenderán una metodología estructurada que parte de la descripción 
+      jerárquica del sistema para crear circuitos digitales interconectados verificables y 
+      sintetizables. Utilizando lenguajes como Verilog, podrán modelar sistemas conductualmente, 
+      anticipando el rendimiento temporal, consumo de energía y otras características físicas. 
+      Además, aprenderán a sintetizar y evaluar diferentes opciones de construcción tecnológica, 
+      optimizando velocidad, eficiencia energética, coste y sostenibilidad ambiental.", 
+     "Media"),
+	(19, 
+     "El curso cubre una amplia gama de temas en el diseño de circuitos integrados. 
+      Inicia con la introducción y motivación del diseño de circuitos integrados, 
+      seguido de ejemplos y repaso de MOSFET. Se abordan temas como compuertas CMOS, 
+      fabricación de circuitos CMOS, teoría del MOSFET, características I-V, y efectos 
+      no ideales. También se estudia la operación del inversor CMOS, niveles lógicos, 
+      estimación de potencia y retraso, así como diseño de circuitos combinacionales y 
+      elementos secuenciales como latches, flip-flops y memorias SRAM y DRAM. Finalmente, 
+      se discuten consideraciones de cableado, modelos de interconexión, y distribución de 
+      potencia y reloj en el diseño físico de circuitos integrados.", 
+     "Media");
+     
+SELECT * FROM `Tarea06_db`.Descripciones;
+```
+
+![Tabla de Cursos, primera adicion](./images/2_Cursos.png)
+
+![Tabla de Requisitos, primera adicion](./images/2_Requisitos.png)
+
+![Tabla de Descripciones, primera adicion](./images/2_Descripciones.png)
+
+</details> <br>
+
+<br>
+
 #### Leer (Read)
+
+**2.1. Realiza consultas para listar todos los cursos con su sigla, nombre, semestre, creditos, descripcion y dificultad.**
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+
+```sql
+SELECT 
+	Cursos.id_curso, Cursos.sigla, Cursos.nombre, Cursos.semestre, Cursos.creditos,
+    Descripciones.descripcion, Descripciones.dificultad
+FROM `Tarea06_db`.Cursos
+INNER JOIN `Tarea06_db`.Descripciones ON Cursos.id_curso = Descripciones.id_curso;
+```
+
+![Read 1](./images/1_read.png)
+
+</details> <br>
+
+
+**2.2. Realiza consultas para listar todos los requisitos de un curso especifico.**
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+
+```sql
+-- Realiza consultas para listar todos los requisitos de un curso especifico.
+USE `Tarea06_db`;
+SELECT 
+	cmain.id_curso AS CursoID, 
+    cmain.nombre AS NombreCurso,
+	creq.id_curso AS CursoID_Requisito, 
+    creq.nombre AS NombreRequisito
+FROM Requisitos
+JOIN Cursos cmain ON Requisitos.id_curso = cmain.id_curso
+JOIN Cursos creq ON Requisitos.id_curso_requisito = creq.id_curso
+WHERE cmain.nombre = "Electronica Industrial";
+```
+
+![Read 2](./images/2_read.png)
+
+</details> <br>
+
+
+**2.3. Realizar consulta para listar los cursos que no son optativos.**
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+
+```sql
+-- Realizar consulta para listar los cursos que no son optativos.
+SELECT * FROM Cursos
+WHERE nombre NOT LIKE "%Optativa%";
+```
+
+![Read 3](./images/3_read.png)
+
+</details> <br>
+
+
+**2.4. Listar los cursos que pertenecen al semestre X.**
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+
+```sql
+-- Listar los cursos que pertenecen al semestre X
+-- Nos dimos cuenta que no pusimos que optativa 3 y 4 eran del semestre 10 entonces
+UPDATE Cursos
+SET semestre="X" 
+WHERE id_curso IN (8,9);
+
+-- Ahora si seleccionamos
+SELECT * FROM Cursos
+WHERE semestre="X";
+```
+
+![Read 4](./images/4_read.png)
+
+</details> <br>
+
+
+
+<br>
 
 #### Actualizar (Update)
 
+**3.1. Actualiza el nombre y creditos de 3 de los cursos optativos.**
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+
+```sql
+
+```
+
+![Update 1](./images/1_update.png)
+
+</details> <br>
+
+
+
+**3.2. Actualiza la descripcion y dificultad de 3 cursos existentes.**
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+
+```sql
+
+```
+
+![Update 1](./images/2_update.png)
+
+</details> <br>
+
+
+
+<br>
+
 #### Eliminar (Delete)
+**4.1. Eliminar un curso inventado y 2 cursos del plan, con sus respectivas descripciones asociadas.**
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+
+```sql
+
+```
+
+![Delete 1](./images/1_delete.png)
+
+</details> <br>
+
+
+**4.2. Eliminar requisitos especificos de 2 cursos existentes.**
+
+<details>
+<summary> Codigo para la insercion de datos de la Tabla Descripciones </summary>
+
+```sql
+
+```
+
+![Delete 1](./images/2_delete.png)
+
+</details> <br>
+
+
 
 
 <br>

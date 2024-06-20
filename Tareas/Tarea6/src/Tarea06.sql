@@ -610,3 +610,11 @@ VALUES
      
 SELECT * FROM `Tarea06_db`.Descripciones;
 
+
+
+-- -------------------------------------------------------
+--                 Operaciones CRUD
+-- -------------------------------------------------------
+-- Realiza consultas para listar todos los cursos con su sigla, nombre, semestre, creditos, descripcion y dificultad.
+
+
