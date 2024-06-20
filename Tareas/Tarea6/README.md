@@ -487,7 +487,18 @@ WHERE semestre="X";
 <summary> Codigo </summary>
 
 ```sql
+-- 1. Actualiza el nombre y creditos de 3 de los cursos optativos
+UPDATE Cursos
+SET nombre="Verificación funcional del diseño de circuitos integrados", creditos=4
+WHERE id_curso=4;
 
+UPDATE Cursos
+SET nombre="Microelectrónica: Sistemas en silicio", creditos=4
+WHERE id_curso=5;
+
+UPDATE Cursos
+SET nombre="Laboratorio de sistemas incrustados", creditos=4
+WHERE id_curso=8;
 ```
 
 ![Update 1](./images/1_update.png)
@@ -502,7 +513,17 @@ WHERE semestre="X";
 <summary> Codigo </summary>
 
 ```sql
+UPDATE Descripciones
+SET descripcion="Curso del primer semestre de licenciatura", dificultad="Dificil"
+WHERE id_curso=1;
 
+UPDATE Descripciones
+SET descripcion="Curso del semestre numero 10", dificultad="Medio"
+WHERE id_curso=6;
+
+UPDATE Descripciones
+SET descripcion="Curso de Bachillerato de 5to semestre y basico de circuitos analogicos", dificultad="Facil"
+WHERE id_curso=12;
 ```
 
 ![Update 1](./images/2_update.png)
@@ -520,10 +541,23 @@ WHERE semestre="X";
 <summary> Codigo  </summary>
 
 ```sql
+-- 1. Elimina un curso inventado y 2 cursos del plan y sus descripciones asociadas.
+DELETE FROM Cursos
+WHERE nombre="Principios de diseño analogico";
 
+DELETE FROM Cursos
+WHERE nombre="Seguridad Ocupacional";
+
+DELETE FROM Cursos
+WHERE nombre="Anteproyecto de TFG";
+
+SELECT * FROM Cursos;
+SELECT * FROM Descripciones;
 ```
 
-![Delete 1](./images/1_delete.png)
+![Delete 1](./images/1_1_del.png)
+
+![Delete 1](./images/1_2_del.png)
 
 </details> <br>
 
@@ -534,10 +568,40 @@ WHERE semestre="X";
 <summary> Codigo </summary>
 
 ```sql
+-- 2. Elimina requisitos especificos de 2 cursos existentes.
+DELETE FROM Requisitos
+WHERE id_curso=(SELECT id_curso FROM Cursos WHERE nombre="Electronica Industrial");
 
+DELETE FROM Requisitos
+WHERE id_curso=(SELECT id_curso FROM Cursos WHERE nombre="Seguridad ocupacional");
+
+-- Ver el resultado
+SELECT 
+	cmain.id_curso AS CursoID, 
+    cmain.nombre AS NombreCurso,
+	creq.id_curso AS CursoID_Requisito, 
+    creq.nombre AS NombreRequisito
+FROM Requisitos
+JOIN Cursos cmain ON Requisitos.id_curso = cmain.id_curso
+JOIN Cursos creq ON Requisitos.id_curso_requisito = creq.id_curso
+WHERE cmain.nombre = "Electronica Industrial";
+
+SELECT 
+	cmain.id_curso AS CursoID, 
+    cmain.nombre AS NombreCurso,
+	creq.id_curso AS CursoID_Requisito, 
+    creq.nombre AS NombreRequisito
+FROM Requisitos
+JOIN Cursos cmain ON Requisitos.id_curso = cmain.id_curso
+JOIN Cursos creq ON Requisitos.id_curso_requisito = creq.id_curso
+WHERE cmain.nombre = "Seguridad ocupacional";
+
+SELECT * FROM Requisitos;
 ```
 
-![Delete 1](./images/2_delete.png)
+> Podemos observar que solo quedan 4 requisitos asociados a Administracion de Sistemas y Ciencias de Datos (cursos del plan) y los dos requisitos del curso nuevo que se habia agregado. Esto porque dos cursos del plan y uno nuveo se eliminaron, y dos cursos del plan levantaron requisitos.
+
+![Delete 1](./images/2_del.png)
 
 </details> <br>
 
