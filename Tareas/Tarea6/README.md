@@ -605,7 +605,7 @@ SELECT * FROM Requisitos;
 ### 1. ¿Qué es una base de datos relacional y cuáles son sus características fundamentales?
 **Definicion**
 
-Una base de datos relacional (RDB) es una forma de estructurar información en tablas, filas y columnas con la capacidad de establecer vínculos (o relaciones) entre información mediante la unión de tablas a través de una clave principal o una clave externa. Estos identificadores únicos demuestran las diferentes relaciones que existen entre las tablas y estas relaciones generalmente se ilustran a través de diferentes tipos de modelos de datos. Adicionalmente, Los analistas utilizan consultas SQL
+Una base de datos relacional (RDB) es una forma de estructurar información en tablas, filas y columnas con la capacidad de establecer vínculos (o relaciones) entre información mediante la unión de tablas a través de una clave principal o una clave externa. Estos identificadores únicos demuestran las diferentes relaciones que existen entre las tablas y estas relaciones generalmente se ilustran a través de diferentes tipos de modelos de datos.
 
 **Caracteristicas Fundamentales**
 - **Tablas**: Estructuras bidimensionales de filas y columnas que contienen los datos.
@@ -734,23 +734,155 @@ Asimismo, l normalizacion de las bases de datos no solo permiten el ingreso de i
 - Faciles de mojarar y ampliar.
 - Brindan mayor proteccion contra anomalias de insercion, actualizaciones y eliminaciones.
 
-A modo de verificar si una base de datos cumple con los criterios de normalizacion, se tienen cinco forms o fundamentos de normalizacion
+A modo de verificar si una base de datos cumple con los criterios de normalizacion, se tienen cinco forms o fundamentos de normalizacion:
+
+#### 1NF (Primera Forma Normal)
+- **Usar el orden de las filas para transmitir información no está permitido**: Las filas en una tabla deben ser independientes y su orden no debe afectar la interpretación de los datos.
+- **Mezclar tipos de datos dentro de la misma columna no está permitido**: Cada columna debe contener datos del mismo tipo, garantizando la uniformidad y evitando la inconsistencia.
+- **Tener una tabla sin una clave primaria no está permitido**: Cada tabla debe tener una clave primaria que identifique de manera única cada fila.
+- **Grupos repetidos no están permitidos**: No debe haber columnas que contengan múltiples valores en una sola fila; cada valor debe estar en una celda separada.
+
+#### 2NF (Segunda Forma Normal)
+- **Cada atributo no clave en la tabla debe depender de toda la clave primaria**: Si una tabla tiene una clave primaria compuesta (formada por más de un atributo), todos los atributos no clave deben depender funcionalmente de toda la clave primaria y no solo de una parte de ella. Esto significa eliminar las dependencias parciales.
+
+#### 3NF (Tercera Forma Normal)
+- **Cada atributo no clave en la tabla debe depender de la clave, de toda la clave y de nada más que la clave**: Además de cumplir con 2NF, todos los atributos no clave deben depender únicamente de la clave primaria y no de otros atributos no clave (eliminando las dependencias transitivas).
+
+#### 4NF (Cuarta Forma Normal)
+- **El único tipo de dependencia multivaluada permitida en una tabla son las dependencias multivaluadas sobre la clave**: Una tabla está en 4NF si cumple con 3NF y no contiene dependencias multivaluadas, excepto aquellas que dependen de la clave primaria.
+
+#### 5NF (Quinta Forma Normal)
+- **No debe ser posible describir la tabla como el resultado lógico de unir otras tablas**: Una tabla está en 5NF si está en 4NF y no puede descomponerse en tablas más pequeñas sin perder información (eliminando todas las dependencias de unión). Es decir, las tablas deben dar paso o habilitar la opcion de crear visualizaciones de datos mediante los joins, mas estas no pueden ser el reultado de un join ya que se tendria duplicacion de informacion de alguna u otra manera.
 
 
-https://builtin.com/data-science/database-normalization
 
-https://www.geeksforgeeks.org/normal-forms-in-dbms/https://www.geeksforgeeks.org/normal-forms-in-dbms/
 
-https://learn.microsoft.com/en-us/office/troubleshoot/access/database-normalization-description
+
+_Para mayor informacion: [What Is Database Normalization?](https://builtin.com/data-science/database-normalization), [Normal Forms in DBMS](https://www.geeksforgeeks.org/normal-forms-in-dbms/https://www.geeksforgeeks.org/normal-forms-in-dbms/) y [Description of the database normalization basics](https://learn.microsoft.com/en-us/office/troubleshoot/access/database-normalization-description)_.
+
+<br>
 
 ### 7. ¿Cómo funcionan los índices en SQL y cuál es su impacto en el rendimiento de las consultas?
-Los indices SQL son como un tipo de punteros que permiten el rendimiento de busqueda de ciertos datos de manera mas rapida y eficiente. Los indices son aplicados sobre columnas de tablas, pero toman memoria, es por esto que se recomienda crear indices unicamnente sobre las columnas que sean mas propensas a busacr informacion sobre ellas.
+
+Los índices en SQL son estructuras de datos adicionales que se crean sobre las columnas de una tabla para mejorar el rendimiento de las operaciones de búsqueda y consulta. Funcionan de manera similar a un índice en un libro, lo cual permite u redireccionamiento directo al sitio de busqueda. En resumen, los indices SQL son como un tipo de punteros que permiten el rendimiento de busqueda de ciertos datos de manera mas rapida y eficiente. Los indices son aplicados sobre columnas de tablas, pero toman memoria, es por esto que se recomienda crear indices unicamnente sobre las columnas que sean mas propensas a busacr informacion sobre ellas.
+
+**Funcionamiento de los Índices:**
+- **Árboles B (B-trees)**: Los índices generalmente se implementan como árboles B o B+. Estas estructuras permiten búsquedas, inserciones, actualizaciones y eliminaciones en tiempo logarítmico. Un índice basado en árbol B divide la columna indexada en bloques, organizando los valores de manera jerárquica y balanceada.
+- **Índices Hash**: Utilizan una función hash para mapear valores de columnas a ubicaciones en una tabla hash. Son eficientes para búsquedas de igualdad pero no para rangos de valores.
+- **Índices de Texto Completo (Full-Text Indexes)**: Utilizados para búsquedas de texto libre, permitiendo búsquedas rápidas en grandes textos.
+
+**Impacto en el Rendimiento:**
+- **Velocidad de Consultas**: Los índices pueden mejorar significativamente la velocidad de las consultas SELECT, especialmente aquellas que utilizan condiciones de búsqueda en columnas indexadas.
+- **Costo de Espacio**: Los índices ocupan espacio adicional en disco, ya que son estructuras adicionales a la tabla principal.
+- **Costo de Mantenimiento**: Las operaciones de inserción, actualización y eliminación pueden ser más lentas, ya que el índice también debe ser actualizado cada vez que se modifica la tabla.
+
+**Buenas Prácticas:**
+- Crear índices en columnas que se utilizan frecuentemente en condiciones WHERE, JOIN, y ORDER BY.
+- Evitar índices en columnas con alta cardinalidad (muchos valores únicos).
+- Monitorear y ajustar índices según el patrón de consultas y rendimiento observado.
+
+<br>
 
 ### 8. ¿Qué es SQL Injection y cuáles son las mejores prácticas para prevenir este tipo de ataque?
 
+SQL Injection es una vulnerabilidad de seguridad que permite a un atacante interferir con las consultas que una aplicación envía a su base de datos. Esto se logra manipulando las entradas de datos de la aplicación para ejecutar comandos SQL maliciosos.
+
+**Funcionamiento del SQL Injection:**
+- **Manipulación de Entrada**: El atacante inserta código SQL malicioso en los campos de entrada de una aplicación (como formularios web), con la intención de modificar la consulta SQL ejecutada por el servidor.
+- **Ejecución no Autorizada**: Esto puede resultar en la revelación de datos sensibles, modificación o destrucción de datos, y en casos graves, toma de control del servidor de la base de datos.
+
+**Mejores Prácticas para Prevenir SQL Injection:**
+- **Uso de Sentencias Preparadas (Prepared Statements)**: Separan el código SQL de los datos proporcionados por el usuario, evitando que los datos sean interpretados como comandos SQL.
+- **Procedimientos Almacenados (Stored Procedures)**: Encapsulan las consultas SQL en el servidor de la base de datos, reduciendo la superficie de ataque.
+- **Validación y Escapado de Entradas**: Validar todas las entradas del usuario y usar mecanismos de escapado apropiados para datos antes de incluirlos en consultas SQL.
+- **Uso de ORM (Object-Relational Mapping)**: Utilizar ORM como Entity Framework o Hibernate, que manejan automáticamente las consultas de manera segura.
+- **Principio de Mínimos Privilegios**: Limitar los privilegios de las cuentas de bases de datos utilizadas por la aplicación, otorgando solo los permisos necesarios.
+
+
+
+_Para mayor informacion: [SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)_.
+
+<br>
 
 ### 9. ¿Qué son los procedimientos almacenados (stored procedures) en SQL y cómo pueden mejorar la eficiencia y seguridad de las operaciones de base de datos?
 
+Los procedimientos almacenados (stored procedures) son conjuntos de instrucciones SQL que se almacenan en la base de datos y se pueden ejecutar de manera repetida. Funcionan de manera similar a las funciones en otros lenguajes de programación.
+
+**Beneficios de los Procedimientos Almacenados:**
+- **Reutilización y Mantenimiento**: Facilitan la reutilización del código y simplifican el mantenimiento, ya que el código SQL se almacena en un solo lugar.
+- **Rendimiento Mejorado**: Al estar precompilados, los procedimientos almacenados pueden ejecutar más rápidamente que las consultas dinámicas. También permiten operaciones en bloque que reducen la sobrecarga de comunicación entre la aplicación y la base de datos.
+- **Seguridad Mejorada**: Ayudan a prevenir SQL Injection al encapsular la lógica de las consultas y usar parámetros en lugar de concatenación de strings. También permiten la implementación de controles de acceso y permisos más granulares.
+- **Consistencia de Datos**: Aseguran que las operaciones complejas se realicen de manera consistente y correcta, ya que encapsulan la lógica empresarial y las reglas de negocio en la base de datos.
+
+<br>
 
 ### 10. ¿Cómo se implementan las relaciones uno a uno, uno a muchos y muchos a muchos en una base de datos relacional y qué consideraciones se deben tener en cuenta en cada caso?
 
+**Relaciones Uno a Uno (1:1):**
+- **Implementación**: Se puede implementar mediante una clave primaria compartida o una clave foránea única. Por ejemplo, en una base de datos de empleados, una tabla `Empleado` puede tener una relación uno a uno con una tabla `EmpleadoDetalles`. Se usa cuando una entidad divide sus atributos entre dos tablas por razones de diseño o seguridad.
+
+```sql
+-- Crear tabla Empleado
+CREATE TABLE Empleado (
+    EmpleadoID INT PRIMARY KEY,
+    Nombre VARCHAR(100)
+);
+
+-- Crear tabla EmpleadoDetalles con una clave primaria compartida
+CREATE TABLE EmpleadoDetalles (
+    EmpleadoID INT PRIMARY KEY,
+    Direccion VARCHAR(255),
+    Telefono VARCHAR(20),
+    FOREIGN KEY (EmpleadoID) REFERENCES Empleado(EmpleadoID)
+);
+```
+
+**Relaciones Uno a Muchos (1:N):**
+- **Implementación**: Se implementa mediante una clave foránea en la tabla que representa la entidad "muchos". Por ejemplo, una tabla `Cliente` tiene una relación uno a muchos con una tabla `Pedidos`, donde cada pedido tiene una clave foránea que apunta al `Cliente`. Es la relación más común y facilita la normalización de datos. Se debe tener cuidado con las operaciones de eliminación y actualización para mantener la integridad referencial.
+
+- Note que la relacion de la foreign key es entre una columna cualquiera y la llave primaria, a diferencia de la relacion Uno a Uno donde es entre claves primarias o claves primarias y candidatas.
+
+```sql
+-- Crear tabla Cliente
+CREATE TABLE Cliente (
+    ClienteID INT PRIMARY KEY,
+    Nombre VARCHAR(100)
+);
+
+-- Crear tabla Pedidos con una clave foránea
+CREATE TABLE Pedidos (
+    PedidoID INT PRIMARY KEY,
+    Fecha DATE,
+    ClienteID INT,
+    FOREIGN KEY (ClienteID) REFERENCES Cliente(ClienteID)
+);
+```
+
+**Relaciones Muchos a Muchos (M:N):**
+- **Implementación**: Se implementa mediante una tabla intermedia (tabla de unión) que contiene claves foráneas que apuntan a las dos tablas que participan en la relación. Por ejemplo, en una base de datos de estudiantes y cursos, una tabla intermedia `EstudianteCurso` relaciona `Estudiante` y `Curso`. La tabla intermedia debe manejar las relaciones y puede incluir atributos adicionales específicos de la relación. Es fundamental asegurar la integridad referencial mediante restricciones y claves foráneas.
+
+```sql
+-- Crear tabla Estudiante
+CREATE TABLE Estudiante (
+    EstudianteID INT PRIMARY KEY,
+    Nombre VARCHAR(100)
+);
+
+-- Crear tabla Curso
+CREATE TABLE Curso (
+    CursoID INT PRIMARY KEY,
+    Titulo VARCHAR(100)
+);
+
+-- Crear tabla intermedia EstudianteCurso
+CREATE TABLE EstudianteCurso (
+    EstudianteID INT,
+    CursoID INT,
+    FechaInscripcion DATE,
+    PRIMARY KEY (EstudianteID, CursoID),
+    FOREIGN KEY (EstudianteID) REFERENCES Estudiante(EstudianteID),
+    FOREIGN KEY (CursoID) REFERENCES Curso(CursoID)
+);
+```
+
+> En resumen, la implementacion puede parecer muy similar entre ambas, la diferencia radica en los atributos de las columnas que esten asociadas a la relacion, es decir, si la columna esta configurada para ser unica (clave candidata) o no.
