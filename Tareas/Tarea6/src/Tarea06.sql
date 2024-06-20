@@ -33,10 +33,10 @@ USE `Tarea06_db` ;
 -- Table `Tarea06_db`.`Cursos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Tarea06_db`.`Cursos` (
-  `id_curso` INT UNSIGNED NOT NULL,
+  `id_curso` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `sigla` CHAR(7) NOT NULL,
   `nombre` VARCHAR(255) NOT NULL,
-  `semestre` CHAR(2) NOT NULL,
+  `semestre` VARCHAR(4) DEFAULT NULL,
   `creditos` TINYINT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_curso`),
   UNIQUE INDEX `sigla_UNIQUE` (`sigla` ASC) VISIBLE,
@@ -58,16 +58,16 @@ CREATE TABLE IF NOT EXISTS `Tarea06_db`.`Requisitos` (
   INDEX `rqm_curso_idx` (`id_curso_requisito` ASC) VISIBLE,
   UNIQUE INDEX `id_requisitos_UNIQUE` (`id_requisitos` ASC) VISIBLE,
   INDEX `curso_idx` (`id_curso` ASC) VISIBLE,
-  CONSTRAINT `fk_curso`
+  CONSTRAINT `fk_id_curso_rqm`
     FOREIGN KEY (`id_curso`)
     REFERENCES `Tarea06_db`.`Cursos` (`id_curso`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_rqm_curso`
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_id_curso_requisito_rqm`
     FOREIGN KEY (`id_curso_requisito`)
     REFERENCES `Tarea06_db`.`Cursos` (`id_curso`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -76,7 +76,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Tarea06_db`.`Descripciones` (
   `id_descripcion` INT NOT NULL,
-  `id_curso` INT UNSIGNED NOT NULL,
+  `id_curso` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `descripcion` TEXT NOT NULL,
   `dificultad` VARCHAR(7) NOT NULL,
   PRIMARY KEY (`id_descripcion`),
@@ -85,11 +85,11 @@ CREATE TABLE IF NOT EXISTS `Tarea06_db`.`Descripciones` (
   UNIQUE INDEX `id_curso_UNIQUE` (`id_curso` ASC) VISIBLE,
   FULLTEXT INDEX `descripcion` (`descripcion`) VISIBLE,
   INDEX `dificultad` (`dificultad` ASC) VISIBLE,
-  CONSTRAINT `fk_descripcion`
+  CONSTRAINT `fk_curso_described`
     FOREIGN KEY (`id_curso`)
     REFERENCES `Tarea06_db`.`Cursos` (`id_curso`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -300,7 +300,7 @@ SELECT * FROM `Tarea06_db`.Cursos;
 -- Todos los cursos estan ingresados, vamos a agregarle los datos a las demas tablas
 -- Primero vamos a hacer la tabla de Requisitos (solo se le agregaran a los optativos
 -- y cursos propios de la carrera de licenciatura, es decir, no se agregaran los pre-
--- requisitos de los requisitos)
+-- requisitos de los requisitos) 
 INSERT INTO `Tarea06_db`.Requisitos(id_curso, id_curso_requisito)
 VALUE(1, 75), (2, 76), (2, 85), (3, 77),
 	 (4, 78), (4, 1), (5, 79), (6, 80),
@@ -363,48 +363,51 @@ VALUE(1, "", ""),
      (27, "", ""),
      (28, "", ""),
      (29, "", ""),
-     (30, "", ""),
-     (31, "", ""),
-     (32, "", ""),
-     (33, "", ""),
-     (34, "", ""),
-     (35, "", ""),
-     (36, "", ""),
-     (37, "", ""),
-     (38, "", ""),
-     (39, "", ""),
-     (40, "", ""),
-     (41, "", ""),
-     (42, "", ""),
-     (43, "", ""),
-     (44, "", ""),
-     (45, "", ""),
-     (46, "", ""),
-     (47, "", ""),
-     (48, "", ""),
-     (49, "", ""),
-     (50, "", ""),
-     (51, "", ""),
-     (52, "", ""),
-     (53, "", ""),
-     (54, "", ""),
-     (55, "", ""),
-     (56, "", ""),
-     (57, "", ""),
-     (58, "", ""),
-     (59, "", ""),
-     (60, "", ""),
-     (61, "", ""),
-     (62, "", ""),
-     (63, "", ""),
-     (64, "", ""),
-     (65, "", ""),
-     (66, "", ""),
-     (67, "", ""),
-     (68, "", ""),
-     (69, "", ""),
-     (70, "", ""),
-     (71, "", ""),
-     (72, "", ""),
-     (73, "", ""),
-     (74, "", "");
+     (30, "", "");
+     
+     
+     
+     
+-- ----------------------------------------------------------------
+--             Reestructuracion de la base de datos
+-- ----------------------------------------------------------------
+
+-- 1.1. Agregar la opcion ON DELETE CASCADE para las foreign keys de Requisitos
+ALTER TABLE `Tarea06_db`.Requisitos
+ADD CONSTRAINT fk_id_curso_rqm
+FOREIGN KEY (id_curso)
+REFERENCES `Tarea06_db`.Cursos(id_curso)
+ON DELETE CASCADE;
+
+ALTER TABLE `Tarea06_db`.Requisitos
+ADD CONSTRAINT fk_id_curso_requisito_rqm
+FOREIGN KEY (id_curso_requisito)
+REFERENCES `Tarea06_db`.Cursos(id_curso)
+ON DELETE CASCADE;
+
+ALTER TABLE `Tarea06_db`.Requisitos DROP FOREIGN KEY fk_curso;
+ALTER TABLE `Tarea06_db`.Requisitos DROP FOREIGN KEY fk_rqm_curso;
+
+-- 1.2. Agregar la opcion ON DELETE CASCADE para las foreign keys de Descripciones
+ALTER TABLE `Tarea06_db`.Descripciones
+ADD CONSTRAINT fk_curso_described
+FOREIGN KEY (id_curso)
+REFERENCES `Tarea06_db`.Cursos(id_curso)
+ON DELETE CASCADE;
+
+ALTER TABLE `Tarea06_db`.Descripciones DROP FOREIGN KEY fk_descripcion;
+
+-- 2. Eliminar todos los datos de la base de datos
+DELETE FROM `Tarea06_db`.Cursos 
+WHERE id_curso > 0;
+
+-- Verificamos que se hayan eliminado los cursos
+-- Verificamos que se hayan eliminado los records dependientes de las demas tablas
+SELECT * FROM `Tarea06_db`.Cursos;
+SELECT * FROM `Tarea06_db`.Requisitos;
+SELECT * FROM `Tarea06_db`.Descripciones;
+
+SHOW TABLES;
+
+
+
